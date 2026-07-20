@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1100.0"
+            stylesheets="@../../css/app.css"
+            fx:controller="com.hotelreservation.controller.kiosk.LoyaltyCheckController"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1">
+
+    <top>
+        <VBox spacing="5.0" styleClass="header">
+            <children>
+                <Label text="Final Loyalty Check" styleClass="header-title" />
+                <Label text="Check loyalty points before confirming the reservation" styleClass="header-subtitle" />
+            </children>
+        </VBox>
+    </top>
+
+    <center>
+        <StackPane>
+            <padding>
+                <Insets top="50" right="80" bottom="50" left="80" />
+            </padding>
+
+            <children>
+                <VBox alignment="CENTER" maxWidth="650.0" spacing="22.0" styleClass="card">
+                    <children>
+                        <Label text="Check Loyalty Before Confirmation" styleClass="screen-title" />
+
+                        <Label text="The guest phone number is loaded from the guest details. Check whether the guest has loyalty points before confirming the reservation."
+                               wrapText="true"
+                               style="-fx-font-size: 15px; -fx-text-fill: #4b5563;" />
+
+                        <TextField fx:id="phoneField"
+                                   promptText="Enter phone number"
+                                   prefWidth="320.0"
+                                   maxWidth="320.0" />
+
+                        <Button text="Check Loyalty"
+                                prefWidth="220.0"
+                                styleClass="primary-button"
+                                onAction="#checkLoyalty" />
+
+                        <VBox alignment="CENTER" spacing="8.0">
+                            <children>
+                                <Label fx:id="loyaltyStatusLabel"
+                                       text="Loyalty status will appear here."
+                                       style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+
+                                <Label fx:id="loyaltyPointsLabel"
+                                       text="Points information will appear here."
+                                       style="-fx-font-size: 14px; -fx-text-fill: #2563eb;" />
+                            </children>
+                        </VBox>
+
+                    </children>
+                </VBox>
+            </children>
+        </StackPane>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="15.0" style="-fx-padding: 18;">
+            <children>
+                <Button text="Back"
+                        prefWidth="180.0"
+                        styleClass="secondary-button"
+                        onAction="#backToAddOns" />
+
+                <Button text="Continue to Booking Summary"
+                        prefWidth="250.0"
+                        styleClass="primary-button"
+                        onAction="#continueToBookingSummary" />
+            </children>
+        </HBox>
+    </bottom>
+
+</BorderPane>

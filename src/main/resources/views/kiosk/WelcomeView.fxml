@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1100.0"
+            stylesheets="@../../css/app.css"
+            fx:controller="com.hotelreservation.controller.kiosk.WelcomeController"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1">
+
+    <top>
+        <VBox spacing="5.0" styleClass="header">
+            <children>
+                <Label text="Hotel Reservation Kiosk" styleClass="header-title" />
+                <Label text="Fast, secure, self-service booking" styleClass="header-subtitle" />
+            </children>
+        </VBox>
+    </top>
+
+    <center>
+        <StackPane>
+            <padding>
+                <Insets top="50" right="80" bottom="50" left="80" />
+            </padding>
+
+            <children>
+                <VBox alignment="CENTER" maxWidth="650.0" spacing="25.0" styleClass="card">
+                    <children>
+                        <Label text="Welcome to Grand Stay Hotel" styleClass="screen-title" />
+
+                        <Label text="Start a new reservation, access admin login, or submit feedback after checkout."
+                               wrapText="true"
+                               style="-fx-font-size: 16px; -fx-text-fill: #4b5563;" />
+
+                        <VBox alignment="CENTER" spacing="15.0">
+                            <children>
+                                <Button text="Start New Booking"
+                                        prefWidth="260.0"
+                                        styleClass="primary-button"
+                                        onAction="#startNewBooking" />
+
+                                <Button text="Admin Login"
+                                        prefWidth="260.0"
+                                        styleClass="secondary-button"
+                                        onAction="#openAdminLogin" />
+
+                                <Button text="Feedback"
+                                        prefWidth="260.0"
+                                        styleClass="secondary-button"
+                                        onAction="#openFeedbackLookup" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </children>
+        </StackPane>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER" style="-fx-padding: 15;">
+            <children>
+                <Label text="Secure hotel self-service system"
+                       style="-fx-text-fill: #6b7280; -fx-font-size: 13px;" />
+            </children>
+        </HBox>
+    </bottom>
+
+</BorderPane>

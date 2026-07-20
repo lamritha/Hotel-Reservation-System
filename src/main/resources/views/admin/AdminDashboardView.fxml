@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1100.0"
+            stylesheets="@../../css/app.css"
+            fx:controller="com.hotelreservation.controller.admin.AdminNavigationController"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1">
+
+    <top>
+        <VBox spacing="5.0" styleClass="header">
+            <children>
+                <Label text="Admin Dashboard" styleClass="header-title" />
+                <Label text="Overview of hotel reservations, rooms, revenue, and system activity" styleClass="header-subtitle" />
+            </children>
+        </VBox>
+    </top>
+
+    <left>
+        <VBox spacing="12.0" prefWidth="220.0" style="-fx-background-color: #111827; -fx-padding: 20;">
+            <children>
+                <Label text="Admin Menu"
+                       style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" />
+
+                <Button text="Dashboard" prefWidth="180.0"
+                        onAction="#openDashboard"
+                        style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold;" />
+
+                <Button text="Reservations" prefWidth="180.0"
+                        onAction="#openReservations"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Rooms" prefWidth="180.0"
+                        onAction="#openRooms"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Guests" prefWidth="180.0"
+                        onAction="#openGuests"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Billing &amp; Payments" prefWidth="180.0"
+                        onAction="#openBillingPayments"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Discounts" prefWidth="180.0"
+                        onAction="#openDiscounts"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Loyalty" prefWidth="180.0"
+                        onAction="#openLoyalty"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Waitlist" prefWidth="180.0"
+                        onAction="#openWaitlist"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Feedback" prefWidth="180.0"
+                        onAction="#openFeedback"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Reports" prefWidth="180.0"
+                        onAction="#openReports"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Notifications" prefWidth="180.0"
+                        onAction="#openNotifications"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Logout" prefWidth="180.0"
+                        onAction="#logout"
+                        style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-font-weight: bold;" />
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="22.0" style="-fx-padding: 30;">
+            <children>
+
+                <VBox spacing="6.0">
+                    <children>
+                        <Label text="Hotel Operations Overview" styleClass="screen-title" />
+                        <Label text="This dashboard gives admins a quick summary of current reservations, room availability, billing, and waitlist activity."
+                               wrapText="true"
+                               style="-fx-font-size: 14px; -fx-text-fill: #6b7280;" />
+                    </children>
+                </VBox>
+
+                <GridPane hgap="20.0" vgap="20.0">
+                    <children>
+
+                        <VBox spacing="8.0" styleClass="card" prefWidth="250.0" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                            <children>
+                                <Label text="Total Reservations" styleClass="section-title" />
+                                <Label text="128" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+                                <Label text="Active and upcoming bookings" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="8.0" styleClass="card" prefWidth="250.0" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                            <children>
+                                <Label text="Available Rooms" styleClass="section-title" />
+                                <Label text="34" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+                                <Label text="Ready for new bookings" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="8.0" styleClass="card" prefWidth="250.0" GridPane.rowIndex="0" GridPane.columnIndex="2">
+                            <children>
+                                <Label text="Occupied Rooms" styleClass="section-title" />
+                                <Label text="46" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+                                <Label text="Currently checked in" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="8.0" styleClass="card" prefWidth="250.0" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                            <children>
+                                <Label text="Pending Payments" styleClass="section-title" />
+                                <Label text="12" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+                                <Label text="Requires billing review" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="8.0" styleClass="card" prefWidth="250.0" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                            <children>
+                                <Label text="Waitlist Requests" styleClass="section-title" />
+                                <Label text="8" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+                                <Label text="Guests waiting for rooms" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="8.0" styleClass="card" prefWidth="250.0" GridPane.rowIndex="1" GridPane.columnIndex="2">
+                            <children>
+                                <Label text="Revenue Today" styleClass="section-title" />
+                                <Label text="CAD 7,420" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+                                <Label text="Payments received today" />
+                            </children>
+                        </VBox>
+
+                    </children>
+                </GridPane>
+
+                <VBox spacing="10.0" styleClass="card">
+                    <children>
+                        <Label text="Recent Activity" styleClass="section-title" />
+                        <Label text="RES-1001 | John Smith | Deluxe Room | Confirmed | CAD 1017" />
+                        <Label text="RES-1002 | Maria Lee | Double Room | Checked In | CAD 690" />
+                        <Label text="ROOM-304 | Penthouse | Status changed to Available" />
+                        <Label text="WAIT-021 | Guest notified for available Deluxe Room" />
+                    </children>
+                </VBox>
+
+            </children>
+        </VBox>
+    </center>
+
+</BorderPane>

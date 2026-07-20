@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1100.0"
+            stylesheets="@../../css/app.css"
+            fx:controller="com.hotelreservation.controller.admin.AdminNavigationController"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1">
+
+    <top>
+        <VBox spacing="5.0" styleClass="header">
+            <children>
+                <Label text="Reports" styleClass="header-title" />
+                <Label text="Generate revenue, occupancy, payment, and feedback reports" styleClass="header-subtitle" />
+            </children>
+        </VBox>
+    </top>
+
+    <left>
+        <VBox spacing="12.0" prefWidth="220.0" style="-fx-background-color: #111827; -fx-padding: 20;">
+            <children>
+                <Label text="Admin Menu"
+                       style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" />
+
+                <Button text="Dashboard" prefWidth="180.0"
+                        onAction="#openDashboard"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Reservations" prefWidth="180.0"
+                        onAction="#openReservations"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Rooms" prefWidth="180.0"
+                        onAction="#openRooms"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Guests" prefWidth="180.0"
+                        onAction="#openGuests"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Billing and Payments" prefWidth="180.0"
+                        onAction="#openBillingPayments"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Discounts" prefWidth="180.0"
+                        onAction="#openDiscounts"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Loyalty" prefWidth="180.0"
+                        onAction="#openLoyalty"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Waitlist" prefWidth="180.0"
+                        onAction="#openWaitlist"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Feedback" prefWidth="180.0"
+                        onAction="#openFeedback"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Reports" prefWidth="180.0"
+                        onAction="#openReports"
+                        style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold;" />
+
+                <Button text="Notifications" prefWidth="180.0"
+                        onAction="#openNotifications"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Logout" prefWidth="180.0"
+                        onAction="#logout"
+                        style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-font-weight: bold;" />
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="22.0" style="-fx-padding: 30;">
+            <children>
+
+                <VBox spacing="6.0">
+                    <children>
+                        <Label text="Generate Reports" styleClass="screen-title" />
+                        <Label text="This screen supports the final reporting requirement: tabular data exports to CSV or PDF for revenue and occupancy."
+                               wrapText="true"
+                               style="-fx-font-size: 14px; -fx-text-fill: #6b7280;" />
+                    </children>
+                </VBox>
+
+                <GridPane hgap="20.0" vgap="20.0">
+                    <children>
+
+                        <VBox spacing="12.0" styleClass="card" prefWidth="420.0" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                            <children>
+                                <Label text="Report Filters" styleClass="section-title" />
+
+                                <Label text="Report Type" />
+                                <ComboBox promptText="Select report type" prefWidth="300.0" />
+
+                                <Label text="From Date" />
+                                <DatePicker prefWidth="300.0" />
+
+                                <Label text="To Date" />
+                                <DatePicker prefWidth="300.0" />
+
+                                <Label text="Export Format" />
+                                <ComboBox promptText="CSV or PDF" prefWidth="300.0" />
+
+                                <HBox spacing="12.0">
+                                    <children>
+                                        <Button text="Generate" prefWidth="140.0" styleClass="primary-button" />
+                                        <Button text="Export" prefWidth="140.0" styleClass="secondary-button" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="12.0" styleClass="card" prefWidth="420.0" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                            <children>
+                                <Label text="Available Report Types" styleClass="section-title" />
+
+                                <Label text="Revenue Report" style="-fx-font-weight: bold;" />
+                                <Label text="Shows total revenue, taxes, discounts, and payments received." wrapText="true" />
+
+                                <Label text="Occupancy Report" style="-fx-font-weight: bold;" />
+                                <Label text="Shows occupied, available, and maintenance rooms by date range." wrapText="true" />
+
+                                <Label text="Payment Report" style="-fx-font-weight: bold;" />
+                                <Label text="Shows payment methods, pending payments, and refund records." wrapText="true" />
+
+                                <Label text="Feedback Report" style="-fx-font-weight: bold;" />
+                                <Label text="Shows ratings, comments, and sentiment tags." wrapText="true" />
+                            </children>
+                        </VBox>
+
+                    </children>
+                </GridPane>
+
+                <VBox spacing="12.0" styleClass="card">
+                    <children>
+                        <Label text="Report Preview" styleClass="section-title" />
+
+                        <GridPane hgap="22.0" vgap="12.0">
+                            <children>
+                                <Label text="Date" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                                <Label text="Reservations" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+                                <Label text="Occupied Rooms" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="2" />
+                                <Label text="Revenue" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="3" />
+                                <Label text="Pending Payments" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="4" />
+
+                                <Label text="July 15, 2026" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                                <Label text="18" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+                                <Label text="42" GridPane.rowIndex="1" GridPane.columnIndex="2" />
+                                <Label text="CAD 7420" GridPane.rowIndex="1" GridPane.columnIndex="3" />
+                                <Label text="3" GridPane.rowIndex="1" GridPane.columnIndex="4" />
+
+                                <Label text="July 16, 2026" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                                <Label text="21" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+                                <Label text="46" GridPane.rowIndex="2" GridPane.columnIndex="2" />
+                                <Label text="CAD 8910" GridPane.rowIndex="2" GridPane.columnIndex="3" />
+                                <Label text="2" GridPane.rowIndex="2" GridPane.columnIndex="4" />
+
+                                <Label text="July 17, 2026" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                                <Label text="15" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+                                <Label text="39" GridPane.rowIndex="3" GridPane.columnIndex="2" />
+                                <Label text="CAD 6350" GridPane.rowIndex="3" GridPane.columnIndex="3" />
+                                <Label text="4" GridPane.rowIndex="3" GridPane.columnIndex="4" />
+                            </children>
+                        </GridPane>
+                    </children>
+                </VBox>
+
+                <HBox spacing="15.0" styleClass="card">
+                    <children>
+                        <Button text="Export Revenue CSV" prefWidth="190.0" styleClass="primary-button" />
+                        <Button text="Export Revenue PDF" prefWidth="190.0" styleClass="secondary-button" />
+                        <Button text="Export Occupancy CSV" prefWidth="210.0" styleClass="primary-button" />
+                        <Button text="Export Occupancy PDF" prefWidth="210.0" styleClass="secondary-button" />
+                    </children>
+                </HBox>
+
+            </children>
+        </VBox>
+    </center>
+
+</BorderPane>

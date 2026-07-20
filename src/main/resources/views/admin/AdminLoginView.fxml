@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1100.0"
+            stylesheets="@../../css/app.css"
+            fx:controller="com.hotelreservation.controller.admin.AdminLoginController"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1">
+
+    <top>
+        <VBox spacing="5.0" styleClass="header">
+            <children>
+                <Label text="Admin Login" styleClass="header-title" />
+                <Label text="Secure access for hotel administrators and managers" styleClass="header-subtitle" />
+            </children>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="25.0" style="-fx-padding: 40;">
+            <children>
+
+                <VBox spacing="18.0" styleClass="card" maxWidth="520.0">
+                    <children>
+                        <Label text="Hotel Administration Portal" styleClass="screen-title" />
+
+                        <Label text="Login using an authorized admin or manager account."
+                               wrapText="true"
+                               style="-fx-font-size: 14px; -fx-text-fill: #6b7280;" />
+
+                        <Label text="Username" />
+                        <TextField fx:id="usernameField"
+                                   promptText="Enter username"
+                                   prefWidth="360.0" />
+
+                        <Label text="Password" />
+                        <PasswordField fx:id="passwordField"
+                                       promptText="Enter password"
+                                       prefWidth="360.0" />
+
+                        <Label text="Role" />
+                        <ComboBox fx:id="roleComboBox"
+                                  promptText="Select role: Admin or Manager"
+                                  prefWidth="360.0" />
+
+                        <Button text="Login"
+                                prefWidth="360.0"
+                                styleClass="primary-button"
+                                onAction="#login" />
+
+                        <Button text="Back to Home"
+                                prefWidth="360.0"
+                                styleClass="secondary-button"
+                                onAction="#backToWelcome" />
+
+                        <Label text="Passwords will be protected using BCrypt in the final implementation."
+                               wrapText="true"
+                               style="-fx-font-size: 13px; -fx-text-fill: #2563eb;" />
+                    </children>
+                </VBox>
+
+            </children>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER" style="-fx-padding: 15;">
+            <children>
+                <Label text="Role-based access will control discount limits and admin features."
+                       style="-fx-text-fill: #6b7280; -fx-font-size: 13px;" />
+            </children>
+        </HBox>
+    </bottom>
+
+</BorderPane>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1100.0"
+            stylesheets="@../../css/app.css"
+            fx:controller="com.hotelreservation.controller.kiosk.ConfirmationController"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1">
+
+    <top>
+        <VBox spacing="5.0" styleClass="header">
+            <children>
+                <Label text="Reservation Confirmation" styleClass="header-title" />
+                <Label text="Reservation created successfully. Payment will be completed at the front desk." styleClass="header-subtitle" />
+            </children>
+        </VBox>
+    </top>
+
+    <center>
+        <StackPane>
+            <padding>
+                <Insets top="45" right="80" bottom="45" left="80" />
+            </padding>
+
+            <children>
+                <VBox spacing="20.0" maxWidth="760.0" styleClass="card">
+                    <children>
+
+                        <Label text="Reservation Confirmed" styleClass="screen-title" />
+
+                        <Label text="The reservation has been created in the kiosk flow. The guest should visit the front desk to complete payment."
+                               wrapText="true"
+                               style="-fx-font-size: 15px; -fx-text-fill: #4b5563;" />
+
+                        <VBox spacing="13.0">
+                            <children>
+                                <Label fx:id="reservationIdLabel"
+                                       text="Reservation ID:"
+                                       style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #2563eb;" />
+
+                                <Label fx:id="guestNameLabel"
+                                       text="Guest:"
+                                       style="-fx-font-size: 15px;" />
+
+                                <Label fx:id="contactLabel"
+                                       text="Contact:"
+                                       style="-fx-font-size: 15px;" />
+
+                                <Label fx:id="stayDatesLabel"
+                                       text="Stay Dates:"
+                                       style="-fx-font-size: 15px;" />
+
+                                <Label fx:id="occupancyLabel"
+                                       text="Occupancy:"
+                                       style="-fx-font-size: 15px;" />
+
+                                <Label fx:id="roomPlanLabel"
+                                       text="Room Plan:"
+                                       wrapText="true"
+                                       style="-fx-font-size: 15px;" />
+
+                                <Label fx:id="statusLabel"
+                                       text="Reservation Status:"
+                                       style="-fx-font-size: 15px; -fx-font-weight: bold;" />
+
+                                <Label fx:id="paymentNoticeLabel"
+                                       text="Payment notice"
+                                       wrapText="true"
+                                       style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #b45309;" />
+                            </children>
+                        </VBox>
+
+                        <HBox alignment="CENTER_RIGHT">
+                            <children>
+                                <Button text="Back to Home"
+                                        prefWidth="180.0"
+                                        styleClass="primary-button"
+                                        onAction="#backToHome" />
+                            </children>
+                        </HBox>
+
+                    </children>
+                </VBox>
+            </children>
+        </StackPane>
+    </center>
+
+</BorderPane>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1100.0"
+            stylesheets="@../../css/app.css"
+            fx:controller="com.hotelreservation.controller.kiosk.FeedbackLookupController"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1">
+
+    <top>
+        <VBox spacing="5.0" styleClass="header">
+            <children>
+                <Label text="Feedback Eligibility Check" styleClass="header-title" />
+                <Label text="Feedback can only be submitted after the guest has checked out" styleClass="header-subtitle" />
+            </children>
+        </VBox>
+    </top>
+
+    <center>
+        <StackPane>
+            <padding>
+                <Insets top="50" right="80" bottom="50" left="80" />
+            </padding>
+
+            <children>
+                <VBox alignment="CENTER" maxWidth="650.0" spacing="22.0" styleClass="card">
+                    <children>
+                        <Label text="Check Reservation Status" styleClass="screen-title" />
+
+                        <Label text="Enter the guest phone number or reservation ID. The system will check whether the guest has checked out before allowing feedback."
+                               wrapText="true"
+                               style="-fx-font-size: 15px; -fx-text-fill: #4b5563;" />
+
+                        <TextField fx:id="lookupField"
+                                   promptText="Enter Reservation ID or Phone Number"
+                                   prefWidth="360.0"
+                                   maxWidth="360.0" />
+
+                        <Button text="Check Feedback Eligibility"
+                                prefWidth="280.0"
+                                styleClass="primary-button"
+                                onAction="#checkFeedbackEligibility" />
+
+                        <Label fx:id="statusLabel"
+                               text="Feedback status will appear here."
+                               wrapText="true"
+                               style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2563eb;" />
+
+                        <HBox alignment="CENTER" spacing="15.0">
+                            <children>
+                                <Button text="Back to Home"
+                                        prefWidth="180.0"
+                                        styleClass="secondary-button"
+                                        onAction="#backToWelcome" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </StackPane>
+    </center>
+
+</BorderPane>

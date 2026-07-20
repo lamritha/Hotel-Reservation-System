@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1100.0"
+            stylesheets="@../../css/app.css"
+            fx:controller="com.hotelreservation.controller.admin.AdminNavigationController"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1">
+
+    <top>
+        <VBox spacing="5.0" styleClass="header">
+            <children>
+                <Label text="Room Management" styleClass="header-title" />
+                <Label text="View and manage room types, prices, occupancy, and availability" styleClass="header-subtitle" />
+            </children>
+        </VBox>
+    </top>
+
+    <left>
+        <VBox spacing="12.0" prefWidth="220.0" style="-fx-background-color: #111827; -fx-padding: 20;">
+            <children>
+                <Label text="Admin Menu"
+                       style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" />
+
+                <Button text="Dashboard" prefWidth="180.0"
+                        onAction="#openDashboard"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Reservations" prefWidth="180.0"
+                        onAction="#openReservations"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Rooms" prefWidth="180.0"
+                        onAction="#openRooms"
+                        style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold;" />
+
+                <Button text="Guests" prefWidth="180.0"
+                        onAction="#openGuests"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Billing and Payments" prefWidth="180.0"
+                        onAction="#openBillingPayments"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Discounts" prefWidth="180.0"
+                        onAction="#openDiscounts"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Loyalty" prefWidth="180.0"
+                        onAction="#openLoyalty"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Waitlist" prefWidth="180.0"
+                        onAction="#openWaitlist"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Feedback" prefWidth="180.0"
+                        onAction="#openFeedback"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Reports" prefWidth="180.0"
+                        onAction="#openReports"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Notifications" prefWidth="180.0"
+                        onAction="#openNotifications"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Logout" prefWidth="180.0"
+                        onAction="#logout"
+                        style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-font-weight: bold;" />
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="22.0" style="-fx-padding: 30;">
+            <children>
+
+                <VBox spacing="6.0">
+                    <children>
+                        <Label text="Manage Rooms" styleClass="screen-title" />
+                        <Label text="This screen represents the Room entity, RoomType enum, and RoomStatus enum from the class diagram."
+                               wrapText="true"
+                               style="-fx-font-size: 14px; -fx-text-fill: #6b7280;" />
+                    </children>
+                </VBox>
+
+                <HBox spacing="15.0" styleClass="card">
+                    <children>
+                        <TextField promptText="Search by room number or floor" prefWidth="320.0" />
+                        <ComboBox promptText="Room type" prefWidth="160.0" />
+                        <ComboBox promptText="Room status" prefWidth="160.0" />
+                        <Button text="Search" prefWidth="120.0" styleClass="primary-button" />
+                        <Button text="Clear" prefWidth="120.0" styleClass="secondary-button" />
+                    </children>
+                </HBox>
+
+                <VBox spacing="12.0" styleClass="card">
+                    <children>
+                        <Label text="Room List" styleClass="section-title" />
+
+                        <GridPane hgap="18.0" vgap="12.0">
+                            <children>
+                                <Label text="Room ID" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                                <Label text="Room No." style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+                                <Label text="Floor" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="2" />
+                                <Label text="Room Type" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="3" />
+                                <Label text="Base Price" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="4" />
+                                <Label text="Max Occupancy" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="5" />
+                                <Label text="Status" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="6" />
+
+                                <Label text="R-101" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                                <Label text="101" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+                                <Label text="1" GridPane.rowIndex="1" GridPane.columnIndex="2" />
+                                <Label text="Single" GridPane.rowIndex="1" GridPane.columnIndex="3" />
+                                <Label text="CAD 120" GridPane.rowIndex="1" GridPane.columnIndex="4" />
+                                <Label text="2" GridPane.rowIndex="1" GridPane.columnIndex="5" />
+                                <Label text="Available" style="-fx-text-fill: green;" GridPane.rowIndex="1" GridPane.columnIndex="6" />
+
+                                <Label text="R-204" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                                <Label text="204" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+                                <Label text="2" GridPane.rowIndex="2" GridPane.columnIndex="2" />
+                                <Label text="Double" GridPane.rowIndex="2" GridPane.columnIndex="3" />
+                                <Label text="CAD 180" GridPane.rowIndex="2" GridPane.columnIndex="4" />
+                                <Label text="4" GridPane.rowIndex="2" GridPane.columnIndex="5" />
+                                <Label text="Occupied" style="-fx-text-fill: #2563eb;" GridPane.rowIndex="2" GridPane.columnIndex="6" />
+
+                                <Label text="R-305" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                                <Label text="305" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+                                <Label text="3" GridPane.rowIndex="3" GridPane.columnIndex="2" />
+                                <Label text="Deluxe" GridPane.rowIndex="3" GridPane.columnIndex="3" />
+                                <Label text="CAD 250" GridPane.rowIndex="3" GridPane.columnIndex="4" />
+                                <Label text="2" GridPane.rowIndex="3" GridPane.columnIndex="5" />
+                                <Label text="Maintenance" style="-fx-text-fill: orange;" GridPane.rowIndex="3" GridPane.columnIndex="6" />
+
+                                <Label text="R-501" GridPane.rowIndex="4" GridPane.columnIndex="0" />
+                                <Label text="501" GridPane.rowIndex="4" GridPane.columnIndex="1" />
+                                <Label text="5" GridPane.rowIndex="4" GridPane.columnIndex="2" />
+                                <Label text="Penthouse" GridPane.rowIndex="4" GridPane.columnIndex="3" />
+                                <Label text="CAD 500" GridPane.rowIndex="4" GridPane.columnIndex="4" />
+                                <Label text="2" GridPane.rowIndex="4" GridPane.columnIndex="5" />
+                                <Label text="Available" style="-fx-text-fill: green;" GridPane.rowIndex="4" GridPane.columnIndex="6" />
+                            </children>
+                        </GridPane>
+                    </children>
+                </VBox>
+
+                <HBox spacing="15.0" styleClass="card">
+                    <children>
+                        <Button text="Add Room" prefWidth="140.0" styleClass="primary-button" />
+                        <Button text="Edit Room" prefWidth="140.0" styleClass="secondary-button" />
+                        <Button text="Mark Available" prefWidth="160.0" styleClass="primary-button" />
+                        <Button text="Mark Occupied" prefWidth="160.0" styleClass="secondary-button" />
+                        <Button text="Mark Maintenance" prefWidth="180.0" styleClass="secondary-button" />
+                    </children>
+                </HBox>
+
+            </children>
+        </VBox>
+    </center>
+
+</BorderPane>

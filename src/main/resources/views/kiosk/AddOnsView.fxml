@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1100.0"
+            stylesheets="@../../css/app.css"
+            fx:controller="com.hotelreservation.controller.kiosk.AddOnsController"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1">
+
+    <top>
+        <VBox spacing="5.0" styleClass="header">
+            <children>
+                <Label text="Add-ons Selection" styleClass="header-title" />
+                <Label text="Choose additional services for the reservation" styleClass="header-subtitle" />
+            </children>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="14.0" style="-fx-padding: 22;">
+            <children>
+
+                <VBox spacing="6.0">
+                    <children>
+                        <Label text="Available Add-ons" styleClass="screen-title" />
+                        <Label text="Add-ons can be charged per night or per reservation based on the pricing model."
+                               wrapText="true"
+                               style="-fx-font-size: 14px; -fx-text-fill: #6b7280;" />
+                    </children>
+                </VBox>
+
+                <GridPane hgap="18.0" vgap="14.0">
+                    <children>
+
+                        <VBox spacing="7.0"
+                              prefWidth="300.0"
+                              style="-fx-background-color: white; -fx-padding: 16; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 10, 0, 0, 3);"
+                              GridPane.rowIndex="0"
+                              GridPane.columnIndex="0">
+                            <children>
+                                <Label text="Wi-Fi" styleClass="section-title" />
+                                <Label text="CAD 15" style="-fx-font-size: 17px; -fx-font-weight: bold;" />
+                                <Label text="Pricing Model: Per Reservation" />
+                                <CheckBox fx:id="wifiCheckBox"
+                                          text="Add Wi-Fi"
+                                          onAction="#updateCostPreview" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="7.0"
+                              prefWidth="300.0"
+                              style="-fx-background-color: white; -fx-padding: 16; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 10, 0, 0, 3);"
+                              GridPane.rowIndex="0"
+                              GridPane.columnIndex="1">
+                            <children>
+                                <Label text="Breakfast" styleClass="section-title" />
+                                <Label text="CAD 20 / night" style="-fx-font-size: 17px; -fx-font-weight: bold;" />
+                                <Label text="Pricing Model: Per Night" />
+                                <CheckBox fx:id="breakfastCheckBox"
+                                          text="Add Breakfast"
+                                          onAction="#updateCostPreview" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="7.0"
+                              prefWidth="300.0"
+                              style="-fx-background-color: white; -fx-padding: 16; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 10, 0, 0, 3);"
+                              GridPane.rowIndex="0"
+                              GridPane.columnIndex="2">
+                            <children>
+                                <Label text="Spa" styleClass="section-title" />
+                                <Label text="CAD 80" style="-fx-font-size: 17px; -fx-font-weight: bold;" />
+                                <Label text="Pricing Model: Per Reservation" />
+                                <CheckBox fx:id="spaCheckBox"
+                                          text="Add Spa"
+                                          onAction="#updateCostPreview" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="7.0"
+                              prefWidth="300.0"
+                              style="-fx-background-color: white; -fx-padding: 16; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 10, 0, 0, 3);"
+                              GridPane.rowIndex="1"
+                              GridPane.columnIndex="0">
+                            <children>
+                                <Label text="Parking" styleClass="section-title" />
+                                <Label text="CAD 25 / night" style="-fx-font-size: 17px; -fx-font-weight: bold;" />
+                                <Label text="Pricing Model: Per Night" />
+                                <CheckBox fx:id="parkingCheckBox"
+                                          text="Add Parking"
+                                          onAction="#updateCostPreview" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="7.0"
+                              prefWidth="300.0"
+                              style="-fx-background-color: white; -fx-padding: 16; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 10, 0, 0, 3);"
+                              GridPane.rowIndex="1"
+                              GridPane.columnIndex="1">
+                            <children>
+                                <Label text="Laundry" styleClass="section-title" />
+                                <Label text="CAD 30" style="-fx-font-size: 17px; -fx-font-weight: bold;" />
+                                <Label text="Pricing Model: Per Reservation" />
+                                <CheckBox fx:id="laundryCheckBox"
+                                          text="Add Laundry"
+                                          onAction="#updateCostPreview" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="7.0"
+                              prefWidth="300.0"
+                              style="-fx-background-color: white; -fx-padding: 16; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 10, 0, 0, 3);"
+                              GridPane.rowIndex="1"
+                              GridPane.columnIndex="2">
+                            <children>
+                                <Label text="Airport Pickup" styleClass="section-title" />
+                                <Label text="CAD 60" style="-fx-font-size: 17px; -fx-font-weight: bold;" />
+                                <Label text="Pricing Model: Per Reservation" />
+                                <CheckBox fx:id="airportPickupCheckBox"
+                                          text="Add Airport Pickup"
+                                          onAction="#updateCostPreview" />
+                            </children>
+                        </VBox>
+
+                    </children>
+                </GridPane>
+
+                <VBox spacing="6.0"
+                      style="-fx-background-color: white; -fx-padding: 16; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 10, 0, 0, 3);">
+                    <children>
+                        <Label text="Estimated Cost Preview" styleClass="section-title" />
+                        <Label fx:id="roomTotalLabel" text="Room Total: CAD 0.00" />
+                        <Label fx:id="addOnTotalLabel" text="Add-ons Total: CAD 0.00" />
+                        <Label fx:id="subtotalLabel" text="Estimated Subtotal: CAD 0.00" />
+                    </children>
+                </VBox>
+
+                <HBox alignment="CENTER_RIGHT" spacing="15.0">
+                    <children>
+                        <Button text="Back"
+                                prefWidth="150.0"
+                                styleClass="secondary-button"
+                                onAction="#backToRoomSelection" />
+
+                        <Button text="Continue to Loyalty Check"
+                                prefWidth="230.0"
+                                styleClass="primary-button"
+                                onAction="#continueToLoyaltyCheck" />
+                    </children>
+                </HBox>
+
+            </children>
+        </VBox>
+    </center>
+
+</BorderPane>

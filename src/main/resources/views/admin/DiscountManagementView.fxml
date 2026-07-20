@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1100.0"
+            stylesheets="@../../css/app.css"
+            fx:controller="com.hotelreservation.controller.admin.AdminNavigationController"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1">
+
+    <top>
+        <VBox spacing="5.0" styleClass="header">
+            <children>
+                <Label text="Discount Management" styleClass="header-title" />
+                <Label text="Apply role-based and loyalty discounts to billing records" styleClass="header-subtitle" />
+            </children>
+        </VBox>
+    </top>
+
+    <left>
+        <VBox spacing="12.0" prefWidth="220.0" style="-fx-background-color: #111827; -fx-padding: 20;">
+            <children>
+                <Label text="Admin Menu"
+                       style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" />
+
+                <Button text="Dashboard" prefWidth="180.0"
+                        onAction="#openDashboard"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Reservations" prefWidth="180.0"
+                        onAction="#openReservations"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Rooms" prefWidth="180.0"
+                        onAction="#openRooms"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Guests" prefWidth="180.0"
+                        onAction="#openGuests"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Billing and Payments" prefWidth="180.0"
+                        onAction="#openBillingPayments"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Discounts" prefWidth="180.0"
+                        onAction="#openDiscounts"
+                        style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold;" />
+
+                <Button text="Loyalty" prefWidth="180.0"
+                        onAction="#openLoyalty"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Waitlist" prefWidth="180.0"
+                        onAction="#openWaitlist"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Feedback" prefWidth="180.0"
+                        onAction="#openFeedback"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Reports" prefWidth="180.0"
+                        onAction="#openReports"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Notifications" prefWidth="180.0"
+                        onAction="#openNotifications"
+                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
+
+                <Button text="Logout" prefWidth="180.0"
+                        onAction="#logout"
+                        style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-font-weight: bold;" />
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="22.0" style="-fx-padding: 30;">
+            <children>
+
+                <VBox spacing="6.0">
+                    <children>
+                        <Label text="Manage Discounts" styleClass="screen-title" />
+                        <Label text="This screen connects to Discount, Billing, AdminUser, and LoyaltyAccount entities."
+                               wrapText="true"
+                               style="-fx-font-size: 14px; -fx-text-fill: #6b7280;" />
+                    </children>
+                </VBox>
+
+                <GridPane hgap="20.0" vgap="20.0">
+                    <children>
+
+                        <VBox spacing="12.0" styleClass="card" prefWidth="420.0" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                            <children>
+                                <Label text="Apply Discount" styleClass="section-title" />
+
+                                <Label text="Billing ID" />
+                                <TextField promptText="Enter billing ID" prefWidth="300.0" />
+
+                                <Label text="Admin Role" />
+                                <ComboBox promptText="Admin or Manager" prefWidth="300.0" />
+
+                                <Label text="Discount Type" />
+                                <ComboBox promptText="Role Based or Loyalty Redemption" prefWidth="300.0" />
+
+                                <Label text="Discount Percentage" />
+                                <TextField promptText="Enter percentage" prefWidth="300.0" />
+
+                                <Button text="Apply Discount" prefWidth="220.0" styleClass="primary-button" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="12.0" styleClass="card" prefWidth="420.0" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                            <children>
+                                <Label text="Discount Rules" styleClass="section-title" />
+
+                                <Label text="Admin role discount limit: 15%" />
+                                <Label text="Manager role discount limit: 30%" />
+                                <Label text="Loyalty points can be redeemed based on available balance." />
+                                <Label text="Discounts are applied to Billing records before final payment." />
+
+                                <Label text="Validation Preview"
+                                       style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+
+                                <Label text="Selected Role: Manager" />
+                                <Label text="Entered Discount: 20%" />
+                                <Label text="Status: Allowed"
+                                       style="-fx-text-fill: green; -fx-font-weight: bold;" />
+                            </children>
+                        </VBox>
+
+                    </children>
+                </GridPane>
+
+                <VBox spacing="12.0" styleClass="card">
+                    <children>
+                        <Label text="Recent Discounts" styleClass="section-title" />
+
+                        <GridPane hgap="18.0" vgap="12.0">
+                            <children>
+                                <Label text="Discount ID" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                                <Label text="Billing ID" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+                                <Label text="Applied By" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="2" />
+                                <Label text="Type" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="3" />
+                                <Label text="Percentage" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="4" />
+                                <Label text="Applied At" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="5" />
+
+                                <Label text="DISC-001" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                                <Label text="BILL-501" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+                                <Label text="manager01" GridPane.rowIndex="1" GridPane.columnIndex="2" />
+                                <Label text="Role Based" GridPane.rowIndex="1" GridPane.columnIndex="3" />
+                                <Label text="20%" GridPane.rowIndex="1" GridPane.columnIndex="4" />
+                                <Label text="July 15, 2026" GridPane.rowIndex="1" GridPane.columnIndex="5" />
+
+                                <Label text="DISC-002" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                                <Label text="BILL-502" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+                                <Label text="admin02" GridPane.rowIndex="2" GridPane.columnIndex="2" />
+                                <Label text="Loyalty Redemption" GridPane.rowIndex="2" GridPane.columnIndex="3" />
+                                <Label text="10%" GridPane.rowIndex="2" GridPane.columnIndex="4" />
+                                <Label text="July 16, 2026" GridPane.rowIndex="2" GridPane.columnIndex="5" />
+                            </children>
+                        </GridPane>
+                    </children>
+                </VBox>
+
+            </children>
+        </VBox>
+    </center>
+
+</BorderPane>

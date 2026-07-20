@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1100.0"
+            stylesheets="@../../css/app.css"
+            fx:controller="com.hotelreservation.controller.kiosk.PaymentController"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1">
+
+    <top>
+        <VBox spacing="5.0" styleClass="header">
+            <children>
+                <Label text="Payment" styleClass="header-title" />
+                <Label text="Complete billing and payment for the reservation" styleClass="header-subtitle" />
+            </children>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="14.0" style="-fx-padding: 25;">
+            <children>
+
+                <VBox spacing="6.0">
+                    <children>
+                        <Label text="Payment Details" styleClass="screen-title" />
+                        <Label text="This screen connects to Billing and Payment entities in the system design."
+                               style="-fx-font-size: 14px; -fx-text-fill: #6b7280;" />
+                    </children>
+                </VBox>
+
+                <GridPane hgap="25.0" vgap="18.0">
+                    <children>
+
+                        <VBox spacing="9.0" styleClass="card" prefWidth="480.0" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                            <children>
+                                <Label text="Billing Summary" styleClass="section-title" />
+                                <Label text="Reservation ID: RES-1001" />
+                                <Label text="Billing ID: BILL-501" />
+                                <Label text="Room Total: CAD 750" />
+                                <Label text="Add-ons Total: CAD 150" />
+                                <Label text="Subtotal: CAD 900" />
+                                <Label text="Tax Amount: CAD 117" />
+                                <Label text="Total Amount: CAD 1017"
+                                       style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="9.0" styleClass="card" prefWidth="480.0" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                            <children>
+                                <Label text="Payment Information" styleClass="section-title" />
+
+                                <Label text="Payment Method" />
+                                <ComboBox promptText="Select payment method" prefWidth="300.0" />
+
+                                <Label text="Amount Paid" />
+                                <TextField promptText="CAD 1017" prefWidth="300.0" />
+
+                                <Label text="Card Number" />
+                                <TextField promptText="XXXX XXXX XXXX XXXX" prefWidth="300.0" />
+
+                                <Label text="Expiry Date" />
+                                <TextField promptText="MM/YY" prefWidth="300.0" />
+
+                                <Label text="CVV" />
+                                <TextField promptText="123" prefWidth="120.0" />
+                            </children>
+                        </VBox>
+
+                    </children>
+                </GridPane>
+
+                <VBox spacing="7.0" styleClass="card">
+                    <children>
+                        <Label text="Supported Payment Methods" styleClass="section-title" />
+                        <Label text="Cash" />
+                        <Label text="Card" />
+                        <Label text="Loyalty Points" />
+                    </children>
+                </VBox>
+
+                <HBox alignment="CENTER_RIGHT" spacing="15.0">
+                    <children>
+                        <Button text="Back"
+                                prefWidth="170.0"
+                                styleClass="secondary-button"
+                                onAction="#backToBookingSummary" />
+
+                        <Button text="Pay and Confirm Booking"
+                                prefWidth="280.0"
+                                styleClass="primary-button"
+                                onAction="#completePayment" />
+                    </children>
+                </HBox>
+
+            </children>
+        </VBox>
+    </center>
+
+</BorderPane>
