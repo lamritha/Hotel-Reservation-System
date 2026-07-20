@@ -1,33 +1,64 @@
 package com.hotelreservation.entity;
 
-public enum AddOn {
+import jakarta.persistence.*;
 
-    WIFI("Wi-Fi", 15.00, false),
-    BREAKFAST("Breakfast", 20.00, true),
-    PARKING("Parking", 25.00, true),
-    SPA("Spa", 80.00, false),
-    LAUNDRY("Laundry", 30.00, false),
-    AIRPORT_PICKUP("Airport Pickup", 60.00, false);
+@Entity
+@Table(name = "addons")
+public class AddOn {
 
-    private final String displayName;
-    private final double price;
-    private final boolean perNight;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "addon_id")
+    private Long addonID;
 
-    AddOn(String displayName, double price, boolean perNight) {
-        this.displayName = displayName;
-        this.price = price;
-        this.perNight = perNight;
+    @Column(name = "name", nullable = false, length = 100)
+    private String name;
+
+    @Column(name = "price", nullable = false)
+    private double price;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "pricing_model", nullable = false, length = 50)
+    private PricingModel pricingModel;
+
+    public AddOn() {
     }
 
-    public String getDisplayName() {
-        return displayName;
+    public AddOn(String name, double price, PricingModel pricingModel) {
+        this.name = name;
+        this.price = price;
+        this.pricingModel = pricingModel;
+    }
+
+    public Long getAddonID() {
+        return addonID;
+    }
+
+    public void setAddonID(Long addonID) {
+        this.addonID = addonID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public boolean isPerNight() {
-        return perNight;
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public PricingModel getPricingModel() {
+        return pricingModel;
+    }
+
+    public void setPricingModel(PricingModel pricingModel) {
+        this.pricingModel = pricingModel;
     }
 }

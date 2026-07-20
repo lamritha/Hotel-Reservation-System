@@ -14,6 +14,8 @@
         <class>com.hotelreservation.entity.Reservation</class>
         <class>com.hotelreservation.entity.Billing</class>
         <class>com.hotelreservation.entity.Payment</class>
+        <class>com.hotelreservation.entity.AddOn</class>
+        <class>com.hotelreservation.entity.ReservationAddOn</class>
 
         <properties>
             <!-- H2 Database Configuration -->

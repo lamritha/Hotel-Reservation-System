@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "reservations")
@@ -43,6 +45,9 @@ public class Reservation {
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ReservationAddOn> reservationAddOns = new ArrayList<>();
 
     public Reservation() {
         this.status = ReservationStatus.PENDING;
@@ -148,5 +153,18 @@ public class Reservation {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public List<ReservationAddOn> getReservationAddOns() {
+        return reservationAddOns;
+    }
+
+    public void setReservationAddOns(List<ReservationAddOn> reservationAddOns) {
+        this.reservationAddOns = reservationAddOns;
+    }
+
+    public void addReservationAddOn(ReservationAddOn reservationAddOn) {
+        reservationAddOns.add(reservationAddOn);
+        reservationAddOn.setReservation(this);
     }
 }

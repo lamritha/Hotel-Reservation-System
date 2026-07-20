@@ -3,6 +3,7 @@ package com.hotelreservation.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 @Table(name = "billings")
@@ -60,6 +61,40 @@ public class Billing {
 
     public void setReservation(Reservation reservation) {
         this.reservation = reservation;
+    }
+
+    /**
+     * Sums add-on charges from persisted ReservationAddOn rows (AddOn.price × quantity),
+     * applying nights for PER_NIGHT pricing models. Queryable consistency check against
+     * PricingService's boolean-based add-on total — not a separate billing source.
+     */
+    public double getPersistedAddOnTotal() {
+        if (reservation == null || reservation.getReservationAddOns() == null) {
+            return 0;
+        }
+
+        long nights = 0;
+        if (reservation.getCheckInDate() != null && reservation.getCheckOutDate() != null) {
+            nights = ChronoUnit.DAYS.between(
+                    reservation.getCheckInDate(),
+                    reservation.getCheckOutDate()
+            );
+        }
+
+        double total = 0;
+        for (ReservationAddOn reservationAddOn : reservation.getReservationAddOns()) {
+            AddOn addOn = reservationAddOn.getAddOn();
+            if (addOn == null) {
+                continue;
+            }
+
+            double lineTotal = addOn.getPrice() * reservationAddOn.getQuantity();
+            if (addOn.getPricingModel() == PricingModel.PER_NIGHT) {
+                lineTotal *= nights;
+            }
+            total += lineTotal;
+        }
+        return total;
     }
 
     public double getSubtotal() {
