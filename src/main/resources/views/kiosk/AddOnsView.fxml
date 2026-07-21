@@ -151,7 +151,7 @@
                                 onAction="#backToRoomSelection" />
 
                         <Button text="Continue to Loyalty Check"
-                                prefWidth="230.0"
+                                prefWidth="280.0"
                                 styleClass="primary-button"
                                 onAction="#continueToLoyaltyCheck" />
                     </children>

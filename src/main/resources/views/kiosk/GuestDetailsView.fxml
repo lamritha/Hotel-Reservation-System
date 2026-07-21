@@ -137,7 +137,7 @@
                                 onAction="#backToStayDates" />
 
                         <Button text="Continue to Room Selection"
-                                prefWidth="250.0"
+                                prefWidth="280.0"
                                 styleClass="primary-button"
                                 onAction="#continueToRoomSelection" />
                     </children>

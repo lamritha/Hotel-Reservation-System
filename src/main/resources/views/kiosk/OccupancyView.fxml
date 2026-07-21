@@ -70,7 +70,7 @@
                                         onAction="#backToWelcome" />
 
                                 <Button text="Continue to Dates"
-                                        prefWidth="220.0"
+                                        prefWidth="280.0"
                                         styleClass="primary-button"
                                         onAction="#continueToStayDates" />
                             </children>

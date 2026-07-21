@@ -35,6 +35,10 @@ public class BookingSession {
     private static boolean laundrySelected;
     private static boolean airportPickupSelected;
 
+    private static boolean loyaltyEnrolled;
+    private static String loyaltyNumber = "";
+    private static int loyaltyPointsBalance;
+
     private static Long savedReservationId;
     private static Long savedGuestId;
     private static Long savedRoomId;
@@ -75,6 +79,10 @@ public class BookingSession {
         parkingSelected = false;
         laundrySelected = false;
         airportPickupSelected = false;
+
+        loyaltyEnrolled = false;
+        loyaltyNumber = "";
+        loyaltyPointsBalance = 0;
 
         savedReservationId = null;
         savedGuestId = null;
@@ -280,6 +288,30 @@ public class BookingSession {
 
     public static void setSavedRoomId(Long savedRoomId) {
         BookingSession.savedRoomId = savedRoomId;
+    }
+
+    public static boolean isLoyaltyEnrolled() {
+        return loyaltyEnrolled;
+    }
+
+    public static void setLoyaltyEnrolled(boolean loyaltyEnrolled) {
+        BookingSession.loyaltyEnrolled = loyaltyEnrolled;
+    }
+
+    public static String getLoyaltyNumber() {
+        return loyaltyNumber;
+    }
+
+    public static void setLoyaltyNumber(String loyaltyNumber) {
+        BookingSession.loyaltyNumber = loyaltyNumber;
+    }
+
+    public static int getLoyaltyPointsBalance() {
+        return loyaltyPointsBalance;
+    }
+
+    public static void setLoyaltyPointsBalance(int loyaltyPointsBalance) {
+        BookingSession.loyaltyPointsBalance = loyaltyPointsBalance;
     }
 
     public static boolean isWifiSelected() {

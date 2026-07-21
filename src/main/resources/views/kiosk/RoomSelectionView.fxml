@@ -241,7 +241,7 @@
                                         onAction="#backToGuestDetails" />
 
                                 <Button text="Continue to Add-ons"
-                                        prefWidth="220.0"
+                                        prefWidth="280.0"
                                         styleClass="primary-button"
                                         onAction="#continueToAddOns" />
                             </children>

@@ -34,7 +34,7 @@ public class BookingSummaryController {
     private Label taxLabel;
 
     @FXML
-    private Label loyaltyDiscountLabel;
+    private Label loyaltyStatusLabel;
 
     @FXML
     private Label finalTotalLabel;
@@ -114,8 +114,14 @@ public class BookingSummaryController {
         taxLabel.setText(
                 String.format("Tax (13%%): CAD %.2f", priceBreakdown.getTaxAmount()));
 
-        loyaltyDiscountLabel.setText(
-                String.format("Loyalty Discount: CAD %.2f", priceBreakdown.getLoyaltyDiscount()));
+        if (BookingSession.isLoyaltyEnrolled()) {
+            loyaltyStatusLabel.setText(
+                    "Loyalty Status: Member (" + BookingSession.getLoyaltyNumber()
+                            + ", " + BookingSession.getLoyaltyPointsBalance() + " points)"
+            );
+        } else {
+            loyaltyStatusLabel.setText("Loyalty Status: Not enrolled");
+        }
 
         finalTotalLabel.setText(
                 String.format("Final Total: CAD %.2f", priceBreakdown.getEstimatedTotal()));

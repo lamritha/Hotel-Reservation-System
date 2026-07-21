@@ -237,6 +237,7 @@ public class RoomSelectionController {
         BookingSession.setDoubleRoomQuantity(doubleQty);
         BookingSession.setDeluxeRoomQuantity(deluxeQty);
         BookingSession.setPenthouseRoomQuantity(penthouseQty);
+        BookingSession.setGroupBooking(BookingSession.getNumAdults() >= 3);
 
         if (singleQty > 0) {
             BookingSession.setSelectedRoomType(RoomType.SINGLE);

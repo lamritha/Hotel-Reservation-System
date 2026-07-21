@@ -86,7 +86,7 @@
                                         <Label fx:id="addOnTotalLabel" text="Add-ons Total: CAD 0.00" />
                                         <Label fx:id="subtotalLabel" text="Subtotal: CAD 0.00" />
                                         <Label fx:id="taxLabel" text="Tax (13%): CAD 0.00" />
-                                        <Label fx:id="loyaltyDiscountLabel" text="Loyalty Discount: CAD 0.00" />
+                                        <Label fx:id="loyaltyStatusLabel" text="Loyalty Status: Not enrolled" />
                                         <Separator />
                                         <Label fx:id="finalTotalLabel"
                                                text="Final Total: CAD 0.00"

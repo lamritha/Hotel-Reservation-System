@@ -57,12 +57,18 @@ public class LoyaltyCheckController {
     }
 
     private void showLoyaltyAccountFound(LoyaltyAccount account) {
+        BookingSession.setLoyaltyEnrolled(true);
+        BookingSession.setLoyaltyNumber(account.getLoyaltyNumber());
+        BookingSession.setLoyaltyPointsBalance(account.getPointsBalance());
         loyaltyStatusLabel.setText("Loyalty account found: " + account.getLoyaltyNumber());
         loyaltyPointsLabel.setText("Available Loyalty Points: " + account.getPointsBalance());
         hideCreateLoyaltyLink();
     }
 
     private void showLoyaltyAccountMissing() {
+        BookingSession.setLoyaltyEnrolled(false);
+        BookingSession.setLoyaltyNumber("");
+        BookingSession.setLoyaltyPointsBalance(0);
         loyaltyStatusLabel.setText("No loyalty account found for this guest.");
         loyaltyPointsLabel.setText("Guest can continue without loyalty points.");
         createLoyaltyHyperlink.setVisible(true);

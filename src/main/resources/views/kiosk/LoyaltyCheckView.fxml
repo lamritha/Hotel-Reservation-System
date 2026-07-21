@@ -101,7 +101,7 @@
                         onAction="#backToAddOns" />
 
                 <Button text="Continue to Booking Summary"
-                        prefWidth="250.0"
+                        prefWidth="280.0"
                         styleClass="primary-button"
                         onAction="#continueToBookingSummary" />
             </children>
