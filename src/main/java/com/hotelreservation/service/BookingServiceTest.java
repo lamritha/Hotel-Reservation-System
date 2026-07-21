@@ -16,6 +16,11 @@ public class BookingServiceTest {
         try {
             ensureAvailableRoom(RoomType.SINGLE);
 
+            com.hotelreservation.util.BookingSession.setSingleRoomQuantity(1);
+            com.hotelreservation.util.BookingSession.setDoubleRoomQuantity(0);
+            com.hotelreservation.util.BookingSession.setDeluxeRoomQuantity(0);
+            com.hotelreservation.util.BookingSession.setPenthouseRoomQuantity(0);
+
             BookingService bookingService = new BookingService();
 
             Guest guest = new Guest(
@@ -28,7 +33,6 @@ public class BookingServiceTest {
 
             Reservation reservation = bookingService.completeBooking(
                     guest,
-                    RoomType.SINGLE,
                     LocalDate.of(2026, 7, 17),
                     LocalDate.of(2026, 7, 20),
                     1,

@@ -9,10 +9,13 @@ import com.hotelreservation.util.BookingSession;
 import com.hotelreservation.util.JpaUtil;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Orchestrates kiosk booking completion: room selection, occupancy checks,
- * pricing via PricingService, and persistence of Guest, Reservation, and Billing.
+ * Orchestrates kiosk booking completion: multi-room selection from BookingSession
+ * quantities, occupancy split, pricing via PricingService, and persistence of Guest,
+ * Reservation, ReservationRoom, and Billing.
  */
 public class BookingService {
 
@@ -63,7 +66,6 @@ public class BookingService {
 
     public Reservation completeBooking(
             Guest guest,
-            RoomType roomType,
             LocalDate checkInDate,
             LocalDate checkOutDate,
             int numAdults,
@@ -76,7 +78,6 @@ public class BookingService {
             return JpaUtil.executeInTransaction(() ->
                     completeBookingInTransaction(
                             guest,
-                            roomType,
                             checkInDate,
                             checkOutDate,
                             numAdults,
@@ -93,7 +94,6 @@ public class BookingService {
 
     private Reservation completeBookingInTransaction(
             Guest guest,
-            RoomType roomType,
             LocalDate checkInDate,
             LocalDate checkOutDate,
             int numAdults,
@@ -102,20 +102,30 @@ public class BookingService {
             PaymentMethod paymentMethod,
             boolean useWeekendPricing
     ) {
-        Room selectedRoom = roomAvailabilityService.findFirstAvailableRoom(
-                roomType,
-                checkInDate,
-                checkOutDate
-        );
-        occupancyService.validateOccupancy(selectedRoom, numAdults, numChildren);
+        List<Room> assignedRooms = collectAssignedRooms(checkInDate, checkOutDate);
+
+        if (assignedRooms.isEmpty()) {
+            throw new IllegalStateException("No rooms selected for this booking.");
+        }
+
+        int totalCapacity = assignedRooms.stream().mapToInt(Room::getMaxOccupancy).sum();
+        int totalGuests = occupancyService.getTotalGuests(numAdults, numChildren);
+        if (totalGuests > totalCapacity) {
+            throw new IllegalStateException(
+                    "Occupancy limit exceeded. Selected rooms allow maximum "
+                            + totalCapacity + " guests, but " + totalGuests + " were requested."
+            );
+        }
+
+        Room legacyRoom = assignedRooms.get(0);
 
         PricingService.PriceBreakdown priceBreakdown = pricingService.calculateSessionPriceBreakdown();
 
-        guestRepository.save(guest);
+        Guest guestToPersist = resolveGuest(guest);
 
         Reservation reservation = new Reservation(
-                guest,
-                selectedRoom,
+                guestToPersist,
+                legacyRoom,
                 checkInDate,
                 checkOutDate,
                 numAdults,
@@ -124,6 +134,8 @@ public class BookingService {
         );
 
         reservation.setStatus(ReservationStatus.CONFIRMED);
+
+        attachAssignedRooms(reservation, assignedRooms, numAdults, numChildren);
 
         attachSelectedAddOns(
                 reservation,
@@ -149,15 +161,117 @@ public class BookingService {
         billingRepository.save(billing);
 
         System.out.println(String.format(
-                "Billing saved: subtotal=%.2f tax=%.2f total=%.2f | persistedAddOnTotal=%.2f | pricingAddOnTotal=%.2f",
+                "Billing saved: subtotal=%.2f tax=%.2f total=%.2f | persistedAddOnTotal=%.2f | pricingAddOnTotal=%.2f | rooms=%d",
                 billing.getSubtotal(),
                 billing.getTaxAmount(),
                 billing.getTotalAmount(),
                 billing.getPersistedAddOnTotal(),
-                priceBreakdown.getAddOnTotal()
+                priceBreakdown.getAddOnTotal(),
+                assignedRooms.size()
         ));
 
         return reservation;
+    }
+
+    /**
+     * Reuses an existing Guest matched by email (updating contact fields), or saves a new one.
+     */
+    private Guest resolveGuest(Guest incomingGuest) {
+        return guestRepository.findByEmail(incomingGuest.getEmail())
+                .map(existingGuest -> {
+                    existingGuest.setFirstName(incomingGuest.getFirstName());
+                    existingGuest.setLastName(incomingGuest.getLastName());
+                    existingGuest.setPhone(incomingGuest.getPhone());
+                    existingGuest.setAddress(incomingGuest.getAddress());
+                    return guestRepository.update(existingGuest);
+                })
+                .orElseGet(() -> guestRepository.save(incomingGuest));
+    }
+
+    private List<Room> collectAssignedRooms(LocalDate checkInDate, LocalDate checkOutDate) {
+        List<Room> assignedRooms = new ArrayList<>();
+
+        appendRoomsForType(
+                assignedRooms,
+                RoomType.SINGLE,
+                BookingSession.getSingleRoomQuantity(),
+                checkInDate,
+                checkOutDate
+        );
+        appendRoomsForType(
+                assignedRooms,
+                RoomType.DOUBLE,
+                BookingSession.getDoubleRoomQuantity(),
+                checkInDate,
+                checkOutDate
+        );
+        appendRoomsForType(
+                assignedRooms,
+                RoomType.DELUXE,
+                BookingSession.getDeluxeRoomQuantity(),
+                checkInDate,
+                checkOutDate
+        );
+        appendRoomsForType(
+                assignedRooms,
+                RoomType.PENTHOUSE,
+                BookingSession.getPenthouseRoomQuantity(),
+                checkInDate,
+                checkOutDate
+        );
+
+        return assignedRooms;
+    }
+
+    private void appendRoomsForType(
+            List<Room> assignedRooms,
+            RoomType roomType,
+            int quantity,
+            LocalDate checkInDate,
+            LocalDate checkOutDate
+    ) {
+        if (quantity <= 0) {
+            return;
+        }
+
+        assignedRooms.addAll(
+                roomAvailabilityService.findAvailableRooms(roomType, checkInDate, checkOutDate, quantity)
+        );
+    }
+
+    /**
+     * Fill-to-max-then-overflow: adults first, then children, up to each room's maxOccupancy.
+     */
+    private void attachAssignedRooms(
+            Reservation reservation,
+            List<Room> assignedRooms,
+            int numAdults,
+            int numChildren
+    ) {
+        int remainingAdults = numAdults;
+        int remainingChildren = numChildren;
+
+        for (Room room : assignedRooms) {
+            int capacity = room.getMaxOccupancy();
+
+            int assignedAdults = Math.min(remainingAdults, capacity);
+            remainingAdults -= assignedAdults;
+
+            int remainingCapacity = capacity - assignedAdults;
+            int assignedChildren = Math.min(remainingChildren, remainingCapacity);
+            remainingChildren -= assignedChildren;
+
+            reservation.addReservationRoom(
+                    new ReservationRoom(reservation, room, assignedAdults, assignedChildren)
+            );
+        }
+
+        if (remainingAdults > 0 || remainingChildren > 0) {
+            throw new IllegalStateException(
+                    "Could not assign all guests across selected rooms. Remaining adults="
+                            + remainingAdults + ", children=" + remainingChildren + "."
+            );
+        }
     }
 
     /**

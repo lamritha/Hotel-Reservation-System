@@ -24,28 +24,57 @@ public class RoomAvailabilityService {
     }
 
     /**
-     * Returns the first room of the given type with no overlapping CONFIRMED reservation
-     * for [checkInDate, checkOutDate).
+     * Returns the first room of the given type with no overlapping CONFIRMED/CHECKED_IN
+     * reservation for [checkInDate, checkOutDate).
      *
      * @throws RuntimeException if no available room exists for the type and dates
      */
     public Room findFirstAvailableRoom(RoomType roomType, LocalDate checkInDate, LocalDate checkOutDate) {
-        List<Room> availableRooms = roomRepository.findAvailableRoomsByTypeAndDates(
-                roomType,
-                checkInDate,
-                checkOutDate
-        );
-
-        if (availableRooms.isEmpty()) {
-            throw new RuntimeException("No available room found for room type: " + roomType
-                    + " between " + checkInDate + " and " + checkOutDate);
-        }
-
+        List<Room> availableRooms = findAvailableRooms(roomType, checkInDate, checkOutDate, 1);
         return availableRooms.get(0);
     }
 
     /**
-     * Counts rooms of the given type with no overlapping CONFIRMED reservation
+     * Returns up to {@code quantity} available rooms of the given type for the stay dates.
+     *
+     * @throws IllegalStateException if fewer rooms are available than requested
+     */
+    public List<Room> findAvailableRooms(
+            RoomType roomType,
+            LocalDate checkInDate,
+            LocalDate checkOutDate,
+            int quantity
+    ) {
+        if (quantity <= 0) {
+            return List.of();
+        }
+
+        List<Room> availableRooms = roomRepository.findAvailableRoomsByTypeAndDates(
+                roomType,
+                checkInDate,
+                checkOutDate,
+                quantity
+        );
+
+        if (availableRooms.size() < quantity) {
+            String displayName = switch (roomType) {
+                case SINGLE -> "Single";
+                case DOUBLE -> "Double";
+                case DELUXE -> "Deluxe";
+                case PENTHOUSE -> "Penthouse";
+            };
+
+            throw new IllegalStateException(
+                    "Only " + availableRooms.size() + " " + displayName
+                            + " room(s) available, but " + quantity + " requested"
+            );
+        }
+
+        return availableRooms;
+    }
+
+    /**
+     * Counts rooms of the given type with no overlapping CONFIRMED/CHECKED_IN reservation
      * for [checkInDate, checkOutDate).
      */
     public int countAvailableRooms(RoomType roomType, LocalDate checkInDate, LocalDate checkOutDate) {

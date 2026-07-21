@@ -46,7 +46,6 @@ public class VerifyAddOnBooking {
             BookingService bookingService = new BookingService();
             Reservation reservation = bookingService.completeBooking(
                     guest,
-                    RoomType.SINGLE,
                     BookingSession.getCheckInDate(),
                     BookingSession.getCheckOutDate(),
                     1,

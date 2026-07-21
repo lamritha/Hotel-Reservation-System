@@ -134,7 +134,6 @@ public class BookingSummaryController {
 
             Reservation reservation = bookingService.completeBooking(
                     guest,
-                    BookingSession.getSelectedRoomType(),
                     BookingSession.getCheckInDate(),
                     BookingSession.getCheckOutDate(),
                     BookingSession.getNumAdults(),
