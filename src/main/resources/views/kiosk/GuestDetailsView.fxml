@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane prefHeight="700.0" prefWidth="1100.0"
@@ -45,41 +46,86 @@
 
                     <children>
                         <Label text="First Name" GridPane.rowIndex="0" GridPane.columnIndex="0" />
-                        <TextField fx:id="firstNameField"
-                                   promptText="Enter first name"
-                                   prefWidth="350"
-                                   GridPane.rowIndex="1"
-                                   GridPane.columnIndex="0" />
+                        <VBox spacing="4.0"
+                              GridPane.rowIndex="1"
+                              GridPane.columnIndex="0">
+                            <children>
+                                <TextField fx:id="firstNameField"
+                                           promptText="Enter first name"
+                                           prefWidth="350" />
+                                <Label fx:id="firstNameErrorLabel"
+                                       text=""
+                                       styleClass="field-error"
+                                       managed="false"
+                                       visible="false" />
+                            </children>
+                        </VBox>
 
                         <Label text="Last Name" GridPane.rowIndex="0" GridPane.columnIndex="1" />
-                        <TextField fx:id="lastNameField"
-                                   promptText="Enter last name"
-                                   prefWidth="350"
-                                   GridPane.rowIndex="1"
-                                   GridPane.columnIndex="1" />
+                        <VBox spacing="4.0"
+                              GridPane.rowIndex="1"
+                              GridPane.columnIndex="1">
+                            <children>
+                                <TextField fx:id="lastNameField"
+                                           promptText="Enter last name"
+                                           prefWidth="350" />
+                                <Label fx:id="lastNameErrorLabel"
+                                       text=""
+                                       styleClass="field-error"
+                                       managed="false"
+                                       visible="false" />
+                            </children>
+                        </VBox>
 
                         <Label text="Email" GridPane.rowIndex="2" GridPane.columnIndex="0" />
-                        <TextField fx:id="emailField"
-                                   promptText="guest@email.com"
-                                   prefWidth="350"
-                                   GridPane.rowIndex="3"
-                                   GridPane.columnIndex="0" />
+                        <VBox spacing="4.0"
+                              GridPane.rowIndex="3"
+                              GridPane.columnIndex="0">
+                            <children>
+                                <TextField fx:id="emailField"
+                                           promptText="guest@email.com"
+                                           prefWidth="350" />
+                                <Label fx:id="emailErrorLabel"
+                                       text=""
+                                       styleClass="field-error"
+                                       managed="false"
+                                       visible="false" />
+                            </children>
+                        </VBox>
 
                         <Label text="Phone" GridPane.rowIndex="2" GridPane.columnIndex="1" />
-                        <TextField fx:id="phoneField"
-                                   promptText="Enter phone number"
-                                   prefWidth="350"
-                                   GridPane.rowIndex="3"
-                                   GridPane.columnIndex="1" />
+                        <VBox spacing="4.0"
+                              GridPane.rowIndex="3"
+                              GridPane.columnIndex="1">
+                            <children>
+                                <TextField fx:id="phoneField"
+                                           promptText="Enter phone number"
+                                           prefWidth="350" />
+                                <Label fx:id="phoneErrorLabel"
+                                       text=""
+                                       styleClass="field-error"
+                                       managed="false"
+                                       visible="false" />
+                            </children>
+                        </VBox>
 
                         <Label text="Address" GridPane.rowIndex="4" GridPane.columnIndex="0" />
-                        <TextArea fx:id="addressArea"
-                                  promptText="Enter address"
-                                  prefRowCount="4"
-                                  prefWidth="720"
-                                  GridPane.rowIndex="5"
-                                  GridPane.columnIndex="0"
-                                  GridPane.columnSpan="2" />
+                        <VBox spacing="4.0"
+                              GridPane.rowIndex="5"
+                              GridPane.columnIndex="0"
+                              GridPane.columnSpan="2">
+                            <children>
+                                <TextArea fx:id="addressArea"
+                                          promptText="Enter address"
+                                          prefRowCount="4"
+                                          prefWidth="720" />
+                                <Label fx:id="addressErrorLabel"
+                                       text=""
+                                       styleClass="field-error"
+                                       managed="false"
+                                       visible="false" />
+                            </children>
+                        </VBox>
                     </children>
                 </GridPane>
 
@@ -100,5 +146,22 @@
             </children>
         </VBox>
     </center>
+
+    <left>
+        <VBox prefWidth="200.0" alignment="TOP_CENTER" spacing="10.0" style="-fx-padding: 24 12 24 18;">
+            <children>
+                <Button fx:id="rulesButton"
+                        text="Rules &amp; Regulations"
+                        prefWidth="170.0"
+                        wrapText="true"
+                        styleClass="secondary-button"
+                        onAction="#showRulesAndRegulations" />
+            </children>
+        </VBox>
+    </left>
+
+    <right>
+        <Region prefWidth="200.0" />
+    </right>
 
 </BorderPane>

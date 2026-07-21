@@ -1,7 +1,7 @@
 package com.hotelreservation.util;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,10 +25,9 @@ public class SceneNavigator {
 
         try {
             FXMLLoader loader = new FXMLLoader(SceneNavigator.class.getResource(fxmlPath));
-            Scene scene = new Scene(loader.load());
+            Parent root = loader.load();
 
-            mainStage.setScene(scene);
-            mainStage.setMaximized(true);
+            mainStage.getScene().setRoot(root);
             mainStage.show();
 
         } catch (IOException e) {

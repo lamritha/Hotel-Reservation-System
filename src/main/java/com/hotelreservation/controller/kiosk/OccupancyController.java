@@ -6,10 +6,17 @@ import com.hotelreservation.util.SceneNavigator;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 public class OccupancyController {
+
+    @FXML
+    private Button rulesButton;
 
     @FXML
     private ComboBox<Integer> adultsComboBox;
@@ -24,8 +31,12 @@ public class OccupancyController {
 
     @FXML
     private void initialize() {
-        adultsComboBox.setItems(FXCollections.observableArrayList(1, 2, 3, 4));
-        childrenComboBox.setItems(FXCollections.observableArrayList(0, 1, 2, 3, 4));
+        adultsComboBox.setItems(FXCollections.observableArrayList(
+                IntStream.rangeClosed(1, 20).boxed().collect(Collectors.toList())
+        ));
+        childrenComboBox.setItems(FXCollections.observableArrayList(
+                IntStream.rangeClosed(0, 20).boxed().collect(Collectors.toList())
+        ));
 
         if (BookingSession.getNumAdults() > 0) {
             adultsComboBox.setValue(BookingSession.getNumAdults());
@@ -77,6 +88,15 @@ public class OccupancyController {
     @FXML
     private void backToWelcome() {
         SceneNavigator.switchTo("/views/kiosk/WelcomeView.fxml");
+    }
+
+    @FXML
+    private void showRulesAndRegulations() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Rules & Regulations");
+        alert.setHeaderText("Hotel Rules & Regulations");
+        alert.setContentText("Placeholder: rules and regulations content will be added later.");
+        alert.showAndWait();
     }
 
     private void showError(String message) {

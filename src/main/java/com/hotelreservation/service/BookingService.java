@@ -102,7 +102,11 @@ public class BookingService {
             PaymentMethod paymentMethod,
             boolean useWeekendPricing
     ) {
-        Room selectedRoom = roomAvailabilityService.findFirstAvailableRoom(roomType);
+        Room selectedRoom = roomAvailabilityService.findFirstAvailableRoom(
+                roomType,
+                checkInDate,
+                checkOutDate
+        );
         occupancyService.validateOccupancy(selectedRoom, numAdults, numChildren);
 
         PricingService.PriceBreakdown priceBreakdown = pricingService.calculateSessionPriceBreakdown();

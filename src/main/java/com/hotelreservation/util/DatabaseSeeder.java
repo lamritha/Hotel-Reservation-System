@@ -3,11 +3,18 @@ package com.hotelreservation.util;
 import com.hotelreservation.entity.AddOn;
 import com.hotelreservation.entity.PricingModel;
 import com.hotelreservation.entity.Room;
+import com.hotelreservation.entity.RoomStatus;
 import com.hotelreservation.entity.RoomType;
 import com.hotelreservation.factory.RoomFactory;
 import jakarta.persistence.EntityManager;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class DatabaseSeeder {
+
+    private static final int TARGET_ROOMS_PER_TYPE = 3;
 
     public static void main(String[] args) {
         EntityManager entityManager = null;
@@ -15,42 +22,17 @@ public class DatabaseSeeder {
         try {
             entityManager = JpaUtil.getEntityManager();
 
-            Long roomCount = entityManager
-                    .createQuery("SELECT COUNT(r) FROM Room r", Long.class)
-                    .getSingleResult();
-
             Long addOnCount = entityManager
                     .createQuery("SELECT COUNT(a) FROM AddOn a", Long.class)
                     .getSingleResult();
 
-            if (roomCount > 0 && addOnCount > 0) {
-                System.out.println("Rooms and add-ons already exist. Seeder skipped.");
-                return;
-            }
-
             entityManager.getTransaction().begin();
 
-            if (roomCount == 0) {
-                RoomFactory roomFactory = new RoomFactory();
-
-                Room room1 = roomFactory.createRoom(RoomType.SINGLE, "101", 1);
-                Room room2 = roomFactory.createRoom(RoomType.DOUBLE, "201", 2);
-                Room room3 = roomFactory.createRoom(RoomType.DELUXE, "301", 3);
-                Room room4 = roomFactory.createRoom(RoomType.PENTHOUSE, "501", 5);
-
-                entityManager.persist(room1);
-                entityManager.persist(room2);
-                entityManager.persist(room3);
-                entityManager.persist(room4);
-
-                System.out.println("Sample rooms inserted successfully.");
-                System.out.println("Single Room ID: " + room1.getRoomId());
-                System.out.println("Double Room ID: " + room2.getRoomId());
-                System.out.println("Deluxe Room ID: " + room3.getRoomId());
-                System.out.println("Penthouse Room ID: " + room4.getRoomId());
-            } else {
-                System.out.println("Rooms already exist. Room seeding skipped.");
-            }
+            RoomFactory roomFactory = new RoomFactory();
+            ensureRoomsForType(entityManager, roomFactory, RoomType.SINGLE, 1, 101);
+            ensureRoomsForType(entityManager, roomFactory, RoomType.DOUBLE, 2, 201);
+            ensureRoomsForType(entityManager, roomFactory, RoomType.DELUXE, 3, 301);
+            ensureRoomsForType(entityManager, roomFactory, RoomType.PENTHOUSE, 5, 501);
 
             if (addOnCount == 0) {
                 entityManager.persist(new AddOn("Wi-Fi", 15.00, PricingModel.PER_RESERVATION));
@@ -64,6 +46,13 @@ public class DatabaseSeeder {
             } else {
                 System.out.println("Add-ons already exist. Add-on seeding skipped.");
             }
+
+            // Availability is date-overlap based; clear stale OCCUPIED flags from testing.
+            int resetCount = entityManager
+                    .createQuery("UPDATE Room r SET r.status = :status")
+                    .setParameter("status", RoomStatus.AVAILABLE)
+                    .executeUpdate();
+            System.out.println("Reset " + resetCount + " room(s) to AVAILABLE.");
 
             entityManager.getTransaction().commit();
 
@@ -82,5 +71,60 @@ public class DatabaseSeeder {
 
             JpaUtil.close();
         }
+    }
+
+    private static void ensureRoomsForType(
+            EntityManager entityManager,
+            RoomFactory roomFactory,
+            RoomType roomType,
+            int floor,
+            int startingRoomNumber
+    ) {
+        Long existingCount = entityManager
+                .createQuery(
+                        "SELECT COUNT(r) FROM Room r WHERE r.roomType = :type",
+                        Long.class
+                )
+                .setParameter("type", roomType)
+                .getSingleResult();
+
+        if (existingCount >= TARGET_ROOMS_PER_TYPE) {
+            System.out.println(roomType + " already has " + existingCount
+                    + " room(s). Seeding skipped.");
+            return;
+        }
+
+        int needed = (int) (TARGET_ROOMS_PER_TYPE - existingCount);
+
+        List<String> existingNumbers = entityManager
+                .createQuery(
+                        "SELECT r.roomNumber FROM Room r WHERE r.roomType = :type",
+                        String.class
+                )
+                .setParameter("type", roomType)
+                .getResultList();
+
+        Set<String> usedNumbers = new HashSet<>(existingNumbers);
+
+        int nextNumber = startingRoomNumber;
+        int inserted = 0;
+
+        while (inserted < needed) {
+            String roomNumber = String.valueOf(nextNumber);
+            nextNumber++;
+
+            if (usedNumbers.contains(roomNumber)) {
+                continue;
+            }
+
+            Room room = roomFactory.createRoom(roomType, roomNumber, floor);
+            entityManager.persist(room);
+            usedNumbers.add(roomNumber);
+            inserted++;
+            System.out.println(roomType + " room " + roomNumber + " inserted.");
+        }
+
+        System.out.println(roomType + ": inserted " + inserted
+                + " room(s) to reach " + TARGET_ROOMS_PER_TYPE + ".");
     }
 }

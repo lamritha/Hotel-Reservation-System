@@ -5,10 +5,14 @@ import com.hotelreservation.util.SceneNavigator;
 import com.hotelreservation.util.ValidationUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class LoyaltyCheckController {
+
+    @FXML
+    private Button rulesButton;
 
     @FXML
     private TextField phoneField;
@@ -68,6 +72,15 @@ public class LoyaltyCheckController {
     @FXML
     private void backToAddOns() {
         SceneNavigator.switchTo("/views/kiosk/AddOnsView.fxml");
+    }
+
+    @FXML
+    private void showRulesAndRegulations() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Rules & Regulations");
+        alert.setHeaderText("Hotel Rules & Regulations");
+        alert.setContentText("Placeholder: rules and regulations content will be added later.");
+        alert.showAndWait();
     }
 
     private void showError(String message) {

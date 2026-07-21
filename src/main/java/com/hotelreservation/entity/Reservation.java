@@ -49,6 +49,9 @@ public class Reservation {
     @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReservationAddOn> reservationAddOns = new ArrayList<>();
 
+    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ReservationRoom> reservationRooms = new ArrayList<>();
+
     public Reservation() {
         this.status = ReservationStatus.PENDING;
     }
@@ -166,5 +169,18 @@ public class Reservation {
     public void addReservationAddOn(ReservationAddOn reservationAddOn) {
         reservationAddOns.add(reservationAddOn);
         reservationAddOn.setReservation(this);
+    }
+
+    public List<ReservationRoom> getReservationRooms() {
+        return reservationRooms;
+    }
+
+    public void setReservationRooms(List<ReservationRoom> reservationRooms) {
+        this.reservationRooms = reservationRooms;
+    }
+
+    public void addReservationRoom(ReservationRoom reservationRoom) {
+        reservationRooms.add(reservationRoom);
+        reservationRoom.setReservation(this);
     }
 }

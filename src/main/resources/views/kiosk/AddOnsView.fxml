@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane prefHeight="700.0" prefWidth="1100.0"
@@ -159,5 +160,22 @@
             </children>
         </VBox>
     </center>
+
+    <left>
+        <VBox prefWidth="200.0" alignment="TOP_CENTER" spacing="10.0" style="-fx-padding: 24 12 24 18;">
+            <children>
+                <Button fx:id="rulesButton"
+                        text="Rules &amp; Regulations"
+                        prefWidth="170.0"
+                        wrapText="true"
+                        styleClass="secondary-button"
+                        onAction="#showRulesAndRegulations" />
+            </children>
+        </VBox>
+    </left>
+
+    <right>
+        <Region prefWidth="200.0" />
+    </right>
 
 </BorderPane>

@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -61,6 +62,23 @@
             </children>
         </StackPane>
     </center>
+
+    <left>
+        <VBox prefWidth="200.0" alignment="TOP_CENTER" spacing="10.0" style="-fx-padding: 24 12 24 18;">
+            <children>
+                <Button fx:id="rulesButton"
+                        text="Rules &amp; Regulations"
+                        prefWidth="170.0"
+                        wrapText="true"
+                        styleClass="secondary-button"
+                        onAction="#showRulesAndRegulations" />
+            </children>
+        </VBox>
+    </left>
+
+    <right>
+        <Region prefWidth="200.0" />
+    </right>
 
     <bottom>
         <HBox alignment="CENTER" style="-fx-padding: 15;">
