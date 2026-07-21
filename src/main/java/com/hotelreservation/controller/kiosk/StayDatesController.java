@@ -58,6 +58,12 @@ public class StayDatesController {
             return;
         }
 
+        if (checkIn.isBefore(LocalDate.now())) {
+            validationLabel.setText("Invalid dates: check-in cannot be in the past.");
+            nightsLabel.setText("Nights: 0");
+            return;
+        }
+
         if (!checkOut.isAfter(checkIn)) {
             validationLabel.setText("Invalid dates: check-out must be after check-in.");
             nightsLabel.setText("Nights: 0");
@@ -77,6 +83,11 @@ public class StayDatesController {
 
         if (checkIn == null || checkOut == null) {
             showError("Please select both check-in and check-out dates.");
+            return;
+        }
+
+        if (checkIn.isBefore(LocalDate.now())) {
+            showError("Check-in date cannot be in the past.");
             return;
         }
 

@@ -1,11 +1,14 @@
 package com.hotelreservation.controller.kiosk;
 
+import com.hotelreservation.entity.LoyaltyAccount;
+import com.hotelreservation.repository.LoyaltyAccountRepository;
 import com.hotelreservation.util.BookingSession;
 import com.hotelreservation.util.SceneNavigator;
 import com.hotelreservation.util.ValidationUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -24,10 +27,16 @@ public class LoyaltyCheckController {
     private Label loyaltyPointsLabel;
 
     @FXML
+    private Hyperlink createLoyaltyHyperlink;
+
+    private final LoyaltyAccountRepository loyaltyAccountRepository = new LoyaltyAccountRepository();
+
+    @FXML
     private void initialize() {
         phoneField.setText(BookingSession.getPhone());
         loyaltyStatusLabel.setText("Phone number loaded from guest details.");
         loyaltyPointsLabel.setText("Click Check Loyalty to check available points.");
+        hideCreateLoyaltyLink();
     }
 
     @FXML
@@ -41,15 +50,37 @@ public class LoyaltyCheckController {
 
         BookingSession.setPhone(phone);
 
-        // Demo logic for prototype:
-        // This simulates checking if the guest is an existing customer.
-        if (phone.equals("416-555-0198") || phone.equals("4165550198")) {
-            loyaltyStatusLabel.setText("Existing customer found.");
-            loyaltyPointsLabel.setText("Available Loyalty Points: 420");
-        } else {
-            loyaltyStatusLabel.setText("No existing loyalty account found.");
-            loyaltyPointsLabel.setText("Guest can continue without loyalty points.");
-        }
+        loyaltyAccountRepository.findByGuestPhone(phone).ifPresentOrElse(
+                this::showLoyaltyAccountFound,
+                this::showLoyaltyAccountMissing
+        );
+    }
+
+    private void showLoyaltyAccountFound(LoyaltyAccount account) {
+        loyaltyStatusLabel.setText("Loyalty account found: " + account.getLoyaltyNumber());
+        loyaltyPointsLabel.setText("Available Loyalty Points: " + account.getPointsBalance());
+        hideCreateLoyaltyLink();
+    }
+
+    private void showLoyaltyAccountMissing() {
+        loyaltyStatusLabel.setText("No loyalty account found for this guest.");
+        loyaltyPointsLabel.setText("Guest can continue without loyalty points.");
+        createLoyaltyHyperlink.setVisible(true);
+        createLoyaltyHyperlink.setManaged(true);
+    }
+
+    private void hideCreateLoyaltyLink() {
+        createLoyaltyHyperlink.setVisible(false);
+        createLoyaltyHyperlink.setManaged(false);
+    }
+
+    @FXML
+    private void createLoyaltyAccountPlaceholder() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Loyalty Signup");
+        alert.setHeaderText("Create a loyalty account");
+        alert.setContentText("This would open account signup.");
+        alert.showAndWait();
     }
 
     @FXML

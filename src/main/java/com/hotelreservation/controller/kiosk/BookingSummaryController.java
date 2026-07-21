@@ -139,8 +139,7 @@ public class BookingSummaryController {
                     BookingSession.getNumAdults(),
                     BookingSession.getNumChildren(),
                     BookingSession.isGroupBooking(),
-                    PaymentMethod.CARD,
-                    true
+                    PaymentMethod.CARD
             );
 
             BookingSession.setSavedReservationId(reservation.getReservationId());

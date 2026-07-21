@@ -17,6 +17,7 @@
         <class>com.hotelreservation.entity.AddOn</class>
         <class>com.hotelreservation.entity.ReservationAddOn</class>
         <class>com.hotelreservation.entity.ReservationRoom</class>
+        <class>com.hotelreservation.entity.LoyaltyAccount</class>
 
         <properties>
             <!-- H2 Database Configuration -->

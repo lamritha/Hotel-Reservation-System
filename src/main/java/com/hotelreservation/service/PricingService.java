@@ -1,6 +1,5 @@
 package com.hotelreservation.service;
 
-import com.hotelreservation.entity.Room;
 import com.hotelreservation.entity.RoomType;
 import com.hotelreservation.strategy.PricingStrategy;
 import com.hotelreservation.strategy.StandardPricingStrategy;
@@ -40,24 +39,28 @@ public class PricingService {
     }
 
     /**
-     * Multi-room total from BookingSession quantities and RoomType base prices.
+     * Multi-room stay total from BookingSession quantities and date-driven weekend pricing.
      */
     public double calculateRoomTotal() {
-        long nights = getNumberOfNights();
-
-        return nights * (
+        double nightlyRoomCost =
                 BookingSession.getSingleRoomQuantity() * RoomType.SINGLE.getBasePrice()
                         + BookingSession.getDoubleRoomQuantity() * RoomType.DOUBLE.getBasePrice()
                         + BookingSession.getDeluxeRoomQuantity() * RoomType.DELUXE.getBasePrice()
-                        + BookingSession.getPenthouseRoomQuantity() * RoomType.PENTHOUSE.getBasePrice()
+                        + BookingSession.getPenthouseRoomQuantity() * RoomType.PENTHOUSE.getBasePrice();
+
+        PricingStrategy pricingStrategy = new WeekendPricingStrategy();
+        return pricingStrategy.calculatePrice(
+                nightlyRoomCost,
+                BookingSession.getCheckInDate(),
+                BookingSession.getCheckOutDate()
         );
     }
 
     /**
-     * Single-room strategy pricing (Standard/Weekend). Not used for kiosk Billing totals.
+     * Strategy pricing for an explicit nightly room cost (Standard vs Weekend).
      */
     public double calculateRoomSubtotal(
-            Room room,
+            double nightlyRoomCost,
             LocalDate checkInDate,
             LocalDate checkOutDate,
             boolean useWeekendPricing
@@ -66,7 +69,7 @@ public class PricingService {
                 ? new WeekendPricingStrategy()
                 : new StandardPricingStrategy();
 
-        return pricingStrategy.calculatePrice(room, checkInDate, checkOutDate);
+        return pricingStrategy.calculatePrice(nightlyRoomCost, checkInDate, checkOutDate);
     }
 
     public double calculateAddOnTotal(

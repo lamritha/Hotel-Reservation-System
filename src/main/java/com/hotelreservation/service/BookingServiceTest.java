@@ -38,8 +38,7 @@ public class BookingServiceTest {
                     1,
                     0,
                     false,
-                    PaymentMethod.CARD,
-                    true
+                    PaymentMethod.CARD
             );
 
             System.out.println("Booking completed successfully.");

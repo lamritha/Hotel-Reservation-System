@@ -71,8 +71,7 @@ public class BookingService {
             int numAdults,
             int numChildren,
             boolean groupBooking,
-            PaymentMethod paymentMethod,
-            boolean useWeekendPricing
+            PaymentMethod paymentMethod
     ) {
         try {
             return JpaUtil.executeInTransaction(() ->
@@ -83,8 +82,7 @@ public class BookingService {
                             numAdults,
                             numChildren,
                             groupBooking,
-                            paymentMethod,
-                            useWeekendPricing
+                            paymentMethod
                     )
             );
         } catch (Exception e) {
@@ -99,8 +97,7 @@ public class BookingService {
             int numAdults,
             int numChildren,
             boolean groupBooking,
-            PaymentMethod paymentMethod,
-            boolean useWeekendPricing
+            PaymentMethod paymentMethod
     ) {
         List<Room> assignedRooms = collectAssignedRooms(checkInDate, checkOutDate);
 

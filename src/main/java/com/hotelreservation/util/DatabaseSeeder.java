@@ -1,6 +1,8 @@
 package com.hotelreservation.util;
 
 import com.hotelreservation.entity.AddOn;
+import com.hotelreservation.entity.Guest;
+import com.hotelreservation.entity.LoyaltyAccount;
 import com.hotelreservation.entity.PricingModel;
 import com.hotelreservation.entity.Room;
 import com.hotelreservation.entity.RoomStatus;
@@ -15,6 +17,7 @@ import java.util.Set;
 public class DatabaseSeeder {
 
     private static final int TARGET_ROOMS_PER_TYPE = 3;
+    private static final int TARGET_LOYALTY_ACCOUNTS = 2;
 
     public static void main(String[] args) {
         EntityManager entityManager = null;
@@ -46,6 +49,8 @@ public class DatabaseSeeder {
             } else {
                 System.out.println("Add-ons already exist. Add-on seeding skipped.");
             }
+
+            ensureLoyaltyAccounts(entityManager);
 
             // Availability is date-overlap based; clear stale OCCUPIED flags from testing.
             int resetCount = entityManager
@@ -126,5 +131,70 @@ public class DatabaseSeeder {
 
         System.out.println(roomType + ": inserted " + inserted
                 + " room(s) to reach " + TARGET_ROOMS_PER_TYPE + ".");
+    }
+
+    /**
+     * Seeds up to two loyalty accounts with known phones for kiosk testing.
+     * Creates dedicated guests when needed so lookup-by-phone works without H2 console.
+     */
+    private static void ensureLoyaltyAccounts(EntityManager entityManager) {
+        Long loyaltyCount = entityManager
+                .createQuery("SELECT COUNT(la) FROM LoyaltyAccount la", Long.class)
+                .getSingleResult();
+
+        if (loyaltyCount >= TARGET_LOYALTY_ACCOUNTS) {
+            System.out.println("Loyalty accounts already exist (" + loyaltyCount
+                    + "). Loyalty seeding skipped.");
+            return;
+        }
+
+        int needed = (int) (TARGET_LOYALTY_ACCOUNTS - loyaltyCount);
+
+        if (needed >= 1) {
+            Guest guest1 = findOrCreateSeedGuest(
+                    entityManager,
+                    "loyalty.guest1@hotel.test",
+                    "416-555-0198",
+                    "Loyalty",
+                    "GuestOne"
+            );
+            entityManager.persist(new LoyaltyAccount(guest1, "LOY-1001", 420, 500, 80));
+            System.out.println("Loyalty account LOY-1001 seeded for phone 416-555-0198.");
+        }
+
+        if (needed >= 2) {
+            Guest guest2 = findOrCreateSeedGuest(
+                    entityManager,
+                    "loyalty.guest2@hotel.test",
+                    "416-555-0100",
+                    "Loyalty",
+                    "GuestTwo"
+            );
+            entityManager.persist(new LoyaltyAccount(guest2, "LOY-1002", 150, 150, 0));
+            System.out.println("Loyalty account LOY-1002 seeded for phone 416-555-0100.");
+        }
+    }
+
+    private static Guest findOrCreateSeedGuest(
+            EntityManager entityManager,
+            String email,
+            String phone,
+            String firstName,
+            String lastName
+    ) {
+        List<Guest> matches = entityManager
+                .createQuery("SELECT g FROM Guest g WHERE g.email = :email", Guest.class)
+                .setParameter("email", email)
+                .getResultList();
+
+        if (!matches.isEmpty()) {
+            Guest existing = matches.getFirst();
+            existing.setPhone(phone);
+            return existing;
+        }
+
+        Guest guest = new Guest(firstName, lastName, email, phone, "123 Loyalty Seed St");
+        entityManager.persist(guest);
+        return guest;
     }
 }

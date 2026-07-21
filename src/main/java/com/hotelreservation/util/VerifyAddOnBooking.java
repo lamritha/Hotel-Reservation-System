@@ -51,8 +51,7 @@ public class VerifyAddOnBooking {
                     1,
                     0,
                     false,
-                    PaymentMethod.CARD,
-                    true
+                    PaymentMethod.CARD
             );
 
             Long reservationId = reservation.getReservationId();
