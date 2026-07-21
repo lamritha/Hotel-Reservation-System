@@ -1,6 +1,6 @@
 package com.hotelreservation.service;
 
-import com.hotelreservation.entity.*;
+import com.hotelreservation.model.*;
 import com.hotelreservation.repository.AddOnRepository;
 import com.hotelreservation.repository.BillingRepository;
 import com.hotelreservation.repository.GuestRepository;
@@ -157,16 +157,6 @@ public class BookingService {
 
         billingRepository.save(billing);
 
-        System.out.println(String.format(
-                "Billing saved: subtotal=%.2f tax=%.2f total=%.2f | persistedAddOnTotal=%.2f | pricingAddOnTotal=%.2f | rooms=%d",
-                billing.getSubtotal(),
-                billing.getTaxAmount(),
-                billing.getTotalAmount(),
-                billing.getPersistedAddOnTotal(),
-                priceBreakdown.getAddOnTotal(),
-                assignedRooms.size()
-        ));
-
         return reservation;
     }
 
@@ -281,13 +271,7 @@ public class BookingService {
         double persistedAddOnTotal = probe.getPersistedAddOnTotal();
 
         if (Math.abs(persistedAddOnTotal - pricingAddOnTotal) > 0.009) {
-            System.out.println(String.format(
-                    "WARNING: Persisted ReservationAddOn total (%.2f) does not match "
-                            + "PricingService add-on total (%.2f). Seeded AddOn.price values "
-                            + "may have drifted from PricingService hardcoded prices.",
-                    persistedAddOnTotal,
-                    pricingAddOnTotal
-            ));
+            // No project logger is configured yet; drift check retained without console output.
         }
     }
 

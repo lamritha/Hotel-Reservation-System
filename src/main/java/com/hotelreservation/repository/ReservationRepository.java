@@ -1,7 +1,7 @@
 package com.hotelreservation.repository;
 
-import com.hotelreservation.entity.Reservation;
-import com.hotelreservation.entity.ReservationStatus;
+import com.hotelreservation.model.Reservation;
+import com.hotelreservation.model.ReservationStatus;
 
 import java.util.List;
 

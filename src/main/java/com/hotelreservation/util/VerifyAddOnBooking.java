@@ -1,6 +1,6 @@
 package com.hotelreservation.util;
 
-import com.hotelreservation.entity.*;
+import com.hotelreservation.model.*;
 import com.hotelreservation.factory.RoomFactory;
 import com.hotelreservation.service.BookingService;
 import jakarta.persistence.EntityManager;

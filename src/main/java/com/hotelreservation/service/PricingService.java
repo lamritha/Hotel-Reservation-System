@@ -1,6 +1,6 @@
 package com.hotelreservation.service;
 
-import com.hotelreservation.entity.RoomType;
+import com.hotelreservation.model.RoomType;
 import com.hotelreservation.strategy.PricingStrategy;
 import com.hotelreservation.strategy.StandardPricingStrategy;
 import com.hotelreservation.strategy.WeekendPricingStrategy;

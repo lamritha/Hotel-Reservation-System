@@ -1,6 +1,6 @@
 package com.hotelreservation.service;
 
-import com.hotelreservation.entity.Room;
+import com.hotelreservation.model.Room;
 
 /**
  * Validates guest occupancy against room capacity.

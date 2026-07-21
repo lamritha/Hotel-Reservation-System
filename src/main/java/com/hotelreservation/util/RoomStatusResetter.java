@@ -1,7 +1,7 @@
 package com.hotelreservation.util;
 
-import com.hotelreservation.entity.Room;
-import com.hotelreservation.entity.RoomStatus;
+import com.hotelreservation.model.Room;
+import com.hotelreservation.model.RoomStatus;
 import jakarta.persistence.EntityManager;
 
 import java.util.List;

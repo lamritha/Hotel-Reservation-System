@@ -77,11 +77,6 @@ public class OccupancyController {
         BookingSession.setNumAdults(adults);
         BookingSession.setNumChildren(children);
 
-        System.out.println("Occupancy saved in BookingSession:");
-        System.out.println("Adults: " + BookingSession.getNumAdults());
-        System.out.println("Children: " + BookingSession.getNumChildren());
-        System.out.println("Total Guests: " + totalGuests);
-
         SceneNavigator.switchTo("/views/kiosk/StayDatesView.fxml");
     }
 

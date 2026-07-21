@@ -1,8 +1,8 @@
 package com.hotelreservation.repository;
 
-import com.hotelreservation.entity.ReservationStatus;
-import com.hotelreservation.entity.Room;
-import com.hotelreservation.entity.RoomType;
+import com.hotelreservation.model.ReservationStatus;
+import com.hotelreservation.model.Room;
+import com.hotelreservation.model.RoomType;
 
 import java.time.LocalDate;
 import java.util.List;

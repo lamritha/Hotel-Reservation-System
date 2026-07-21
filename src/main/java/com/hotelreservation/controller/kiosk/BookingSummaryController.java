@@ -1,8 +1,8 @@
 package com.hotelreservation.controller.kiosk;
 
-import com.hotelreservation.entity.Guest;
-import com.hotelreservation.entity.PaymentMethod;
-import com.hotelreservation.entity.Reservation;
+import com.hotelreservation.model.Guest;
+import com.hotelreservation.model.PaymentMethod;
+import com.hotelreservation.model.Reservation;
 import com.hotelreservation.service.BookingService;
 import com.hotelreservation.service.OccupancyService;
 import com.hotelreservation.service.PricingService;

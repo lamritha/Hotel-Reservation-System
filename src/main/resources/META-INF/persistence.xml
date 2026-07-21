@@ -9,15 +9,15 @@
     <persistence-unit name="HotelReservationPU" transaction-type="RESOURCE_LOCAL">
 
         <!-- Entity Classes -->
-        <class>com.hotelreservation.entity.Guest</class>
-        <class>com.hotelreservation.entity.Room</class>
-        <class>com.hotelreservation.entity.Reservation</class>
-        <class>com.hotelreservation.entity.Billing</class>
-        <class>com.hotelreservation.entity.Payment</class>
-        <class>com.hotelreservation.entity.AddOn</class>
-        <class>com.hotelreservation.entity.ReservationAddOn</class>
-        <class>com.hotelreservation.entity.ReservationRoom</class>
-        <class>com.hotelreservation.entity.LoyaltyAccount</class>
+        <class>com.hotelreservation.model.Guest</class>
+        <class>com.hotelreservation.model.Room</class>
+        <class>com.hotelreservation.model.Reservation</class>
+        <class>com.hotelreservation.model.Billing</class>
+        <class>com.hotelreservation.model.Payment</class>
+        <class>com.hotelreservation.model.AddOn</class>
+        <class>com.hotelreservation.model.ReservationAddOn</class>
+        <class>com.hotelreservation.model.ReservationRoom</class>
+        <class>com.hotelreservation.model.LoyaltyAccount</class>
 
         <properties>
             <!-- H2 Database Configuration -->

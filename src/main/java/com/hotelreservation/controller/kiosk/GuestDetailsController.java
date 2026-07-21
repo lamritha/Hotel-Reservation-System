@@ -81,12 +81,6 @@ public class GuestDetailsController {
         BookingSession.setPhone(phoneField.getText().trim());
         BookingSession.setAddress(addressArea.getText().trim());
 
-        System.out.println("Guest personal details saved in BookingSession:");
-        System.out.println("Guest: " + BookingSession.getFirstName() + " " + BookingSession.getLastName());
-        System.out.println("Email: " + BookingSession.getEmail());
-        System.out.println("Phone: " + BookingSession.getPhone());
-        System.out.println("Address: " + BookingSession.getAddress());
-
         SceneNavigator.switchTo("/views/kiosk/RoomSelectionView.fxml");
     }
 

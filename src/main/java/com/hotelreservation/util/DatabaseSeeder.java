@@ -1,12 +1,12 @@
 package com.hotelreservation.util;
 
-import com.hotelreservation.entity.AddOn;
-import com.hotelreservation.entity.Guest;
-import com.hotelreservation.entity.LoyaltyAccount;
-import com.hotelreservation.entity.PricingModel;
-import com.hotelreservation.entity.Room;
-import com.hotelreservation.entity.RoomStatus;
-import com.hotelreservation.entity.RoomType;
+import com.hotelreservation.model.AddOn;
+import com.hotelreservation.model.Guest;
+import com.hotelreservation.model.LoyaltyAccount;
+import com.hotelreservation.model.PricingModel;
+import com.hotelreservation.model.Room;
+import com.hotelreservation.model.RoomStatus;
+import com.hotelreservation.model.RoomType;
 import com.hotelreservation.factory.RoomFactory;
 import jakarta.persistence.EntityManager;
 

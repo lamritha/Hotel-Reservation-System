@@ -1,6 +1,6 @@
 package com.hotelreservation.util;
 
-import com.hotelreservation.entity.RoomType;
+import com.hotelreservation.model.RoomType;
 
 import java.time.LocalDate;
 

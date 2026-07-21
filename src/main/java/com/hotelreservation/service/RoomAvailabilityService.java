@@ -1,7 +1,7 @@
 package com.hotelreservation.service;
 
-import com.hotelreservation.entity.Room;
-import com.hotelreservation.entity.RoomType;
+import com.hotelreservation.model.Room;
+import com.hotelreservation.model.RoomType;
 import com.hotelreservation.repository.RoomRepository;
 
 import java.time.LocalDate;

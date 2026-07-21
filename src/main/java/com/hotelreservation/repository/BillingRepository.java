@@ -1,6 +1,6 @@
 package com.hotelreservation.repository;
 
-import com.hotelreservation.entity.Billing;
+import com.hotelreservation.model.Billing;
 
 public class BillingRepository extends AbstractRepository<Billing> {
 

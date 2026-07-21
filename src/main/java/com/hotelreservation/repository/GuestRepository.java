@@ -1,6 +1,6 @@
 package com.hotelreservation.repository;
 
-import com.hotelreservation.entity.Guest;
+import com.hotelreservation.model.Guest;
 
 import java.util.Optional;
 

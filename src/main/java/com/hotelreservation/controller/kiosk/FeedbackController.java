@@ -58,12 +58,6 @@ public class FeedbackController {
 
         sentimentLabel.setText("Sentiment Tag: " + sentiment);
 
-        System.out.println("Feedback submitted:");
-        System.out.println("Reservation ID: " + reservationIdLabel.getText());
-        System.out.println("Rating: " + rating);
-        System.out.println("Comment: " + comment);
-        System.out.println("Sentiment: " + sentiment);
-
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Feedback Submitted");
         alert.setHeaderText("Thank you for your feedback");

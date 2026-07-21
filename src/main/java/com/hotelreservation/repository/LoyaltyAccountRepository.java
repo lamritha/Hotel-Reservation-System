@@ -1,6 +1,6 @@
 package com.hotelreservation.repository;
 
-import com.hotelreservation.entity.LoyaltyAccount;
+import com.hotelreservation.model.LoyaltyAccount;
 
 import java.util.Optional;
 

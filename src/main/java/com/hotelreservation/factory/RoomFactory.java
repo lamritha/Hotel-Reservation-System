@@ -1,8 +1,8 @@
 package com.hotelreservation.factory;
 
-import com.hotelreservation.entity.Room;
-import com.hotelreservation.entity.RoomStatus;
-import com.hotelreservation.entity.RoomType;
+import com.hotelreservation.model.Room;
+import com.hotelreservation.model.RoomStatus;
+import com.hotelreservation.model.RoomType;
 
 public class RoomFactory {
 

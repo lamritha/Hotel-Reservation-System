@@ -99,10 +99,6 @@ public class StayDatesController {
         BookingSession.setCheckInDate(checkIn);
         BookingSession.setCheckOutDate(checkOut);
 
-        System.out.println("Stay dates saved in BookingSession:");
-        System.out.println("Check-in: " + BookingSession.getCheckInDate());
-        System.out.println("Check-out: " + BookingSession.getCheckOutDate());
-
         SceneNavigator.switchTo("/views/kiosk/GuestDetailsView.fxml");
     }
 

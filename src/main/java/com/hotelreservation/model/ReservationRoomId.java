@@ -1,4 +1,4 @@
-package com.hotelreservation.entity;
+package com.hotelreservation.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

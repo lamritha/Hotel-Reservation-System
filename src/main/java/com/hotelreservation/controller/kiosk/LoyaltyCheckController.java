@@ -1,6 +1,6 @@
 package com.hotelreservation.controller.kiosk;
 
-import com.hotelreservation.entity.LoyaltyAccount;
+import com.hotelreservation.model.LoyaltyAccount;
 import com.hotelreservation.repository.LoyaltyAccountRepository;
 import com.hotelreservation.util.BookingSession;
 import com.hotelreservation.util.SceneNavigator;
@@ -99,9 +99,6 @@ public class LoyaltyCheckController {
         }
 
         BookingSession.setPhone(phone);
-
-        System.out.println("Loyalty check completed:");
-        System.out.println("Phone: " + BookingSession.getPhone());
 
         SceneNavigator.switchTo("/views/kiosk/BookingSummaryView.fxml");
     }

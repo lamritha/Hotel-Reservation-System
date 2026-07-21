@@ -1,6 +1,6 @@
 package com.hotelreservation.controller.kiosk;
 
-import com.hotelreservation.entity.RoomType;
+import com.hotelreservation.model.RoomType;
 import com.hotelreservation.service.OccupancyService;
 import com.hotelreservation.service.RoomAvailabilityService;
 import com.hotelreservation.util.BookingSession;
@@ -66,7 +66,6 @@ public class RoomSelectionController {
                 BookingSession.getNumAdults(),
                 BookingSession.getNumChildren()
         );
-        System.out.println("Total Guests = " + totalGuests);
         singleQty = 0;
         doubleQty = 0;
         deluxeQty = 0;
@@ -248,11 +247,6 @@ public class RoomSelectionController {
         } else if (penthouseQty > 0) {
             BookingSession.setSelectedRoomType(RoomType.PENTHOUSE);
         }
-
-        System.out.println("Room selection saved in BookingSession:");
-        System.out.println("Room Plan: " + BookingSession.getRoomPlanSummary());
-        System.out.println("Total Capacity: " + BookingSession.getTotalRoomCapacity());
-        System.out.println("Selected Main Room Type: " + BookingSession.getSelectedRoomType());
 
         SceneNavigator.switchTo("/views/kiosk/AddOnsView.fxml");
     }

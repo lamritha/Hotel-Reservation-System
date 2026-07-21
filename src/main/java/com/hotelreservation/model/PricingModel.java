@@ -1,4 +1,4 @@
-package com.hotelreservation.entity;
+package com.hotelreservation.model;
 
 public enum PricingModel {
     PER_RESERVATION,

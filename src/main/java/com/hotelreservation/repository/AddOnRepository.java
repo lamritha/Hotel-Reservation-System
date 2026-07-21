@@ -1,6 +1,6 @@
 package com.hotelreservation.repository;
 
-import com.hotelreservation.entity.AddOn;
+import com.hotelreservation.model.AddOn;
 
 import java.util.Optional;
 
