@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.VBox?>
@@ -79,84 +80,90 @@
     </left>
 
     <center>
-        <VBox spacing="22.0" style="-fx-padding: 30;">
-            <children>
-
-                <VBox spacing="6.0">
+        <ScrollPane fitToWidth="true"
+                    hbarPolicy="NEVER"
+                    styleClass="scroll-pane">
+            <content>
+                <VBox spacing="22.0" style="-fx-padding: 30;">
                     <children>
-                        <Label text="Hotel Operations Overview" styleClass="screen-title" />
-                        <Label text="This dashboard gives admins a quick summary of current reservations, room availability, billing, and waitlist activity."
-                               wrapText="true"
-                               style="-fx-font-size: 14px; -fx-text-fill: #6b7280;" />
+
+                        <VBox spacing="6.0">
+                            <children>
+                                <Label text="Hotel Operations Overview" styleClass="screen-title" />
+                                <Label text="This dashboard gives admins a quick summary of current reservations, room availability, billing, and waitlist activity."
+                                       wrapText="true"
+                                       style="-fx-font-size: 14px; -fx-text-fill: #6b7280;" />
+                            </children>
+                        </VBox>
+
+                        <GridPane hgap="20.0" vgap="20.0">
+                            <children>
+
+                                <VBox spacing="8.0" styleClass="card" prefWidth="250.0" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                                    <children>
+                                        <Label text="Total Reservations" styleClass="section-title" />
+                                        <Label text="128" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+                                        <Label text="Active and upcoming bookings" />
+                                    </children>
+                                </VBox>
+
+                                <VBox spacing="8.0" styleClass="card" prefWidth="250.0" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                                    <children>
+                                        <Label text="Available Rooms" styleClass="section-title" />
+                                        <Label text="34" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+                                        <Label text="Ready for new bookings" />
+                                    </children>
+                                </VBox>
+
+                                <VBox spacing="8.0" styleClass="card" prefWidth="250.0" GridPane.rowIndex="0" GridPane.columnIndex="2">
+                                    <children>
+                                        <Label text="Occupied Rooms" styleClass="section-title" />
+                                        <Label text="46" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+                                        <Label text="Currently checked in" />
+                                    </children>
+                                </VBox>
+
+                                <VBox spacing="8.0" styleClass="card" prefWidth="250.0" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                                    <children>
+                                        <Label text="Pending Payments" styleClass="section-title" />
+                                        <Label text="12" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+                                        <Label text="Requires billing review" />
+                                    </children>
+                                </VBox>
+
+                                <VBox spacing="8.0" styleClass="card" prefWidth="250.0" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                                    <children>
+                                        <Label text="Waitlist Requests" styleClass="section-title" />
+                                        <Label text="8" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+                                        <Label text="Guests waiting for rooms" />
+                                    </children>
+                                </VBox>
+
+                                <VBox spacing="8.0" styleClass="card" prefWidth="250.0" GridPane.rowIndex="1" GridPane.columnIndex="2">
+                                    <children>
+                                        <Label text="Revenue Today" styleClass="section-title" />
+                                        <Label text="CAD 7,420" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
+                                        <Label text="Payments received today" />
+                                    </children>
+                                </VBox>
+
+                            </children>
+                        </GridPane>
+
+                        <VBox spacing="10.0" styleClass="card">
+                            <children>
+                                <Label text="Recent Activity" styleClass="section-title" />
+                                <Label text="RES-1001 | John Smith | Deluxe Room | Confirmed | CAD 1017" />
+                                <Label text="RES-1002 | Maria Lee | Double Room | Checked In | CAD 690" />
+                                <Label text="ROOM-304 | Penthouse | Status changed to Available" />
+                                <Label text="WAIT-021 | Guest notified for available Deluxe Room" />
+                            </children>
+                        </VBox>
+
                     </children>
                 </VBox>
-
-                <GridPane hgap="20.0" vgap="20.0">
-                    <children>
-
-                        <VBox spacing="8.0" styleClass="card" prefWidth="250.0" GridPane.rowIndex="0" GridPane.columnIndex="0">
-                            <children>
-                                <Label text="Total Reservations" styleClass="section-title" />
-                                <Label text="128" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
-                                <Label text="Active and upcoming bookings" />
-                            </children>
-                        </VBox>
-
-                        <VBox spacing="8.0" styleClass="card" prefWidth="250.0" GridPane.rowIndex="0" GridPane.columnIndex="1">
-                            <children>
-                                <Label text="Available Rooms" styleClass="section-title" />
-                                <Label text="34" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
-                                <Label text="Ready for new bookings" />
-                            </children>
-                        </VBox>
-
-                        <VBox spacing="8.0" styleClass="card" prefWidth="250.0" GridPane.rowIndex="0" GridPane.columnIndex="2">
-                            <children>
-                                <Label text="Occupied Rooms" styleClass="section-title" />
-                                <Label text="46" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
-                                <Label text="Currently checked in" />
-                            </children>
-                        </VBox>
-
-                        <VBox spacing="8.0" styleClass="card" prefWidth="250.0" GridPane.rowIndex="1" GridPane.columnIndex="0">
-                            <children>
-                                <Label text="Pending Payments" styleClass="section-title" />
-                                <Label text="12" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
-                                <Label text="Requires billing review" />
-                            </children>
-                        </VBox>
-
-                        <VBox spacing="8.0" styleClass="card" prefWidth="250.0" GridPane.rowIndex="1" GridPane.columnIndex="1">
-                            <children>
-                                <Label text="Waitlist Requests" styleClass="section-title" />
-                                <Label text="8" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
-                                <Label text="Guests waiting for rooms" />
-                            </children>
-                        </VBox>
-
-                        <VBox spacing="8.0" styleClass="card" prefWidth="250.0" GridPane.rowIndex="1" GridPane.columnIndex="2">
-                            <children>
-                                <Label text="Revenue Today" styleClass="section-title" />
-                                <Label text="CAD 7,420" style="-fx-font-size: 28px; -fx-font-weight: bold;" />
-                                <Label text="Payments received today" />
-                            </children>
-                        </VBox>
-
-                    </children>
-                </GridPane>
-
-                <VBox spacing="10.0" styleClass="card">
-                    <children>
-                        <Label text="Recent Activity" styleClass="section-title" />
-                        <Label text="RES-1001 | John Smith | Deluxe Room | Confirmed | CAD 1017" />
-                        <Label text="RES-1002 | Maria Lee | Double Room | Checked In | CAD 690" />
-                        <Label text="ROOM-304 | Penthouse | Status changed to Available" />
-                        <Label text="WAIT-021 | Guest notified for available Deluxe Room" />
-                    </children>
-                </VBox>
-
-            </children>
-        </VBox>
+            </content>
+        </ScrollPane>
     </center>
 
 </BorderPane>

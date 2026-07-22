@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -82,6 +83,10 @@
     </left>
 
     <center>
+        <ScrollPane fitToWidth="true"
+                    hbarPolicy="NEVER"
+                    styleClass="scroll-pane">
+            <content>
         <VBox spacing="22.0" style="-fx-padding: 30;">
             <children>
 
@@ -188,6 +193,8 @@
 
             </children>
         </VBox>
+            </content>
+        </ScrollPane>
     </center>
 
 </BorderPane>

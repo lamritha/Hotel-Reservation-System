@@ -43,6 +43,9 @@ public class BookingSession {
     private static Long savedGuestId;
     private static Long savedRoomId;
 
+    /** Reservation ID from the feedback lookup screen (display / submit context). */
+    private static String feedbackReservationId = "";
+
     private BookingSession() {
         // Prevent object creation
     }
@@ -87,6 +90,8 @@ public class BookingSession {
         savedReservationId = null;
         savedGuestId = null;
         savedRoomId = null;
+
+        feedbackReservationId = "";
     }
 
     public static String getFirstName() {
@@ -288,6 +293,14 @@ public class BookingSession {
 
     public static void setSavedRoomId(Long savedRoomId) {
         BookingSession.savedRoomId = savedRoomId;
+    }
+
+    public static String getFeedbackReservationId() {
+        return feedbackReservationId;
+    }
+
+    public static void setFeedbackReservationId(String feedbackReservationId) {
+        BookingSession.feedbackReservationId = feedbackReservationId == null ? "" : feedbackReservationId;
     }
 
     public static boolean isLoyaltyEnrolled() {

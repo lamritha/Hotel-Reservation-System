@@ -30,10 +30,6 @@ public class AdminLoginController {
         String password = passwordField.getText().trim();
         String role = roleComboBox.getValue();
 
-        System.out.println("Admin login button clicked");
-        System.out.println("Username: " + username);
-        System.out.println("Role: " + role);
-
         if (username.isEmpty() || password.isEmpty() || role == null) {
             showError("Please enter username, password, and select a role.");
             return;

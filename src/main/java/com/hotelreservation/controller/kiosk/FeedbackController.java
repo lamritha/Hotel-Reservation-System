@@ -1,5 +1,6 @@
 package com.hotelreservation.controller.kiosk;
 
+import com.hotelreservation.util.BookingSession;
 import com.hotelreservation.util.SceneNavigator;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -24,7 +25,12 @@ public class FeedbackController {
 
     @FXML
     private void initialize() {
-        reservationIdLabel.setText("RES-1001");
+        String reservationId = BookingSession.getFeedbackReservationId();
+        if (reservationId == null || reservationId.isBlank()) {
+            reservationIdLabel.setText("Reservation");
+        } else {
+            reservationIdLabel.setText(reservationId);
+        }
 
         ratingComboBox.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5));
 
