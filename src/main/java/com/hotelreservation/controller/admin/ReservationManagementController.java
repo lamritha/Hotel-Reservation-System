@@ -27,7 +27,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.geometry.Rectangle2D;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
@@ -468,7 +470,7 @@ public class ReservationManagementController
             dialogStage.initModality(
                     Modality.WINDOW_MODAL
             );
-            dialogStage.setResizable(false);
+            dialogStage.setResizable(true);
             dialogStage.setScene(new Scene(root));
 
             ReservationFormController formController =
@@ -492,6 +494,27 @@ public class ReservationManagementController
                         reservationToEdit
                 );
             }
+
+            Rectangle2D visualBounds =
+                    Screen.getPrimary().getVisualBounds();
+            double screenMargin = 60.0;
+            double preferredWidth = 820.0;
+            double preferredHeight = 760.0;
+            dialogStage.setWidth(
+                    Math.min(
+                            preferredWidth,
+                            visualBounds.getWidth()
+                                    - screenMargin
+                    )
+            );
+            dialogStage.setHeight(
+                    Math.min(
+                            preferredHeight,
+                            visualBounds.getHeight()
+                                    - screenMargin
+                    )
+            );
+            dialogStage.centerOnScreen();
 
             dialogStage.showAndWait();
 

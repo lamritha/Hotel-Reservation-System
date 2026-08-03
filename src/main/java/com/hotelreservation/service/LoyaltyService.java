@@ -169,16 +169,30 @@ public class LoyaltyService {
                         * HotelPolicyConfig
                         .LOYALTY_DOLLARS_PER_POINT;
 
+        double alreadyRedeemed =
+                transactionRepository
+                        .sumRedeemedAmountByReservationId(
+                                billing.getReservation()
+                                        .getReservationId()
+                        );
+        double remainingCapRoom = Math.max(
+                0,
+                maximumByPolicy - alreadyRedeemed
+        );
         double redeemable = roundMoney(
-                Math.min(maximumByPolicy, availableDollars)
+                Math.min(remainingCapRoom, availableDollars)
         );
         if (requestedDollars - redeemable > 0.009) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "Maximum loyalty redemption is CAD %.2f.",
-                            redeemable
-                    )
+            String message = alreadyRedeemed > 0.009
+                    ? String.format(
+                    "Maximum additional loyalty redemption is CAD %.2f.",
+                    redeemable
+            )
+                    : String.format(
+                    "Maximum loyalty redemption is CAD %.2f.",
+                    redeemable
             );
+            throw new IllegalArgumentException(message);
         }
 
         int points = (int) Math.ceil(
