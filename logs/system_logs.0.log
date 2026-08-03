@@ -870,3 +870,325 @@ Aug 03, 2026 5:04:04 P.M. com.hotelreservation.util.AppLogger audit
 INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=5 | message=Administrator logged in successfully with role ADMIN.
 Aug 03, 2026 5:04:05 P.M. com.hotelreservation.util.AppLogger audit
 INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=27 | message=Phone reservation created for Verify AdminShared with 1 room(s).
+Aug 03, 2026 5:21:06 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 03, 2026 5:21:06 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=5 | message=Administrator logged in successfully with role ADMIN.
+Aug 03, 2026 5:21:07 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=33 | message=Phone reservation created for Phone Deposit with 1 room(s).
+Aug 03, 2026 5:21:07 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=33 | message=CAD 50.00 processed using CARD as DEPOSIT.
+Aug 03, 2026 5:21:07 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=34 | message=Phone reservation created for Hold Room with 1 room(s).
+Aug 03, 2026 5:21:07 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=35 | message=Phone reservation created for Edit Me with 1 room(s).
+Aug 03, 2026 5:21:07 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=RESERVATION_MODIFIED | entityType=Reservation | entityId=35 | message=Reservation dates, occupancy, guest details, and room assignment were updated.
+Aug 03, 2026 5:21:07 P.M. com.hotelreservation.util.AppLogger exception
+SEVERE: Reservation modification failed.
+java.lang.IllegalStateException: One or more selected rooms are no longer available. Refresh room availability and try again.
+	at com.hotelreservation.service.ReservationManagementService.resolveAvailableRooms(ReservationManagementService.java:498)
+	at com.hotelreservation.service.ReservationManagementService.lambda$modifyReservation$0(ReservationManagementService.java:271)
+	at com.hotelreservation.util.JpaUtil.executeInTransaction(JpaUtil.java:47)
+	at com.hotelreservation.service.ReservationManagementService.modifyReservation(ReservationManagementService.java:254)
+	at com.hotelreservation.util.VerifyFullBackend.test06_modifyAndConflict(VerifyFullBackend.java:398)
+	at com.hotelreservation.util.VerifyFullBackend.main(VerifyFullBackend.java:86)
+
+Aug 03, 2026 5:21:07 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=36 | message=Phone reservation created for Cancel Me with 1 room(s).
+Aug 03, 2026 5:21:07 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=RESERVATION_CANCELLED | entityType=Reservation | entityId=36 | message=Reservation status changed from CONFIRMED to CANCELLED.
+Aug 03, 2026 5:21:07 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=37 | message=Phone reservation created for Pay Cash with 1 room(s).
+Aug 03, 2026 5:21:07 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=38 | message=Phone reservation created for Pay Card with 1 room(s).
+Aug 03, 2026 5:21:07 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=39 | message=Phone reservation created for Pay Loy with 1 room(s).
+Aug 03, 2026 5:21:07 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=37 | message=CAD 25.00 processed using CASH as PARTIAL_PAYMENT.
+Aug 03, 2026 5:21:07 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=38 | message=CAD 40.00 processed using CARD as PARTIAL_PAYMENT.
+Aug 03, 2026 5:21:07 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=VERIFY | action=LOYALTY_ENROLLED | entityType=LoyaltyAccount | entityId=LOY-09616FBD | message=Loyalty account created for Pay Loy.
+Aug 03, 2026 5:21:07 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=39 | message=CAD 67.80 processed using LOYALTY_POINTS as LOYALTY_REDEMPTION.
+Aug 03, 2026 5:21:07 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=40 | message=Phone reservation created for Ref Und with 1 room(s).
+Aug 03, 2026 5:21:07 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=40 | message=CAD 60.00 processed using CARD as PARTIAL_PAYMENT.
+Aug 03, 2026 5:21:07 P.M. com.hotelreservation.util.AppLogger audit
+WARNING: actor=admin | action=REFUND_PROCESSED | entityType=Reservation | entityId=40 | message=Refunded CAD 20.00 using CARD.
+Aug 03, 2026 5:21:08 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=41 | message=Phone reservation created for Block Checkout with 1 room(s).
+Aug 03, 2026 5:21:08 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECK_IN | entityType=Reservation | entityId=41 | message=Guest checked in and assigned rooms were marked occupied.
+Aug 03, 2026 5:21:08 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=42 | message=Phone reservation created for Full Pay with 1 room(s).
+Aug 03, 2026 5:21:08 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=42 | message=CAD 271.20 processed using CARD as FINAL_PAYMENT.
+Aug 03, 2026 5:21:08 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECK_IN | entityType=Reservation | entityId=42 | message=Guest checked in and assigned rooms were marked occupied.
+Aug 03, 2026 5:21:08 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECKOUT | entityType=Reservation | entityId=42 | message=Final balance settled, checkout completed, rooms marked available, and final bill exported to C:\Users\ashil\Desktop\Amritha\College\Sem 5\APD545\Project\MS1\Hotel-Reservation-System\Hotel-Reservation-System\exports\final-bill-RES-42-20260803-172108.pdf.
+Aug 03, 2026 5:21:08 P.M. com.hotelreservation.util.AppLogger exception
+SEVERE: Phone reservation creation failed.
+java.lang.IllegalArgumentException: Please enter a valid last name.
+	at com.hotelreservation.util.ReservationValidator.validate(ReservationValidator.java:34)
+	at com.hotelreservation.service.ReservationManagementService.validateReservationRequest(ReservationManagementService.java:430)
+	at com.hotelreservation.service.ReservationManagementService.createPhoneReservation(ReservationManagementService.java:155)
+	at com.hotelreservation.util.VerifyFullBackend.createPhoneOnFreshRoom(VerifyFullBackend.java:1092)
+	at com.hotelreservation.util.VerifyFullBackend.test12_discountCaps(VerifyFullBackend.java:693)
+	at com.hotelreservation.util.VerifyFullBackend.main(VerifyFullBackend.java:92)
+
+Aug 03, 2026 5:21:08 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGOUT | entityType=AdminUser | entityId=5 | message=Administrator logged out.
+Aug 03, 2026 5:21:08 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=5 | message=Administrator logged in successfully with role ADMIN.
+Aug 03, 2026 5:21:08 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=43 | message=Phone reservation created for Next Deluxe with 1 room(s).
+Aug 03, 2026 5:21:08 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=WAITLIST_ADDED | entityType=WaitlistEntry | entityId=3 | message=Guest added for DELUXE from 2026-11-01 to 2026-11-05.
+Aug 03, 2026 5:21:08 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=WAITLIST_ADDED | entityType=WaitlistEntry | entityId=4 | message=Guest added for DELUXE from 2026-10-05 to 2026-10-12.
+Aug 03, 2026 5:21:08 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=ROOM_STATUS_CHANGED | entityType=Room | entityId=19 | message=Room 301 changed from AVAILABLE to MAINTENANCE.
+Aug 03, 2026 5:21:08 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=ROOM_STATUS_CHANGED | entityType=Room | entityId=19 | message=Room 301 changed from MAINTENANCE to AVAILABLE.
+Aug 03, 2026 5:21:08 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=GUEST | action=FEEDBACK_SUBMITTED | entityType=Reservation | entityId=42 | message=Rating 5 submitted with sentiment POSITIVE.
+Aug 03, 2026 5:21:08 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=44 | message=Phone reservation created for No Feedback with 1 room(s).
+Aug 03, 2026 5:21:08 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGOUT | entityType=AdminUser | entityId=5 | message=Administrator logged out.
+Aug 03, 2026 5:21:09 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=5 | message=Administrator logged in successfully with role ADMIN.
+Aug 03, 2026 5:21:09 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGOUT | entityType=AdminUser | entityId=5 | message=Administrator logged out.
+Aug 03, 2026 5:21:09 P.M. com.hotelreservation.util.AppLogger audit
+WARNING: actor=admin | action=LOGIN_FAILURE | entityType=AdminUser | entityId=admin | message=Invalid username, password, or role.
+Aug 03, 2026 5:21:09 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=5 | message=Administrator logged in successfully with role ADMIN.
+Aug 03, 2026 5:21:09 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=REVENUE_REPORT | entityType=Report | entityId=- | message=Generated 1 report row(s).
+Aug 03, 2026 5:21:09 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=OCCUPANCY_REPORT | entityType=Report | entityId=- | message=Generated 8 report row(s).
+Aug 03, 2026 5:23:02 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 03, 2026 5:23:03 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=5 | message=Administrator logged in successfully with role ADMIN.
+Aug 03, 2026 5:23:03 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=49 | message=Phone reservation created for Phone Deposit with 1 room(s).
+Aug 03, 2026 5:23:03 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=49 | message=CAD 50.00 processed using CARD as DEPOSIT.
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=50 | message=Phone reservation created for Hold Room with 1 room(s).
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=51 | message=Phone reservation created for Edit Me with 1 room(s).
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=RESERVATION_MODIFIED | entityType=Reservation | entityId=51 | message=Reservation dates, occupancy, guest details, and room assignment were updated.
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger exception
+SEVERE: Reservation modification failed.
+java.lang.IllegalStateException: One or more selected rooms are no longer available. Refresh room availability and try again.
+	at com.hotelreservation.service.ReservationManagementService.resolveAvailableRooms(ReservationManagementService.java:498)
+	at com.hotelreservation.service.ReservationManagementService.lambda$modifyReservation$0(ReservationManagementService.java:271)
+	at com.hotelreservation.util.JpaUtil.executeInTransaction(JpaUtil.java:47)
+	at com.hotelreservation.service.ReservationManagementService.modifyReservation(ReservationManagementService.java:254)
+	at com.hotelreservation.util.VerifyFullBackend.test06_modifyAndConflict(VerifyFullBackend.java:398)
+	at com.hotelreservation.util.VerifyFullBackend.main(VerifyFullBackend.java:86)
+
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=52 | message=Phone reservation created for Cancel Me with 1 room(s).
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=RESERVATION_CANCELLED | entityType=Reservation | entityId=52 | message=Reservation status changed from CONFIRMED to CANCELLED.
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=53 | message=Phone reservation created for Pay Cash with 1 room(s).
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=54 | message=Phone reservation created for Pay Card with 1 room(s).
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=55 | message=Phone reservation created for Pay Loy with 1 room(s).
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=53 | message=CAD 25.00 processed using CASH as PARTIAL_PAYMENT.
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=54 | message=CAD 40.00 processed using CARD as PARTIAL_PAYMENT.
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=VERIFY | action=LOYALTY_ENROLLED | entityType=LoyaltyAccount | entityId=LOY-6A1C94A0 | message=Loyalty account created for Pay Loy.
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=55 | message=CAD 67.80 processed using LOYALTY_POINTS as LOYALTY_REDEMPTION.
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=56 | message=Phone reservation created for Ref Und with 1 room(s).
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=56 | message=CAD 60.00 processed using CARD as PARTIAL_PAYMENT.
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+WARNING: actor=admin | action=REFUND_PROCESSED | entityType=Reservation | entityId=56 | message=Refunded CAD 20.00 using CARD.
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=57 | message=Phone reservation created for Block Checkout with 1 room(s).
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECK_IN | entityType=Reservation | entityId=57 | message=Guest checked in and assigned rooms were marked occupied.
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=58 | message=Phone reservation created for Full Pay with 1 room(s).
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=58 | message=CAD 271.20 processed using CARD as FINAL_PAYMENT.
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECK_IN | entityType=Reservation | entityId=58 | message=Guest checked in and assigned rooms were marked occupied.
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECKOUT | entityType=Reservation | entityId=58 | message=Final balance settled, checkout completed, rooms marked available, and final bill exported to C:\Users\ashil\Desktop\Amritha\College\Sem 5\APD545\Project\MS1\Hotel-Reservation-System\Hotel-Reservation-System\exports\final-bill-RES-58-20260803-172304.pdf.
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=59 | message=Phone reservation created for Disc AdminOk with 1 room(s).
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=60 | message=Phone reservation created for Disc AdminOver with 1 room(s).
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=DISCOUNT_APPLIED | entityType=Reservation | entityId=59 | message=15.00% discount (CAD 40.68) applied. Reason: admin max ok
+Aug 03, 2026 5:23:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGOUT | entityType=AdminUser | entityId=5 | message=Administrator logged out.
+Aug 03, 2026 5:23:05 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=manager | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=6 | message=Administrator logged in successfully with role MANAGER.
+Aug 03, 2026 5:23:05 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=manager | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=61 | message=Phone reservation created for Disc MgrOk with 1 room(s).
+Aug 03, 2026 5:23:05 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=manager | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=62 | message=Phone reservation created for Disc MgrOver with 1 room(s).
+Aug 03, 2026 5:23:05 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=manager | action=DISCOUNT_APPLIED | entityType=Reservation | entityId=61 | message=30.00% discount (CAD 91.53) applied. Reason: manager max ok
+Aug 03, 2026 5:23:05 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=manager | action=LOGOUT | entityType=AdminUser | entityId=6 | message=Administrator logged out.
+Aug 03, 2026 5:23:06 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=5 | message=Administrator logged in successfully with role ADMIN.
+Aug 03, 2026 5:23:06 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=63 | message=Phone reservation created for Next Penthouse with 1 room(s).
+Aug 03, 2026 5:23:06 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=WAITLIST_ADDED | entityType=WaitlistEntry | entityId=5 | message=Guest added for PENTHOUSE from 2027-09-01 to 2027-09-05.
+Aug 03, 2026 5:23:06 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=WAITLIST_ADDED | entityType=WaitlistEntry | entityId=6 | message=Guest added for PENTHOUSE from 2027-08-10 to 2027-08-15.
+Aug 03, 2026 5:23:06 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=ROOM_STATUS_CHANGED | entityType=Room | entityId=22 | message=Room 501 changed from AVAILABLE to MAINTENANCE.
+Aug 03, 2026 5:23:06 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=ROOM_STATUS_CHANGED | entityType=Room | entityId=22 | message=Room 501 changed from MAINTENANCE to AVAILABLE.
+Aug 03, 2026 5:23:06 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=GUEST | action=FEEDBACK_SUBMITTED | entityType=Reservation | entityId=58 | message=Rating 5 submitted with sentiment POSITIVE.
+Aug 03, 2026 5:23:06 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=64 | message=Phone reservation created for No Feedback with 1 room(s).
+Aug 03, 2026 5:23:06 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGOUT | entityType=AdminUser | entityId=5 | message=Administrator logged out.
+Aug 03, 2026 5:23:06 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=5 | message=Administrator logged in successfully with role ADMIN.
+Aug 03, 2026 5:23:06 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGOUT | entityType=AdminUser | entityId=5 | message=Administrator logged out.
+Aug 03, 2026 5:23:07 P.M. com.hotelreservation.util.AppLogger audit
+WARNING: actor=admin | action=LOGIN_FAILURE | entityType=AdminUser | entityId=admin | message=Invalid username, password, or role.
+Aug 03, 2026 5:23:07 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=5 | message=Administrator logged in successfully with role ADMIN.
+Aug 03, 2026 5:23:07 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=REVENUE_REPORT | entityType=Report | entityId=- | message=Generated 1 report row(s).
+Aug 03, 2026 5:23:07 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=OCCUPANCY_REPORT | entityType=Report | entityId=- | message=Generated 8 report row(s).
+Aug 03, 2026 5:23:59 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 03, 2026 5:23:59 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=5 | message=Administrator logged in successfully with role ADMIN.
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=69 | message=Phone reservation created for Phone Deposit with 1 room(s).
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=69 | message=CAD 50.00 processed using CARD as DEPOSIT.
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=70 | message=Phone reservation created for Hold Room with 1 room(s).
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=71 | message=Phone reservation created for Edit Me with 1 room(s).
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=RESERVATION_MODIFIED | entityType=Reservation | entityId=71 | message=Reservation dates, occupancy, guest details, and room assignment were updated.
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger exception
+SEVERE: Reservation modification failed.
+java.lang.IllegalStateException: One or more selected rooms are no longer available. Refresh room availability and try again.
+	at com.hotelreservation.service.ReservationManagementService.resolveAvailableRooms(ReservationManagementService.java:498)
+	at com.hotelreservation.service.ReservationManagementService.lambda$modifyReservation$0(ReservationManagementService.java:271)
+	at com.hotelreservation.util.JpaUtil.executeInTransaction(JpaUtil.java:47)
+	at com.hotelreservation.service.ReservationManagementService.modifyReservation(ReservationManagementService.java:254)
+	at com.hotelreservation.util.VerifyFullBackend.test06_modifyAndConflict(VerifyFullBackend.java:399)
+	at com.hotelreservation.util.VerifyFullBackend.main(VerifyFullBackend.java:87)
+
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=72 | message=Phone reservation created for Cancel Me with 1 room(s).
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=RESERVATION_CANCELLED | entityType=Reservation | entityId=72 | message=Reservation status changed from CONFIRMED to CANCELLED.
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=73 | message=Phone reservation created for Pay Cash with 1 room(s).
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=74 | message=Phone reservation created for Pay Card with 1 room(s).
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=75 | message=Phone reservation created for Pay Loy with 1 room(s).
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=73 | message=CAD 25.00 processed using CASH as PARTIAL_PAYMENT.
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=74 | message=CAD 40.00 processed using CARD as PARTIAL_PAYMENT.
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=VERIFY | action=LOYALTY_ENROLLED | entityType=LoyaltyAccount | entityId=LOY-4C3ECB71 | message=Loyalty account created for Pay Loy.
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=75 | message=CAD 67.80 processed using LOYALTY_POINTS as LOYALTY_REDEMPTION.
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=76 | message=Phone reservation created for Ref Und with 1 room(s).
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=76 | message=CAD 60.00 processed using CARD as PARTIAL_PAYMENT.
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+WARNING: actor=admin | action=REFUND_PROCESSED | entityType=Reservation | entityId=76 | message=Refunded CAD 20.00 using CARD.
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=77 | message=Phone reservation created for Block Checkout with 1 room(s).
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECK_IN | entityType=Reservation | entityId=77 | message=Guest checked in and assigned rooms were marked occupied.
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=78 | message=Phone reservation created for Full Pay with 1 room(s).
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=78 | message=CAD 271.20 processed using CARD as FINAL_PAYMENT.
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECK_IN | entityType=Reservation | entityId=78 | message=Guest checked in and assigned rooms were marked occupied.
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECKOUT | entityType=Reservation | entityId=78 | message=Final balance settled, checkout completed, rooms marked available, and final bill exported to C:\Users\ashil\Desktop\Amritha\College\Sem 5\APD545\Project\MS1\Hotel-Reservation-System\Hotel-Reservation-System\exports\final-bill-RES-78-20260803-172400.pdf.
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=79 | message=Phone reservation created for Disc AdminOk with 1 room(s).
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=80 | message=Phone reservation created for Disc AdminOver with 1 room(s).
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=DISCOUNT_APPLIED | entityType=Reservation | entityId=79 | message=15.00% discount (CAD 40.68) applied. Reason: admin max ok
+Aug 03, 2026 5:24:00 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGOUT | entityType=AdminUser | entityId=5 | message=Administrator logged out.
+Aug 03, 2026 5:24:01 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=manager | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=6 | message=Administrator logged in successfully with role MANAGER.
+Aug 03, 2026 5:24:01 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=manager | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=81 | message=Phone reservation created for Disc MgrOk with 1 room(s).
+Aug 03, 2026 5:24:01 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=manager | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=82 | message=Phone reservation created for Disc MgrOver with 1 room(s).
+Aug 03, 2026 5:24:01 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=manager | action=DISCOUNT_APPLIED | entityType=Reservation | entityId=81 | message=30.00% discount (CAD 91.53) applied. Reason: manager max ok
+Aug 03, 2026 5:24:01 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=manager | action=LOGOUT | entityType=AdminUser | entityId=6 | message=Administrator logged out.
+Aug 03, 2026 5:24:01 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=5 | message=Administrator logged in successfully with role ADMIN.
+Aug 03, 2026 5:24:01 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=83 | message=Phone reservation created for Next Penthouse with 1 room(s).
+Aug 03, 2026 5:24:01 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=WAITLIST_ADDED | entityType=WaitlistEntry | entityId=7 | message=Guest added for PENTHOUSE from 2027-09-01 to 2027-09-05.
+Aug 03, 2026 5:24:01 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=WAITLIST_ADDED | entityType=WaitlistEntry | entityId=8 | message=Guest added for PENTHOUSE from 2027-08-10 to 2027-08-15.
+Aug 03, 2026 5:24:01 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=ROOM_STATUS_CHANGED | entityType=Room | entityId=23 | message=Room 502 changed from AVAILABLE to MAINTENANCE.
+Aug 03, 2026 5:24:01 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=ROOM_STATUS_CHANGED | entityType=Room | entityId=23 | message=Room 502 changed from MAINTENANCE to AVAILABLE.
+Aug 03, 2026 5:24:01 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=WAITLIST_AVAILABILITY_NOTIFICATION | entityType=WaitlistEntry | entityId=6 | message=Room 502 (PENTHOUSE) is available for waitlist WAIT-6 belonging to Wait Yes.
+Aug 03, 2026 5:24:01 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=WAITLIST_AVAILABILITY_NOTIFICATION | entityType=WaitlistEntry | entityId=8 | message=Room 502 (PENTHOUSE) is available for waitlist WAIT-8 belonging to Wait Yes.
+Aug 03, 2026 5:24:01 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=GUEST | action=FEEDBACK_SUBMITTED | entityType=Reservation | entityId=78 | message=Rating 5 submitted with sentiment POSITIVE.
+Aug 03, 2026 5:24:01 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=84 | message=Phone reservation created for No Feedback with 1 room(s).
+Aug 03, 2026 5:24:01 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGOUT | entityType=AdminUser | entityId=5 | message=Administrator logged out.
+Aug 03, 2026 5:24:02 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=5 | message=Administrator logged in successfully with role ADMIN.
+Aug 03, 2026 5:24:02 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGOUT | entityType=AdminUser | entityId=5 | message=Administrator logged out.
+Aug 03, 2026 5:24:02 P.M. com.hotelreservation.util.AppLogger audit
+WARNING: actor=admin | action=LOGIN_FAILURE | entityType=AdminUser | entityId=admin | message=Invalid username, password, or role.
+Aug 03, 2026 5:24:02 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=5 | message=Administrator logged in successfully with role ADMIN.
+Aug 03, 2026 5:24:02 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=REVENUE_REPORT | entityType=Report | entityId=- | message=Generated 1 report row(s).
+Aug 03, 2026 5:24:02 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=OCCUPANCY_REPORT | entityType=Report | entityId=- | message=Generated 8 report row(s).
