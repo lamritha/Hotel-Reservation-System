@@ -828,3 +828,25 @@ java.lang.IllegalArgumentException: Payment exceeds the outstanding balance of C
 	at com.hotelreservation.service.BillingPaymentService.processPayment(BillingPaymentService.java:124)
 	at com.hotelreservation.util.VerifyOverpayDeposit.main(VerifyOverpayDeposit.java:97)
 
+Aug 03, 2026 3:06:47 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 03, 2026 3:06:47 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=ADMIN_ACCOUNT_CREATED | entityType=AdminUser | entityId=5 | message=Default ADMIN account created for username admin.
+Aug 03, 2026 3:06:48 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=ADMIN_ACCOUNT_CREATED | entityType=AdminUser | entityId=6 | message=Default MANAGER account created for username manager.
+Aug 03, 2026 3:17:16 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 03, 2026 3:17:18 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=5 | message=Administrator logged in successfully with role ADMIN.
+Aug 03, 2026 3:17:18 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=24 | message=Phone reservation created for Next Booking with 1 room(s).
+Aug 03, 2026 3:17:18 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=WAITLIST_ADDED | entityType=WaitlistEntry | entityId=1 | message=Guest added for DOUBLE from 2026-09-01 to 2026-09-05.
+Aug 03, 2026 3:17:18 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=WAITLIST_ADDED | entityType=WaitlistEntry | entityId=2 | message=Guest added for DOUBLE from 2026-08-10 to 2026-08-15.
+Aug 03, 2026 3:17:18 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=ROOM_STATUS_CHANGED | entityType=Room | entityId=16 | message=Room 201 changed from AVAILABLE to MAINTENANCE.
+Aug 03, 2026 3:17:18 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=ROOM_STATUS_CHANGED | entityType=Room | entityId=16 | message=Room 201 changed from MAINTENANCE to AVAILABLE.
+Aug 03, 2026 3:17:18 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=WAITLIST_AVAILABILITY_NOTIFICATION | entityType=WaitlistEntry | entityId=2 | message=Room 201 (DOUBLE) is available for waitlist WAIT-2 belonging to Wait Overlap.

@@ -5,9 +5,11 @@ import com.hotelreservation.model.NotificationType;
 import com.hotelreservation.model.WaitlistEntry;
 import com.hotelreservation.model.WaitlistStatus;
 import com.hotelreservation.repository.NotificationRepository;
+import com.hotelreservation.repository.RoomRepository;
 import com.hotelreservation.repository.WaitlistRepository;
 import com.hotelreservation.util.AppLogger;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,24 +29,40 @@ public class AdminNotificationObserver
     private final WaitlistRepository waitlistRepository;
     private final NotificationRepository
             notificationRepository;
+    private final RoomRepository roomRepository;
 
     public AdminNotificationObserver(
             WaitlistRepository waitlistRepository,
-            NotificationRepository notificationRepository
+            NotificationRepository notificationRepository,
+            RoomRepository roomRepository
     ) {
         this.waitlistRepository = waitlistRepository;
         this.notificationRepository =
                 notificationRepository;
+        this.roomRepository = roomRepository;
     }
 
     @Override
     public void onRoomAvailable(
             RoomAvailabilityEvent event
     ) {
-        List<WaitlistEntry> matches =
-                waitlistRepository.findWaitingByRoomType(
-                        event.room().getRoomType()
+        LocalDate availableFrom = event.availableFrom();
+        LocalDate availableTo = roomRepository
+                .findNextReservationStart(
+                        event.room(),
+                        availableFrom
+                )
+                .orElseGet(
+                        () -> availableFrom.plusYears(10)
                 );
+
+        List<WaitlistEntry> matches =
+                waitlistRepository
+                        .findWaitingByRoomTypeAndDates(
+                                event.room().getRoomType(),
+                                availableFrom,
+                                availableTo
+                        );
 
         for (WaitlistEntry entry : matches) {
             if (entry.getStatus() != WaitlistStatus.WAITING) {

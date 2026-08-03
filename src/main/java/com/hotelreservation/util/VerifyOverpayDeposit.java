@@ -33,7 +33,7 @@ public class VerifyOverpayDeposit {
             var login = AppConfig.getAuthenticationService()
                     .authenticate(
                             "admin",
-                            "admin123",
+                            "ChangeMe!2026Admin",
                             AdminRole.ADMIN
                     );
             if (!login.successful()) {

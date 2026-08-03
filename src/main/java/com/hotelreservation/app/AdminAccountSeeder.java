@@ -27,9 +27,11 @@ public class AdminAccountSeeder {
     }
 
     public void seedDefaultAccounts() {
+        // Development/demo seed accounts only — not a production security posture.
+        // Change these passwords (or disable this seeder) before any real deployment.
         seedAccountIfMissing(
                 "admin",
-                "admin123",
+                "ChangeMe!2026Admin",
                 "System",
                 "Administrator",
                 "admin@grandstayhotel.com",
@@ -38,7 +40,7 @@ public class AdminAccountSeeder {
 
         seedAccountIfMissing(
                 "manager",
-                "manager123",
+                "ChangeMe!2026Manager",
                 "Hotel",
                 "Manager",
                 "manager@grandstayhotel.com",

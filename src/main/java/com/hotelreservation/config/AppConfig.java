@@ -121,7 +121,8 @@ public final class AppConfig {
             ADMIN_NOTIFICATION_OBSERVER =
             new AdminNotificationObserver(
                     WAITLIST_REPOSITORY,
-                    NOTIFICATION_REPOSITORY
+                    NOTIFICATION_REPOSITORY,
+                    ROOM_REPOSITORY
             );
 
     private static final LoyaltyService LOYALTY_SERVICE =

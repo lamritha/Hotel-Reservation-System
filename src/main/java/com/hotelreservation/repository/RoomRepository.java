@@ -7,6 +7,7 @@ import com.hotelreservation.model.RoomType;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public class RoomRepository extends AbstractRepository<Room> {
 
@@ -263,6 +264,82 @@ public class RoomRepository extends AbstractRepository<Room> {
             }
 
             return query.getResultList();
+        });
+    }
+
+    /**
+     * Earliest CONFIRMED/CHECKED_IN check-in for this room on/after fromDate,
+     * via ReservationRoom or the legacy reservation.room link.
+     */
+    public Optional<LocalDate> findNextReservationStart(
+            Room room,
+            LocalDate fromDate
+    ) {
+        if (room == null || fromDate == null) {
+            return Optional.empty();
+        }
+
+        return executeRead(entityManager -> {
+            LocalDate viaAssignment = entityManager
+                    .createQuery(
+                            """
+                            SELECT MIN(reservationRoom.reservation.checkInDate)
+                            FROM ReservationRoom reservationRoom
+                            WHERE reservationRoom.room = :room
+                              AND reservationRoom.reservation.status
+                                  IN (:confirmed, :checkedIn)
+                              AND reservationRoom.reservation.checkInDate
+                                  >= :fromDate
+                            """,
+                            LocalDate.class
+                    )
+                    .setParameter("room", room)
+                    .setParameter(
+                            "confirmed",
+                            ReservationStatus.CONFIRMED
+                    )
+                    .setParameter(
+                            "checkedIn",
+                            ReservationStatus.CHECKED_IN
+                    )
+                    .setParameter("fromDate", fromDate)
+                    .getSingleResult();
+
+            LocalDate viaLegacy = entityManager
+                    .createQuery(
+                            """
+                            SELECT MIN(reservation.checkInDate)
+                            FROM Reservation reservation
+                            WHERE reservation.room = :room
+                              AND reservation.status
+                                  IN (:confirmed, :checkedIn)
+                              AND reservation.checkInDate >= :fromDate
+                            """,
+                            LocalDate.class
+                    )
+                    .setParameter("room", room)
+                    .setParameter(
+                            "confirmed",
+                            ReservationStatus.CONFIRMED
+                    )
+                    .setParameter(
+                            "checkedIn",
+                            ReservationStatus.CHECKED_IN
+                    )
+                    .setParameter("fromDate", fromDate)
+                    .getSingleResult();
+
+            if (viaAssignment == null) {
+                return Optional.ofNullable(viaLegacy);
+            }
+            if (viaLegacy == null) {
+                return Optional.of(viaAssignment);
+            }
+            return Optional.of(
+                    viaAssignment.isBefore(viaLegacy)
+                            ? viaAssignment
+                            : viaLegacy
+            );
         });
     }
 
