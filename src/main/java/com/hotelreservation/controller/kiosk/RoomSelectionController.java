@@ -4,11 +4,14 @@ import com.hotelreservation.model.RoomType;
 import com.hotelreservation.service.OccupancyService;
 import com.hotelreservation.service.RoomAvailabilityService;
 import com.hotelreservation.util.BookingSession;
+import com.hotelreservation.util.RulesDialog;
 import com.hotelreservation.util.SceneNavigator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+
+import java.util.Objects;
 
 public class RoomSelectionController {
 
@@ -39,8 +42,22 @@ public class RoomSelectionController {
     @FXML
     private Label validationLabel;
 
-    private final OccupancyService occupancyService = new OccupancyService();
-    private final RoomAvailabilityService roomAvailabilityService = new RoomAvailabilityService();
+    private final OccupancyService occupancyService;
+    private final RoomAvailabilityService roomAvailabilityService;
+
+    public RoomSelectionController(
+            OccupancyService occupancyService,
+            RoomAvailabilityService roomAvailabilityService
+    ) {
+        this.occupancyService = Objects.requireNonNull(
+                occupancyService,
+                "occupancyService"
+        );
+        this.roomAvailabilityService = Objects.requireNonNull(
+                roomAvailabilityService,
+                "roomAvailabilityService"
+        );
+    }
 
     private int singleQty;
     private int doubleQty;
@@ -236,7 +253,9 @@ public class RoomSelectionController {
         BookingSession.setDoubleRoomQuantity(doubleQty);
         BookingSession.setDeluxeRoomQuantity(deluxeQty);
         BookingSession.setPenthouseRoomQuantity(penthouseQty);
-        BookingSession.setGroupBooking(BookingSession.getNumAdults() >= 3);
+        BookingSession.setGroupBooking(
+                getTotalRoomQuantity() > 1
+        );
 
         if (singleQty > 0) {
             BookingSession.setSelectedRoomType(RoomType.SINGLE);
@@ -258,11 +277,7 @@ public class RoomSelectionController {
 
     @FXML
     private void showRulesAndRegulations() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Rules & Regulations");
-        alert.setHeaderText("Hotel Rules & Regulations");
-        alert.setContentText("Placeholder: rules and regulations content will be added later.");
-        alert.showAndWait();
+        RulesDialog.show();
     }
 
     private void showError(String message) {

@@ -3,179 +3,83 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane prefHeight="700.0" prefWidth="1100.0"
             stylesheets="@../../css/app.css"
-            fx:controller="com.hotelreservation.controller.admin.AdminNavigationController"
+            fx:controller="com.hotelreservation.controller.admin.LoyaltyManagementController"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1">
-
     <top>
         <VBox spacing="5.0" styleClass="header">
             <children>
-                <Label text="Loyalty Account Management" styleClass="header-title" />
-                <Label text="Manage guest loyalty accounts, points earned, and points redeemed" styleClass="header-subtitle" />
+                <Label text="Loyalty Dashboard" styleClass="header-title"/>
+                <Label text="Balances, earning history, and redemption activity"
+                       styleClass="header-subtitle"/>
             </children>
         </VBox>
     </top>
-
-    <left>
-        <VBox spacing="12.0" prefWidth="220.0" style="-fx-background-color: #111827; -fx-padding: 20;">
-            <children>
-                <Label text="Admin Menu"
-                       style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" />
-
-                <Button text="Dashboard" prefWidth="180.0"
-                        onAction="#openDashboard"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Reservations" prefWidth="180.0"
-                        onAction="#openReservations"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Rooms" prefWidth="180.0"
-                        onAction="#openRooms"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Guests" prefWidth="180.0"
-                        onAction="#openGuests"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Billing and Payments" prefWidth="180.0"
-                        onAction="#openBillingPayments"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Discounts" prefWidth="180.0"
-                        onAction="#openDiscounts"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Loyalty" prefWidth="180.0"
-                        onAction="#openLoyalty"
-                        style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold;" />
-
-                <Button text="Waitlist" prefWidth="180.0"
-                        onAction="#openWaitlist"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Feedback" prefWidth="180.0"
-                        onAction="#openFeedback"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Reports" prefWidth="180.0"
-                        onAction="#openReports"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Notifications" prefWidth="180.0"
-                        onAction="#openNotifications"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Logout" prefWidth="180.0"
-                        onAction="#logout"
-                        style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-font-weight: bold;" />
-            </children>
-        </VBox>
-    </left>
-
+    <left><fx:include source="AdminSidebar.fxml"/></left>
     <center>
-        <ScrollPane fitToWidth="true"
-                    hbarPolicy="NEVER"
-                    styleClass="scroll-pane">
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
             <content>
-        <VBox spacing="22.0" style="-fx-padding: 30;">
-            <children>
-
-                <VBox spacing="6.0">
+                <VBox spacing="16.0" style="-fx-padding: 24;">
                     <children>
-                        <Label text="Manage Loyalty Accounts" styleClass="screen-title" />
-                        <Label text="This screen connects to the LoyaltyAccount and Guest entities."
-                               wrapText="true"
-                               style="-fx-font-size: 14px; -fx-text-fill: #6b7280;" />
-                    </children>
-                </VBox>
-
-                <HBox spacing="15.0" styleClass="card">
-                    <children>
-                        <TextField promptText="Search by guest name, email, or loyalty number" prefWidth="450.0" />
-                        <Button text="Search" prefWidth="120.0" styleClass="primary-button" />
-                        <Button text="Clear" prefWidth="120.0" styleClass="secondary-button" />
-                    </children>
-                </HBox>
-
-                <VBox spacing="12.0" styleClass="card">
-                    <children>
-                        <Label text="Loyalty Account List" styleClass="section-title" />
-
-                        <GridPane hgap="18.0" vgap="12.0">
+                        <HBox spacing="10.0" styleClass="card">
                             <children>
-                                <Label text="Loyalty No." style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="0" />
-                                <Label text="Guest Name" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="1" />
-                                <Label text="Email" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="2" />
-                                <Label text="Points Balance" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="3" />
-                                <Label text="Total Earned" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="4" />
-                                <Label text="Total Redeemed" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="5" />
-
-                                <Label text="LOY-9001" GridPane.rowIndex="1" GridPane.columnIndex="0" />
-                                <Label text="John Smith" GridPane.rowIndex="1" GridPane.columnIndex="1" />
-                                <Label text="john.smith@email.com" GridPane.rowIndex="1" GridPane.columnIndex="2" />
-                                <Label text="420" GridPane.rowIndex="1" GridPane.columnIndex="3" />
-                                <Label text="620" GridPane.rowIndex="1" GridPane.columnIndex="4" />
-                                <Label text="200" GridPane.rowIndex="1" GridPane.columnIndex="5" />
-
-                                <Label text="LOY-9002" GridPane.rowIndex="2" GridPane.columnIndex="0" />
-                                <Label text="Maria Lee" GridPane.rowIndex="2" GridPane.columnIndex="1" />
-                                <Label text="maria.lee@email.com" GridPane.rowIndex="2" GridPane.columnIndex="2" />
-                                <Label text="180" GridPane.rowIndex="2" GridPane.columnIndex="3" />
-                                <Label text="300" GridPane.rowIndex="2" GridPane.columnIndex="4" />
-                                <Label text="120" GridPane.rowIndex="2" GridPane.columnIndex="5" />
+                                <TextField fx:id="searchField"
+                                           promptText="Loyalty number, guest, email, or phone"
+                                           prefWidth="430.0"
+                                           onAction="#searchAccounts"/>
+                                <Button text="Search"
+                                        styleClass="primary-button"
+                                        onAction="#searchAccounts"/>
+                                <Button text="Clear"
+                                        styleClass="secondary-button"
+                                        onAction="#clearSearch"/>
+                                <Label fx:id="resultLabel" text="0 account(s)"/>
                             </children>
-                        </GridPane>
-                    </children>
-                </VBox>
-
-                <GridPane hgap="20.0" vgap="20.0">
-                    <children>
-
-                        <VBox spacing="10.0" styleClass="card" prefWidth="390.0" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                        </HBox>
+                        <VBox spacing="8.0" styleClass="card">
                             <children>
-                                <Label text="Selected Loyalty Account" styleClass="section-title" />
-                                <Label text="Guest: John Smith" />
-                                <Label text="Loyalty Number: LOY-9001" />
-                                <Label text="Current Points Balance: 420" />
-                                <Label text="Eligible Redemption Value: CAD 42" />
+                                <TableView fx:id="accountTable" prefHeight="280.0">
+                                    <columns>
+                                        <TableColumn fx:id="numberColumn" text="Loyalty Number" prefWidth="160.0"/>
+                                        <TableColumn fx:id="guestColumn" text="Guest" prefWidth="180.0"/>
+                                        <TableColumn fx:id="phoneColumn" text="Phone" prefWidth="150.0"/>
+                                        <TableColumn fx:id="balanceColumn" text="Balance" prefWidth="100.0"/>
+                                        <TableColumn fx:id="earnedColumn" text="Earned" prefWidth="100.0"/>
+                                        <TableColumn fx:id="redeemedColumn" text="Redeemed" prefWidth="100.0"/>
+                                    </columns>
+                                </TableView>
+                                <Label text="Enroll new members from the Guests screen."
+                                       style="-fx-text-fill: #6b7280;"/>
                             </children>
                         </VBox>
-
-                        <VBox spacing="10.0" styleClass="card" prefWidth="390.0" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                        <VBox spacing="8.0" styleClass="card">
                             <children>
-                                <Label text="Loyalty Actions" styleClass="section-title" />
-
-                                <Label text="Points to Add" />
-                                <TextField promptText="Enter points earned" prefWidth="260.0" />
-
-                                <Label text="Points to Redeem" />
-                                <TextField promptText="Enter points to redeem" prefWidth="260.0" />
-
-                                <HBox spacing="12.0">
-                                    <children>
-                                        <Button text="Add Points" prefWidth="130.0" styleClass="primary-button" />
-                                        <Button text="Redeem Points" prefWidth="150.0" styleClass="secondary-button" />
-                                    </children>
-                                </HBox>
+                                <Label fx:id="selectedAccountLabel"
+                                       text="Select a loyalty account."
+                                       styleClass="section-title"/>
+                                <TableView fx:id="historyTable" prefHeight="250.0">
+                                    <columns>
+                                        <TableColumn fx:id="dateColumn" text="Date" prefWidth="170.0"/>
+                                        <TableColumn fx:id="typeColumn" text="Type" prefWidth="120.0"/>
+                                        <TableColumn fx:id="pointsColumn" text="Points" prefWidth="90.0"/>
+                                        <TableColumn fx:id="monetaryColumn" text="Paid / Redeemed" prefWidth="130.0"/>
+                                        <TableColumn fx:id="descriptionColumn" text="Description" prefWidth="330.0"/>
+                                    </columns>
+                                </TableView>
                             </children>
                         </VBox>
-
                     </children>
-                </GridPane>
-
-            </children>
-        </VBox>
+                </VBox>
             </content>
         </ScrollPane>
     </center>
-
 </BorderPane>

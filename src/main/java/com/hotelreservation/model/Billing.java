@@ -27,8 +27,24 @@ public class Billing {
     @Column(name = "total_amount", nullable = false)
     private double totalAmount;
 
+    /*
+     * Nullable for backward compatibility with Milestone 2 databases. Existing
+     * rows are interpreted as having no discount.
+     */
+    @Column(name = "discount_percentage")
+    private Double discountPercentage;
+
+    @Column(name = "discount_amount")
+    private Double discountAmount;
+
+    @Column(name = "discount_applied_by", length = 50)
+    private String discountAppliedBy;
+
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
     public Billing() {
     }
@@ -45,6 +61,12 @@ public class Billing {
         if (createdAt == null) {
             createdAt = LocalDateTime.now();
         }
+        updatedAt = createdAt;
+    }
+
+    @PreUpdate
+    private void onUpdate() {
+        updatedAt = LocalDateTime.now();
     }
 
     public Long getBillingId() {
@@ -121,11 +143,43 @@ public class Billing {
         this.totalAmount = totalAmount;
     }
 
+    public double getDiscountPercentage() {
+        return discountPercentage == null ? 0 : discountPercentage;
+    }
+
+    public void setDiscountPercentage(double discountPercentage) {
+        this.discountPercentage = discountPercentage;
+    }
+
+    public double getDiscountAmount() {
+        return discountAmount == null ? 0 : discountAmount;
+    }
+
+    public void setDiscountAmount(double discountAmount) {
+        this.discountAmount = discountAmount;
+    }
+
+    public String getDiscountAppliedBy() {
+        return discountAppliedBy;
+    }
+
+    public void setDiscountAppliedBy(String discountAppliedBy) {
+        this.discountAppliedBy = discountAppliedBy;
+    }
+
+    public double getAmountAfterDiscount() {
+        return Math.max(0, totalAmount - getDiscountAmount());
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 }

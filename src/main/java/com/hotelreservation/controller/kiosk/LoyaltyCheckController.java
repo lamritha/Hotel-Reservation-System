@@ -1,8 +1,9 @@
 package com.hotelreservation.controller.kiosk;
 
 import com.hotelreservation.model.LoyaltyAccount;
-import com.hotelreservation.repository.LoyaltyAccountRepository;
+import com.hotelreservation.service.LoyaltyService;
 import com.hotelreservation.util.BookingSession;
+import com.hotelreservation.util.RulesDialog;
 import com.hotelreservation.util.SceneNavigator;
 import com.hotelreservation.util.ValidationUtil;
 import javafx.fxml.FXML;
@@ -29,7 +30,13 @@ public class LoyaltyCheckController {
     @FXML
     private Hyperlink createLoyaltyHyperlink;
 
-    private final LoyaltyAccountRepository loyaltyAccountRepository = new LoyaltyAccountRepository();
+    private final LoyaltyService loyaltyService;
+
+    public LoyaltyCheckController(
+            LoyaltyService loyaltyService
+    ) {
+        this.loyaltyService = loyaltyService;
+    }
 
     @FXML
     private void initialize() {
@@ -50,7 +57,7 @@ public class LoyaltyCheckController {
 
         BookingSession.setPhone(phone);
 
-        loyaltyAccountRepository.findByGuestPhone(phone).ifPresentOrElse(
+        loyaltyService.findByPhone(phone).ifPresentOrElse(
                 this::showLoyaltyAccountFound,
                 this::showLoyaltyAccountMissing
         );
@@ -58,6 +65,7 @@ public class LoyaltyCheckController {
 
     private void showLoyaltyAccountFound(LoyaltyAccount account) {
         BookingSession.setLoyaltyEnrolled(true);
+        BookingSession.setLoyaltyEnrollmentRequested(false);
         BookingSession.setLoyaltyNumber(account.getLoyaltyNumber());
         BookingSession.setLoyaltyPointsBalance(account.getPointsBalance());
         loyaltyStatusLabel.setText("Loyalty account found: " + account.getLoyaltyNumber());
@@ -67,6 +75,7 @@ public class LoyaltyCheckController {
 
     private void showLoyaltyAccountMissing() {
         BookingSession.setLoyaltyEnrolled(false);
+        BookingSession.setLoyaltyEnrollmentRequested(false);
         BookingSession.setLoyaltyNumber("");
         BookingSession.setLoyaltyPointsBalance(0);
         loyaltyStatusLabel.setText("No loyalty account found for this guest.");
@@ -81,12 +90,17 @@ public class LoyaltyCheckController {
     }
 
     @FXML
-    private void createLoyaltyAccountPlaceholder() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Loyalty Signup");
-        alert.setHeaderText("Create a loyalty account");
-        alert.setContentText("This would open account signup.");
-        alert.showAndWait();
+    private void requestLoyaltyEnrollment() {
+        BookingSession.setLoyaltyEnrollmentRequested(true);
+        BookingSession.setLoyaltyEnrolled(false);
+        loyaltyStatusLabel.setText(
+                "Loyalty enrollment requested."
+        );
+        loyaltyPointsLabel.setText(
+                "A loyalty number will be issued when "
+                        + "the reservation is confirmed."
+        );
+        hideCreateLoyaltyLink();
     }
 
     @FXML
@@ -110,11 +124,7 @@ public class LoyaltyCheckController {
 
     @FXML
     private void showRulesAndRegulations() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Rules & Regulations");
-        alert.setHeaderText("Hotel Rules & Regulations");
-        alert.setContentText("Placeholder: rules and regulations content will be added later.");
-        alert.showAndWait();
+        RulesDialog.show();
     }
 
     private void showError(String message) {

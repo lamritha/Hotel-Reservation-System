@@ -4,180 +4,99 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane prefHeight="700.0" prefWidth="1100.0"
             stylesheets="@../../css/app.css"
-            fx:controller="com.hotelreservation.controller.admin.AdminNavigationController"
+            fx:controller="com.hotelreservation.controller.admin.NotificationsController"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1">
-
     <top>
         <VBox spacing="5.0" styleClass="header">
             <children>
-                <Label text="Notifications" styleClass="header-title" />
-                <Label text="Admin alerts for room availability, waitlist matches, payments, and checkouts" styleClass="header-subtitle" />
+                <Label text="Notifications" styleClass="header-title"/>
+                <Label text="Observer-generated room availability and waitlist alerts"
+                       styleClass="header-subtitle"/>
             </children>
         </VBox>
     </top>
-
-    <left>
-        <VBox spacing="12.0" prefWidth="220.0" style="-fx-background-color: #111827; -fx-padding: 20;">
-            <children>
-                <Label text="Admin Menu"
-                       style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" />
-
-                <Button text="Dashboard" prefWidth="180.0"
-                        onAction="#openDashboard"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Reservations" prefWidth="180.0"
-                        onAction="#openReservations"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Rooms" prefWidth="180.0"
-                        onAction="#openRooms"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Guests" prefWidth="180.0"
-                        onAction="#openGuests"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Billing and Payments" prefWidth="180.0"
-                        onAction="#openBillingPayments"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Discounts" prefWidth="180.0"
-                        onAction="#openDiscounts"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Loyalty" prefWidth="180.0"
-                        onAction="#openLoyalty"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Waitlist" prefWidth="180.0"
-                        onAction="#openWaitlist"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Feedback" prefWidth="180.0"
-                        onAction="#openFeedback"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Reports" prefWidth="180.0"
-                        onAction="#openReports"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Notifications" prefWidth="180.0"
-                        onAction="#openNotifications"
-                        style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold;" />
-
-                <Button text="Logout" prefWidth="180.0"
-                        onAction="#logout"
-                        style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-font-weight: bold;" />
-            </children>
-        </VBox>
-    </left>
-
+    <left><fx:include source="AdminSidebar.fxml"/></left>
     <center>
-        <ScrollPane fitToWidth="true"
-                    hbarPolicy="NEVER"
-                    styleClass="scroll-pane">
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
             <content>
-        <VBox spacing="22.0" style="-fx-padding: 30;">
-            <children>
-
-                <VBox spacing="6.0">
+                <VBox spacing="16.0" style="-fx-padding: 24;">
                     <children>
-                        <Label text="System Notifications" styleClass="screen-title" />
-                        <Label text="This screen supports the Observer pattern requirement by showing alerts when rooms become available or waitlisted guests can be notified."
-                               wrapText="true"
-                               style="-fx-font-size: 14px; -fx-text-fill: #6b7280;" />
-                    </children>
-                </VBox>
-
-                <HBox spacing="15.0" styleClass="card">
-                    <children>
-                        <TextField promptText="Search notifications by type, guest, room, or message" prefWidth="420.0" />
-                        <ComboBox promptText="Notification type" prefWidth="180.0" />
-                        <ComboBox promptText="Status" prefWidth="150.0" />
-                        <Button text="Search" prefWidth="120.0" styleClass="primary-button" />
-                        <Button text="Clear" prefWidth="120.0" styleClass="secondary-button" />
-                    </children>
-                </HBox>
-
-                <VBox spacing="12.0" styleClass="card">
-                    <children>
-                        <Label text="Notification List" styleClass="section-title" />
-
-                        <GridPane hgap="18.0" vgap="12.0">
+                        <HBox spacing="10.0" styleClass="card">
                             <children>
-                                <Label text="Notification ID" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="0" />
-                                <Label text="Type" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="1" />
-                                <Label text="Message" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="2" />
-                                <Label text="Created At" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="3" />
-                                <Label text="Status" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="4" />
-
-                                <Label text="NOT-001" GridPane.rowIndex="1" GridPane.columnIndex="0" />
-                                <Label text="Room Available" GridPane.rowIndex="1" GridPane.columnIndex="1" />
-                                <Label text="Deluxe room is now available for WAIT-021." wrapText="true" GridPane.rowIndex="1" GridPane.columnIndex="2" />
-                                <Label text="July 18, 2026 10:30 AM" GridPane.rowIndex="1" GridPane.columnIndex="3" />
-                                <Label text="Unread" style="-fx-text-fill: orange;" GridPane.rowIndex="1" GridPane.columnIndex="4" />
-
-                                <Label text="NOT-002" GridPane.rowIndex="2" GridPane.columnIndex="0" />
-                                <Label text="Payment Pending" GridPane.rowIndex="2" GridPane.columnIndex="1" />
-                                <Label text="RES-1002 has a pending payment review." wrapText="true" GridPane.rowIndex="2" GridPane.columnIndex="2" />
-                                <Label text="July 18, 2026 11:15 AM" GridPane.rowIndex="2" GridPane.columnIndex="3" />
-                                <Label text="Unread" style="-fx-text-fill: orange;" GridPane.rowIndex="2" GridPane.columnIndex="4" />
-
-                                <Label text="NOT-003" GridPane.rowIndex="3" GridPane.columnIndex="0" />
-                                <Label text="Checkout Reminder" GridPane.rowIndex="3" GridPane.columnIndex="1" />
-                                <Label text="Guest John Smith is scheduled for checkout today." wrapText="true" GridPane.rowIndex="3" GridPane.columnIndex="2" />
-                                <Label text="July 18, 2026 12:00 PM" GridPane.rowIndex="3" GridPane.columnIndex="3" />
-                                <Label text="Read" style="-fx-text-fill: green;" GridPane.rowIndex="3" GridPane.columnIndex="4" />
-
-                                <Label text="NOT-004" GridPane.rowIndex="4" GridPane.columnIndex="0" />
-                                <Label text="Waitlist Match" GridPane.rowIndex="4" GridPane.columnIndex="1" />
-                                <Label text="Penthouse matched with WAIT-022." wrapText="true" GridPane.rowIndex="4" GridPane.columnIndex="2" />
-                                <Label text="July 18, 2026 1:20 PM" GridPane.rowIndex="4" GridPane.columnIndex="3" />
-                                <Label text="Read" style="-fx-text-fill: green;" GridPane.rowIndex="4" GridPane.columnIndex="4" />
+                                <TextField fx:id="searchField"
+                                           promptText="Search message"
+                                           prefWidth="320.0"
+                                           onAction="#searchNotifications"/>
+                                <ComboBox fx:id="typeFilter"
+                                          promptText="Type"
+                                          prefWidth="170.0"/>
+                                <ComboBox fx:id="statusFilter"
+                                          prefWidth="120.0"/>
+                                <Button text="Search"
+                                        styleClass="primary-button"
+                                        onAction="#searchNotifications"/>
+                                <Button text="Clear"
+                                        styleClass="secondary-button"
+                                        onAction="#clearFilters"/>
+                                <Label fx:id="resultLabel" text="0 notification(s)"/>
                             </children>
-                        </GridPane>
-                    </children>
-                </VBox>
-
-                <GridPane hgap="20.0" vgap="20.0">
-                    <children>
-
-                        <VBox spacing="10.0" styleClass="card" prefWidth="390.0" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                        </HBox>
+                        <VBox spacing="10.0" styleClass="card">
                             <children>
-                                <Label text="Selected Notification" styleClass="section-title" />
-                                <Label text="Notification ID: NOT-001" />
-                                <Label text="Type: Room Available" />
-                                <Label text="Related Waitlist ID: WAIT-021" />
-                                <Label text="Message: Deluxe room is now available for Nina Patel." wrapText="true" />
+                                <TableView fx:id="notificationTable"
+                                           prefHeight="500.0">
+                                    <columns>
+                                        <TableColumn fx:id="idColumn" text="ID" prefWidth="90.0"/>
+                                        <TableColumn fx:id="typeColumn" text="Type" prefWidth="150.0"/>
+                                        <TableColumn fx:id="messageColumn" text="Message" prefWidth="450.0"/>
+                                        <TableColumn fx:id="createdColumn" text="Created" prefWidth="180.0"/>
+                                        <TableColumn fx:id="statusColumn" text="Status" prefWidth="100.0"/>
+                                    </columns>
+                                </TableView>
+                                <HBox spacing="14.0" alignment="CENTER_RIGHT">
+                                    <children>
+                                        <Button fx:id="previousPageButton"
+                                                text="Previous"
+                                                prefWidth="100.0"
+                                                styleClass="secondary-button"
+                                                onAction="#previousPage"/>
+                                        <Label fx:id="pageLabel"
+                                               text="Page 1 of 1"
+                                               style="-fx-font-weight: bold;"/>
+                                        <Button fx:id="nextPageButton"
+                                                text="Next"
+                                                prefWidth="100.0"
+                                                styleClass="secondary-button"
+                                                onAction="#nextPage"/>
+                                    </children>
+                                </HBox>
+                                <HBox spacing="10.0">
+                                    <children>
+                                        <Button fx:id="markReadButton"
+                                                text="Mark as Read"
+                                                styleClass="primary-button"
+                                                onAction="#markRead"/>
+                                        <Button fx:id="archiveButton"
+                                                text="Archive"
+                                                styleClass="secondary-button"
+                                                onAction="#archive"/>
+                                    </children>
+                                </HBox>
                             </children>
                         </VBox>
-
-                        <VBox spacing="10.0" styleClass="card" prefWidth="390.0" GridPane.rowIndex="0" GridPane.columnIndex="1">
-                            <children>
-                                <Label text="Notification Actions" styleClass="section-title" />
-                                <Button text="Mark as Read" prefWidth="200.0" styleClass="primary-button" />
-                                <Button text="Notify Guest" prefWidth="200.0" styleClass="primary-button" />
-                                <Button text="Clear Notification" prefWidth="200.0" styleClass="secondary-button" />
-                            </children>
-                        </VBox>
-
                     </children>
-                </GridPane>
-
-            </children>
-        </VBox>
+                </VBox>
             </content>
         </ScrollPane>
     </center>
-
 </BorderPane>

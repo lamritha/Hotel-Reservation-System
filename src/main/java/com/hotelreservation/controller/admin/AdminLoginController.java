@@ -1,14 +1,15 @@
 package com.hotelreservation.controller.admin;
 
+import com.hotelreservation.model.AdminRole;
+import com.hotelreservation.security.AuthenticationService;
 import com.hotelreservation.util.SceneNavigator;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class AdminLoginController {
+
+    private final AuthenticationService authenticationService;
 
     @FXML
     private TextField usernameField;
@@ -19,32 +20,87 @@ public class AdminLoginController {
     @FXML
     private ComboBox<String> roleComboBox;
 
+    public AdminLoginController(
+            AuthenticationService authenticationService
+    ) {
+        this.authenticationService = authenticationService;
+    }
+
     @FXML
     private void initialize() {
-        roleComboBox.setItems(FXCollections.observableArrayList("Admin", "Manager"));
+        roleComboBox.setItems(
+                FXCollections.observableArrayList(
+                        "Admin",
+                        "Manager"
+                )
+        );
+
+        roleComboBox.getSelectionModel().selectFirst();
     }
 
     @FXML
     private void login() {
         String username = usernameField.getText().trim();
-        String password = passwordField.getText().trim();
-        String role = roleComboBox.getValue();
+        String password = passwordField.getText();
+        AdminRole selectedRole =
+                convertRole(roleComboBox.getValue());
 
-        if (username.isEmpty() || password.isEmpty() || role == null) {
-            showError("Please enter username, password, and select a role.");
+        AuthenticationService.AuthenticationResult result =
+                authenticationService.authenticate(
+                        username,
+                        password,
+                        selectedRole
+                );
+
+        if (!result.successful()) {
+            passwordField.clear();
+            showError(result.message());
             return;
         }
 
-        if (username.equals("admin") && password.equals("admin123")) {
-            SceneNavigator.switchTo("/views/admin/AdminDashboardView.fxml");
-        } else {
-            showError("Invalid username or password.");
+        showSuccess(
+                result.adminUser().getFullName(),
+                result.adminUser().getRole()
+        );
+
+        SceneNavigator.switchTo(
+                "/views/admin/AdminDashboardView.fxml"
+        );
+    }
+
+    private AdminRole convertRole(String selectedRole) {
+        if (selectedRole == null) {
+            return null;
         }
+
+        return switch (selectedRole) {
+            case "Admin" -> AdminRole.ADMIN;
+            case "Manager" -> AdminRole.MANAGER;
+            default -> null;
+        };
     }
 
     @FXML
     private void backToWelcome() {
-        SceneNavigator.switchTo("/views/kiosk/WelcomeView.fxml");
+        SceneNavigator.switchTo(
+                "/views/kiosk/WelcomeView.fxml"
+        );
+    }
+
+    private void showSuccess(
+            String administratorName,
+            AdminRole role
+    ) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Login Successful");
+        alert.setHeaderText(
+                "Welcome, " + administratorName
+        );
+        alert.setContentText(
+                "You are signed in with the "
+                        + role + " role."
+        );
+        alert.showAndWait();
     }
 
     private void showError(String message) {

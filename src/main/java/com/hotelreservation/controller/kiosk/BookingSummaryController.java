@@ -7,6 +7,7 @@ import com.hotelreservation.service.BookingService;
 import com.hotelreservation.service.OccupancyService;
 import com.hotelreservation.service.PricingService;
 import com.hotelreservation.util.BookingSession;
+import com.hotelreservation.util.RulesDialog;
 import com.hotelreservation.util.SceneNavigator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -57,9 +58,19 @@ public class BookingSummaryController {
     @FXML
     private Label paymentNoticeLabel;
 
-    private final OccupancyService occupancyService = new OccupancyService();
-    private final PricingService pricingService = new PricingService();
-    private final BookingService bookingService = new BookingService();
+    private final OccupancyService occupancyService;
+    private final PricingService pricingService;
+    private final BookingService bookingService;
+
+    public BookingSummaryController(
+            OccupancyService occupancyService,
+            PricingService pricingService,
+            BookingService bookingService
+    ) {
+        this.occupancyService = occupancyService;
+        this.pricingService = pricingService;
+        this.bookingService = bookingService;
+    }
 
     @FXML
     private void initialize() {
@@ -119,6 +130,11 @@ public class BookingSummaryController {
                     "Loyalty Status: Member (" + BookingSession.getLoyaltyNumber()
                             + ", " + BookingSession.getLoyaltyPointsBalance() + " points)"
             );
+        } else if (BookingSession
+                .isLoyaltyEnrollmentRequested()) {
+            loyaltyStatusLabel.setText(
+                    "Loyalty Status: Enrollment requested"
+            );
         } else {
             loyaltyStatusLabel.setText("Loyalty Status: Not enrolled");
         }
@@ -172,11 +188,7 @@ public class BookingSummaryController {
 
     @FXML
     private void showRulesAndRegulations() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Rules & Regulations");
-        alert.setHeaderText("Hotel Rules & Regulations");
-        alert.setContentText("Placeholder: rules and regulations content will be added later.");
-        alert.showAndWait();
+        RulesDialog.show();
     }
 
     private String getRootCauseMessage(Throwable throwable) {

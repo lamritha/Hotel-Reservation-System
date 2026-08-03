@@ -1,67 +1,84 @@
 package com.hotelreservation.controller.admin;
 
+import com.hotelreservation.security.AdminSession;
+import com.hotelreservation.security.AuthenticationService;
 import com.hotelreservation.util.SceneNavigator;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
-public class AdminNavigationController {
+public class AdminNavigationController
+        extends BaseAdminController {
+
+    private static final String ACTIVE_STYLE =
+            "-fx-background-color: #2563eb; "
+                    + "-fx-text-fill: white; "
+                    + "-fx-font-weight: bold;";
 
     @FXML
-    private void openDashboard() {
-        SceneNavigator.switchTo("/views/admin/AdminDashboardView.fxml");
+    private Button dashboardButton;
+    @FXML
+    private Button reservationsButton;
+    @FXML
+    private Button roomsButton;
+    @FXML
+    private Button guestsButton;
+    @FXML
+    private Button billingButton;
+    @FXML
+    private Button discountsButton;
+    @FXML
+    private Button loyaltyButton;
+    @FXML
+    private Button waitlistButton;
+    @FXML
+    private Button feedbackButton;
+    @FXML
+    private Button reportsButton;
+    @FXML
+    private Button notificationsButton;
+
+    public AdminNavigationController(
+            AuthenticationService authenticationService,
+            AdminSession adminSession
+    ) {
+        super(authenticationService, adminSession);
     }
 
     @FXML
-    private void openReservations() {
-        SceneNavigator.switchTo("/views/admin/ReservationManagementView.fxml");
-    }
+    private void initialize() {
+        String path = SceneNavigator.getCurrentFxmlPath();
+        if (path == null) {
+            return;
+        }
 
-    @FXML
-    private void openRooms() {
-        SceneNavigator.switchTo("/views/admin/RoomManagementView.fxml");
-    }
+        Button activeButton = switch (path) {
+            case "/views/admin/AdminDashboardView.fxml" ->
+                    dashboardButton;
+            case "/views/admin/ReservationManagementView.fxml" ->
+                    reservationsButton;
+            case "/views/admin/RoomManagementView.fxml" ->
+                    roomsButton;
+            case "/views/admin/GuestManagementView.fxml" ->
+                    guestsButton;
+            case "/views/admin/BillingPaymentView.fxml" ->
+                    billingButton;
+            case "/views/admin/DiscountManagementView.fxml" ->
+                    discountsButton;
+            case "/views/admin/LoyaltyAccountView.fxml" ->
+                    loyaltyButton;
+            case "/views/admin/WaitlistView.fxml" ->
+                    waitlistButton;
+            case "/views/admin/FeedbackManagementView.fxml" ->
+                    feedbackButton;
+            case "/views/admin/ReportsView.fxml" ->
+                    reportsButton;
+            case "/views/admin/NotificationsView.fxml" ->
+                    notificationsButton;
+            default -> null;
+        };
 
-    @FXML
-    private void openGuests() {
-        SceneNavigator.switchTo("/views/admin/GuestManagementView.fxml");
-    }
-
-    @FXML
-    private void openBillingPayments() {
-        SceneNavigator.switchTo("/views/admin/BillingPaymentView.fxml");
-    }
-
-    @FXML
-    private void openDiscounts() {
-        SceneNavigator.switchTo("/views/admin/DiscountManagementView.fxml");
-    }
-
-    @FXML
-    private void openLoyalty() {
-        SceneNavigator.switchTo("/views/admin/LoyaltyAccountView.fxml");
-    }
-
-    @FXML
-    private void openWaitlist() {
-        SceneNavigator.switchTo("/views/admin/WaitlistView.fxml");
-    }
-
-    @FXML
-    private void openFeedback() {
-        SceneNavigator.switchTo("/views/admin/FeedbackManagementView.fxml");
-    }
-
-    @FXML
-    private void openReports() {
-        SceneNavigator.switchTo("/views/admin/ReportsView.fxml");
-    }
-
-    @FXML
-    private void openNotifications() {
-        SceneNavigator.switchTo("/views/admin/NotificationsView.fxml");
-    }
-
-    @FXML
-    private void logout() {
-        SceneNavigator.switchTo("/views/kiosk/WelcomeView.fxml");
+        if (activeButton != null) {
+            activeButton.setStyle(ACTIVE_STYLE);
+        }
     }
 }

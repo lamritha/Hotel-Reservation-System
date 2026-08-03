@@ -24,6 +24,14 @@ public class Payment {
     @Column(name = "payment_method", nullable = false, length = 30)
     private PaymentMethod paymentMethod;
 
+    /*
+     * Nullable so existing Milestone 2 payment rows remain compatible. A null
+     * value is treated as PARTIAL_PAYMENT.
+     */
+    @Enumerated(EnumType.STRING)
+    @Column(name = "payment_type", length = 30)
+    private PaymentType paymentType;
+
     @Column(name = "payment_date", nullable = false)
     private LocalDateTime paymentDate;
 
@@ -35,9 +43,26 @@ public class Payment {
     }
 
     public Payment(Billing billing, double amount, PaymentMethod paymentMethod, String note) {
+        this(
+                billing,
+                amount,
+                paymentMethod,
+                PaymentType.PARTIAL_PAYMENT,
+                note
+        );
+    }
+
+    public Payment(
+            Billing billing,
+            double amount,
+            PaymentMethod paymentMethod,
+            PaymentType paymentType,
+            String note
+    ) {
         this.billing = billing;
         this.amount = amount;
         this.paymentMethod = paymentMethod;
+        this.paymentType = paymentType;
         this.note = note;
         this.paymentDate = LocalDateTime.now();
     }
@@ -72,6 +97,16 @@ public class Payment {
 
     public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    public PaymentType getPaymentType() {
+        return paymentType == null
+                ? PaymentType.PARTIAL_PAYMENT
+                : paymentType;
+    }
+
+    public void setPaymentType(PaymentType paymentType) {
+        this.paymentType = paymentType;
     }
 
     public LocalDateTime getPaymentDate() {

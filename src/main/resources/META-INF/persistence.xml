@@ -18,11 +18,17 @@
         <class>com.hotelreservation.model.ReservationAddOn</class>
         <class>com.hotelreservation.model.ReservationRoom</class>
         <class>com.hotelreservation.model.LoyaltyAccount</class>
+        <class>com.hotelreservation.model.AdminUser</class>
+        <class>com.hotelreservation.model.Discount</class>
+        <class>com.hotelreservation.model.LoyaltyTransaction</class>
+        <class>com.hotelreservation.model.WaitlistEntry</class>
+        <class>com.hotelreservation.model.Feedback</class>
+        <class>com.hotelreservation.model.AdminNotification</class>
 
         <properties>
             <!-- H2 Database Configuration -->
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:file:C:/Users/ashil/Desktop/Amritha/College/Sem 5/APD545/Project/MS1/Hotel-Reservation-System/Hotel-Reservation-System/database/hotel_reservation_db"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:file:./database/hotel_reservation_db"/>
             <property name="jakarta.persistence.jdbc.user" value="sa"/>
             <property name="jakarta.persistence.jdbc.password" value=""/>
 

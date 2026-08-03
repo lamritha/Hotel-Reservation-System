@@ -2,180 +2,115 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane prefHeight="700.0" prefWidth="1100.0"
             stylesheets="@../../css/app.css"
-            fx:controller="com.hotelreservation.controller.admin.AdminNavigationController"
+            fx:controller="com.hotelreservation.controller.admin.FeedbackManagementController"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1">
-
     <top>
         <VBox spacing="5.0" styleClass="header">
             <children>
-                <Label text="Feedback Management" styleClass="header-title" />
-                <Label text="Review guest feedback, ratings, comments, and sentiment tags" styleClass="header-subtitle" />
+                <Label text="Feedback Management" styleClass="header-title"/>
+                <Label text="Checked-out guest feedback, sentiment filters, and CSV summaries"
+                       styleClass="header-subtitle"/>
             </children>
         </VBox>
     </top>
-
-    <left>
-        <VBox spacing="12.0" prefWidth="220.0" style="-fx-background-color: #111827; -fx-padding: 20;">
-            <children>
-                <Label text="Admin Menu"
-                       style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" />
-
-                <Button text="Dashboard" prefWidth="180.0"
-                        onAction="#openDashboard"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Reservations" prefWidth="180.0"
-                        onAction="#openReservations"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Rooms" prefWidth="180.0"
-                        onAction="#openRooms"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Guests" prefWidth="180.0"
-                        onAction="#openGuests"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Billing and Payments" prefWidth="180.0"
-                        onAction="#openBillingPayments"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Discounts" prefWidth="180.0"
-                        onAction="#openDiscounts"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Loyalty" prefWidth="180.0"
-                        onAction="#openLoyalty"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Waitlist" prefWidth="180.0"
-                        onAction="#openWaitlist"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Feedback" prefWidth="180.0"
-                        onAction="#openFeedback"
-                        style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold;" />
-
-                <Button text="Reports" prefWidth="180.0"
-                        onAction="#openReports"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Notifications" prefWidth="180.0"
-                        onAction="#openNotifications"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Logout" prefWidth="180.0"
-                        onAction="#logout"
-                        style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-font-weight: bold;" />
-            </children>
-        </VBox>
-    </left>
-
+    <left><fx:include source="AdminSidebar.fxml"/></left>
     <center>
-        <ScrollPane fitToWidth="true"
-                    hbarPolicy="NEVER"
-                    styleClass="scroll-pane">
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
             <content>
-        <VBox spacing="22.0" style="-fx-padding: 30;">
-            <children>
-
-                <VBox spacing="6.0">
+                <VBox spacing="16.0" style="-fx-padding: 24;">
                     <children>
-                        <Label text="Manage Guest Feedback" styleClass="screen-title" />
-                        <Label text="This screen connects to Feedback and Reservation entities. Sentiment tag can be generated later during implementation."
-                               wrapText="true"
-                               style="-fx-font-size: 14px; -fx-text-fill: #6b7280;" />
-                    </children>
-                </VBox>
-
-                <HBox spacing="15.0" styleClass="card">
-                    <children>
-                        <TextField promptText="Search by reservation ID, guest name, or keyword" prefWidth="420.0" />
-                        <ComboBox promptText="Rating" prefWidth="150.0" />
-                        <ComboBox promptText="Sentiment tag" prefWidth="180.0" />
-                        <Button text="Search" prefWidth="120.0" styleClass="primary-button" />
-                        <Button text="Clear" prefWidth="120.0" styleClass="secondary-button" />
-                    </children>
-                </HBox>
-
-                <VBox spacing="12.0" styleClass="card">
-                    <children>
-                        <Label text="Feedback List" styleClass="section-title" />
-
-                        <GridPane hgap="18.0" vgap="12.0">
+                        <VBox spacing="10.0" styleClass="card">
                             <children>
-                                <Label text="Feedback ID" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="0" />
-                                <Label text="Reservation ID" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="1" />
-                                <Label text="Guest" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="2" />
-                                <Label text="Rating" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="3" />
-                                <Label text="Sentiment" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="4" />
-                                <Label text="Submitted At" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="5" />
-
-                                <Label text="FDB-001" GridPane.rowIndex="1" GridPane.columnIndex="0" />
-                                <Label text="RES-1001" GridPane.rowIndex="1" GridPane.columnIndex="1" />
-                                <Label text="John Smith" GridPane.rowIndex="1" GridPane.columnIndex="2" />
-                                <Label text="5" GridPane.rowIndex="1" GridPane.columnIndex="3" />
-                                <Label text="Positive" style="-fx-text-fill: green;" GridPane.rowIndex="1" GridPane.columnIndex="4" />
-                                <Label text="July 18, 2026" GridPane.rowIndex="1" GridPane.columnIndex="5" />
-
-                                <Label text="FDB-002" GridPane.rowIndex="2" GridPane.columnIndex="0" />
-                                <Label text="RES-1002" GridPane.rowIndex="2" GridPane.columnIndex="1" />
-                                <Label text="Maria Lee" GridPane.rowIndex="2" GridPane.columnIndex="2" />
-                                <Label text="3" GridPane.rowIndex="2" GridPane.columnIndex="3" />
-                                <Label text="Neutral" style="-fx-text-fill: orange;" GridPane.rowIndex="2" GridPane.columnIndex="4" />
-                                <Label text="July 20, 2026" GridPane.rowIndex="2" GridPane.columnIndex="5" />
-
-                                <Label text="FDB-003" GridPane.rowIndex="3" GridPane.columnIndex="0" />
-                                <Label text="RES-1003" GridPane.rowIndex="3" GridPane.columnIndex="1" />
-                                <Label text="Ava Brown" GridPane.rowIndex="3" GridPane.columnIndex="2" />
-                                <Label text="2" GridPane.rowIndex="3" GridPane.columnIndex="3" />
-                                <Label text="Negative" style="-fx-text-fill: red;" GridPane.rowIndex="3" GridPane.columnIndex="4" />
-                                <Label text="July 24, 2026" GridPane.rowIndex="3" GridPane.columnIndex="5" />
-                            </children>
-                        </GridPane>
-                    </children>
-                </VBox>
-
-                <GridPane hgap="20.0" vgap="20.0">
-                    <children>
-
-                        <VBox spacing="10.0" styleClass="card" prefWidth="390.0" GridPane.rowIndex="0" GridPane.columnIndex="0">
-                            <children>
-                                <Label text="Selected Feedback" styleClass="section-title" />
-                                <Label text="Feedback ID: FDB-001" />
-                                <Label text="Reservation ID: RES-1001" />
-                                <Label text="Rating: 5 out of 5" />
-                                <Label text="Comment: Smooth booking process and excellent service." wrapText="true" />
+                                <HBox spacing="9.0">
+                                    <children>
+                                        <TextField fx:id="guestFilter"
+                                                   promptText="Guest, email, or phone"
+                                                   prefWidth="250.0"
+                                                   onAction="#searchFeedback"/>
+                                        <ComboBox fx:id="ratingFilter"
+                                                  promptText="Rating"
+                                                  prefWidth="105.0"/>
+                                        <ComboBox fx:id="sentimentFilter"
+                                                  promptText="Sentiment"
+                                                  prefWidth="150.0"/>
+                                        <DatePicker fx:id="fromPicker"
+                                                    promptText="From"
+                                                    prefWidth="135.0"/>
+                                        <DatePicker fx:id="toPicker"
+                                                    promptText="To"
+                                                    prefWidth="135.0"/>
+                                        <Button text="Search"
+                                                styleClass="primary-button"
+                                                onAction="#searchFeedback"/>
+                                        <Button text="Clear"
+                                                styleClass="secondary-button"
+                                                onAction="#clearFilters"/>
+                                    </children>
+                                </HBox>
+                                <HBox spacing="12.0" alignment="CENTER_LEFT">
+                                    <children>
+                                        <Label fx:id="summaryLabel"
+                                               text="0 feedback entries"
+                                               wrapText="true"/>
+                                        <Button text="Export CSV"
+                                                styleClass="primary-button"
+                                                onAction="#exportCsv"/>
+                                    </children>
+                                </HBox>
                             </children>
                         </VBox>
 
-                        <VBox spacing="10.0" styleClass="card" prefWidth="390.0" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                        <VBox spacing="8.0" styleClass="card">
                             <children>
-                                <Label text="Feedback Actions" styleClass="section-title" />
-                                <Button text="View Full Feedback" prefWidth="200.0" styleClass="primary-button" />
-                                <Button text="Export Feedback" prefWidth="200.0" styleClass="secondary-button" />
-                                <Button text="Mark Reviewed" prefWidth="200.0" styleClass="secondary-button" />
+                                <TableView fx:id="feedbackTable"
+                                           prefHeight="500.0">
+                                    <columns>
+                                        <TableColumn fx:id="reservationColumn" text="Reservation" prefWidth="110.0"/>
+                                        <TableColumn fx:id="guestColumn" text="Guest" prefWidth="160.0"/>
+                                        <TableColumn fx:id="ratingColumn" text="Rating" prefWidth="75.0"/>
+                                        <TableColumn fx:id="commentColumn" text="Comment" prefWidth="330.0"/>
+                                        <TableColumn fx:id="sentimentColumn" text="Sentiment" prefWidth="130.0"/>
+                                        <TableColumn fx:id="dateColumn" text="Submitted" prefWidth="170.0"/>
+                                    </columns>
+                                </TableView>
+                                <HBox spacing="14.0" alignment="CENTER_RIGHT">
+                                    <children>
+                                        <Label fx:id="paginationResultLabel"
+                                               text="0 feedback entries"
+                                               style="-fx-text-fill: #6b7280;"/>
+                                        <Button fx:id="previousPageButton"
+                                                text="Previous"
+                                                prefWidth="100.0"
+                                                styleClass="secondary-button"
+                                                onAction="#previousPage"/>
+                                        <Label fx:id="pageLabel"
+                                               text="Page 1 of 1"
+                                               style="-fx-font-weight: bold;"/>
+                                        <Button fx:id="nextPageButton"
+                                                text="Next"
+                                                prefWidth="100.0"
+                                                styleClass="secondary-button"
+                                                onAction="#nextPage"/>
+                                    </children>
+                                </HBox>
                             </children>
                         </VBox>
-
                     </children>
-                </GridPane>
-
-            </children>
-        </VBox>
+                </VBox>
             </content>
         </ScrollPane>
     </center>
-
 </BorderPane>

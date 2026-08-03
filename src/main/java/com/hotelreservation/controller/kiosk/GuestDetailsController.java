@@ -1,6 +1,7 @@
 package com.hotelreservation.controller.kiosk;
 
 import com.hotelreservation.util.BookingSession;
+import com.hotelreservation.util.RulesDialog;
 import com.hotelreservation.util.SceneNavigator;
 import com.hotelreservation.util.ValidationUtil;
 import javafx.fxml.FXML;
@@ -150,10 +151,6 @@ public class GuestDetailsController {
 
     @FXML
     private void showRulesAndRegulations() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Rules & Regulations");
-        alert.setHeaderText("Hotel Rules & Regulations");
-        alert.setContentText("Placeholder: rules and regulations content will be added later.");
-        alert.showAndWait();
+        RulesDialog.show();
     }
 }

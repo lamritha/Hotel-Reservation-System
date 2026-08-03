@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="760.0"
+            prefWidth="820.0"
+            stylesheets="@../../css/app.css"
+            fx:controller="com.hotelreservation.controller.admin.ReservationFormController"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1">
+
+    <top>
+        <VBox spacing="5.0"
+              styleClass="header">
+            <children>
+                <Label fx:id="formTitleLabel"
+                       text="Reservation"
+                       styleClass="header-title"/>
+
+                <Label fx:id="formSubtitleLabel"
+                       text="Enter the reservation information."
+                       wrapText="true"
+                       styleClass="header-subtitle"/>
+            </children>
+        </VBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true"
+                    hbarPolicy="NEVER"
+                    styleClass="scroll-pane">
+            <content>
+                <VBox spacing="18.0"
+                      style="-fx-padding: 24;">
+                    <children>
+
+                        <VBox spacing="14.0"
+                              styleClass="card">
+                            <children>
+                                <Label text="Guest Information"
+                                       styleClass="section-title"/>
+                                <Label text="* Required fields"
+                                       styleClass="required-note"/>
+
+                                <GridPane hgap="12.0"
+                                          vgap="12.0">
+                                    <children>
+                                        <Label text="First name *"
+                                               GridPane.columnIndex="0"
+                                               GridPane.rowIndex="0"/>
+
+                                        <TextField fx:id="firstNameField"
+                                                   promptText="First name"
+                                                   prefWidth="250.0"
+                                                   GridPane.columnIndex="1"
+                                                   GridPane.rowIndex="0"/>
+
+                                        <Label text="Last name *"
+                                               GridPane.columnIndex="2"
+                                               GridPane.rowIndex="0"/>
+
+                                        <TextField fx:id="lastNameField"
+                                                   promptText="Last name"
+                                                   prefWidth="250.0"
+                                                   GridPane.columnIndex="3"
+                                                   GridPane.rowIndex="0"/>
+
+                                        <Label text="Email *"
+                                               GridPane.columnIndex="0"
+                                               GridPane.rowIndex="1"/>
+
+                                        <TextField fx:id="emailField"
+                                                   promptText="guest@example.com"
+                                                   prefWidth="250.0"
+                                                   GridPane.columnIndex="1"
+                                                   GridPane.rowIndex="1"/>
+
+                                        <Label text="Phone *"
+                                               GridPane.columnIndex="2"
+                                               GridPane.rowIndex="1"/>
+
+                                        <TextField fx:id="phoneField"
+                                                   promptText="416-555-1234"
+                                                   prefWidth="250.0"
+                                                   GridPane.columnIndex="3"
+                                                   GridPane.rowIndex="1"/>
+
+                                        <Label text="Address *"
+                                               GridPane.columnIndex="0"
+                                               GridPane.rowIndex="2"/>
+
+                                        <TextArea fx:id="addressArea"
+                                                  promptText="Guest address"
+                                                  prefHeight="70.0"
+                                                  wrapText="true"
+                                                  GridPane.columnIndex="1"
+                                                  GridPane.columnSpan="3"
+                                                  GridPane.rowIndex="2"/>
+                                    </children>
+                                </GridPane>
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="14.0"
+                              styleClass="card">
+                            <children>
+                                <Label text="Stay and Occupancy"
+                                       styleClass="section-title"/>
+
+                                <GridPane hgap="12.0"
+                                          vgap="12.0">
+                                    <children>
+                                        <Label text="Check-in *"
+                                               GridPane.columnIndex="0"
+                                               GridPane.rowIndex="0"/>
+
+                                        <DatePicker fx:id="checkInDatePicker"
+                                                    prefWidth="200.0"
+                                                    GridPane.columnIndex="1"
+                                                    GridPane.rowIndex="0"/>
+
+                                        <Label text="Check-out *"
+                                               GridPane.columnIndex="2"
+                                               GridPane.rowIndex="0"/>
+
+                                        <DatePicker fx:id="checkOutDatePicker"
+                                                    prefWidth="200.0"
+                                                    GridPane.columnIndex="3"
+                                                    GridPane.rowIndex="0"/>
+
+                                        <Label text="Adults *"
+                                               GridPane.columnIndex="0"
+                                               GridPane.rowIndex="1"/>
+
+                                        <Spinner fx:id="adultsSpinner"
+                                                 editable="true"
+                                                 prefWidth="120.0"
+                                                 GridPane.columnIndex="1"
+                                                 GridPane.rowIndex="1"/>
+
+                                        <Label text="Children"
+                                               GridPane.columnIndex="2"
+                                               GridPane.rowIndex="1"/>
+
+                                        <Spinner fx:id="childrenSpinner"
+                                                 editable="true"
+                                                 prefWidth="120.0"
+                                                 GridPane.columnIndex="3"
+                                                 GridPane.rowIndex="1"/>
+                                    </children>
+                                </GridPane>
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="10.0"
+                              styleClass="card">
+                            <children>
+                                <HBox alignment="CENTER_LEFT"
+                                      spacing="12.0">
+                                    <children>
+                                        <Label text="Available Rooms *"
+                                               styleClass="section-title"/>
+
+                                        <Button text="Refresh"
+                                                styleClass="secondary-button"
+                                                onAction="#refreshAvailableRooms"/>
+                                    </children>
+                                </HBox>
+
+                                <Label fx:id="availabilityLabel"
+                                       text="Choose stay dates to load rooms."
+                                       wrapText="true"
+                                       style="-fx-text-fill: #6b7280;"/>
+
+                                <ListView fx:id="availableRoomsList"
+                                          prefHeight="220.0"/>
+
+                                <Label fx:id="occupancySummaryLabel"
+                                       text="Selected rooms: 0 | Capacity: 0 | Guests: 1"
+                                       style="-fx-font-weight: bold;"/>
+
+                                <Label text="Select one room for a standard reservation. Use Ctrl+Click to select multiple rooms for a group booking."
+                                       wrapText="true"
+                                       style="-fx-text-fill: #6b7280; -fx-font-size: 12px;"/>
+                            </children>
+                        </VBox>
+
+                        <HBox alignment="CENTER_RIGHT"
+                              spacing="12.0">
+                            <children>
+                                <Button text="Close"
+                                        prefWidth="110.0"
+                                        styleClass="secondary-button"
+                                        onAction="#closeDialog"/>
+
+                                <Button fx:id="saveButton"
+                                        text="Save"
+                                        prefWidth="180.0"
+                                        styleClass="primary-button"
+                                        onAction="#saveReservation"/>
+                            </children>
+                        </HBox>
+
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

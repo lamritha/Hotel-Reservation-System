@@ -1,5 +1,14 @@
 package com.hotelreservation.service;
 
+import com.hotelreservation.config.HotelPolicyConfig;
+import com.hotelreservation.decorator.AirportPickupDecorator;
+import com.hotelreservation.decorator.BaseBookingPrice;
+import com.hotelreservation.decorator.BookingPriceComponent;
+import com.hotelreservation.decorator.BreakfastDecorator;
+import com.hotelreservation.decorator.LaundryDecorator;
+import com.hotelreservation.decorator.ParkingDecorator;
+import com.hotelreservation.decorator.SpaDecorator;
+import com.hotelreservation.decorator.WifiDecorator;
 import com.hotelreservation.model.RoomType;
 import com.hotelreservation.strategy.PricingStrategy;
 import com.hotelreservation.strategy.StandardPricingStrategy;
@@ -14,17 +23,8 @@ import java.time.temporal.ChronoUnit;
  */
 public class PricingService {
 
-    private static final double TAX_RATE = 0.13;
-
-    private static final double WIFI_PRICE = 15;
-    private static final double BREAKFAST_PRICE = 20;
-    private static final double PARKING_PRICE = 25;
-    private static final double SPA_PRICE = 80;
-    private static final double LAUNDRY_PRICE = 30;
-    private static final double AIRPORT_PICKUP_PRICE = 60;
-
     public double getTaxRate() {
-        return TAX_RATE;
+        return HotelPolicyConfig.TAX_RATE;
     }
 
     public long getNumberOfNights() {
@@ -81,28 +81,36 @@ public class PricingService {
             boolean airportPickup
     ) {
         long nights = getNumberOfNights();
-        double total = 0;
+        BookingPriceComponent decoratedPrice =
+                new BaseBookingPrice(0, "");
 
         if (wifi) {
-            total += WIFI_PRICE;
+            decoratedPrice = new WifiDecorator(decoratedPrice);
         }
         if (breakfast) {
-            total += BREAKFAST_PRICE * nights;
+            decoratedPrice = new BreakfastDecorator(
+                    decoratedPrice,
+                    nights
+            );
         }
         if (parking) {
-            total += PARKING_PRICE * nights;
+            decoratedPrice = new ParkingDecorator(
+                    decoratedPrice,
+                    nights
+            );
         }
         if (spa) {
-            total += SPA_PRICE;
+            decoratedPrice = new SpaDecorator(decoratedPrice);
         }
         if (laundry) {
-            total += LAUNDRY_PRICE;
+            decoratedPrice = new LaundryDecorator(decoratedPrice);
         }
         if (airportPickup) {
-            total += AIRPORT_PICKUP_PRICE;
+            decoratedPrice =
+                    new AirportPickupDecorator(decoratedPrice);
         }
 
-        return total;
+        return decoratedPrice.getPrice();
     }
 
     public double calculateAddOnTotalFromSession() {
@@ -121,7 +129,7 @@ public class PricingService {
     }
 
     public double calculateTax(double subtotal) {
-        return subtotal * TAX_RATE;
+        return subtotal * HotelPolicyConfig.TAX_RATE;
     }
 
     public double calculateEstimatedTotal(double subtotal, double taxAmount, double loyaltyDiscount) {

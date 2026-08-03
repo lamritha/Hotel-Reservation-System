@@ -4,6 +4,8 @@ import com.hotelreservation.model.*;
 import com.hotelreservation.repository.AddOnRepository;
 import com.hotelreservation.repository.BillingRepository;
 import com.hotelreservation.repository.GuestRepository;
+import com.hotelreservation.repository.LoyaltyAccountRepository;
+import com.hotelreservation.repository.LoyaltyTransactionRepository;
 import com.hotelreservation.repository.ReservationRepository;
 import com.hotelreservation.util.BookingSession;
 import com.hotelreservation.util.JpaUtil;
@@ -26,6 +28,7 @@ public class BookingService {
     private final ReservationRepository reservationRepository;
     private final BillingRepository billingRepository;
     private final AddOnRepository addOnRepository;
+    private final LoyaltyService loyaltyService;
 
     private static final String WIFI_NAME = "Wi-Fi";
     private static final String BREAKFAST_NAME = "Breakfast";
@@ -42,7 +45,11 @@ public class BookingService {
                 new GuestRepository(),
                 new ReservationRepository(),
                 new BillingRepository(),
-                new AddOnRepository()
+                new AddOnRepository(),
+                new LoyaltyService(
+                        new LoyaltyAccountRepository(),
+                        new LoyaltyTransactionRepository()
+                )
         );
     }
 
@@ -53,7 +60,8 @@ public class BookingService {
             GuestRepository guestRepository,
             ReservationRepository reservationRepository,
             BillingRepository billingRepository,
-            AddOnRepository addOnRepository
+            AddOnRepository addOnRepository,
+            LoyaltyService loyaltyService
     ) {
         this.roomAvailabilityService = roomAvailabilityService;
         this.occupancyService = occupancyService;
@@ -62,6 +70,7 @@ public class BookingService {
         this.reservationRepository = reservationRepository;
         this.billingRepository = billingRepository;
         this.addOnRepository = addOnRepository;
+        this.loyaltyService = loyaltyService;
     }
 
     public Reservation completeBooking(
@@ -113,6 +122,11 @@ public class BookingService {
                             + totalCapacity + " guests, but " + totalGuests + " were requested."
             );
         }
+        if (totalGuests < assignedRooms.size()) {
+            throw new IllegalStateException(
+                    "Each selected room must have at least one guest."
+            );
+        }
 
         Room legacyRoom = assignedRooms.get(0);
 
@@ -127,7 +141,7 @@ public class BookingService {
                 checkOutDate,
                 numAdults,
                 numChildren,
-                groupBooking
+                groupBooking || assignedRooms.size() > 1
         );
 
         reservation.setStatus(ReservationStatus.CONFIRMED);
@@ -147,6 +161,21 @@ public class BookingService {
         warnIfPersistedAddOnTotalDrifts(reservation, priceBreakdown.getAddOnTotal());
 
         reservationRepository.save(reservation);
+
+        if (BookingSession.isLoyaltyEnrollmentRequested()) {
+            LoyaltyAccount account =
+                    loyaltyService.enrollGuest(
+                            guestToPersist,
+                            "KIOSK"
+                    );
+            BookingSession.setLoyaltyEnrolled(true);
+            BookingSession.setLoyaltyNumber(
+                    account.getLoyaltyNumber()
+            );
+            BookingSession.setLoyaltyPointsBalance(
+                    account.getPointsBalance()
+            );
+        }
 
         Billing billing = new Billing(
                 reservation,
@@ -238,18 +267,62 @@ public class BookingService {
         int remainingAdults = numAdults;
         int remainingChildren = numChildren;
 
+        List<int[]> allocations = new ArrayList<>();
         for (Room room : assignedRooms) {
-            int capacity = room.getMaxOccupancy();
+            int assignedAdults;
+            int assignedChildren;
+            if (remainingAdults > 0) {
+                assignedAdults = 1;
+                assignedChildren = 0;
+                remainingAdults--;
+            } else {
+                assignedAdults = 0;
+                assignedChildren = 1;
+                remainingChildren--;
+            }
+            allocations.add(
+                    new int[]{
+                            assignedAdults,
+                            assignedChildren
+                    }
+            );
+        }
 
-            int assignedAdults = Math.min(remainingAdults, capacity);
-            remainingAdults -= assignedAdults;
+        for (int index = 0;
+             index < assignedRooms.size();
+             index++) {
+            Room room = assignedRooms.get(index);
+            int[] allocation = allocations.get(index);
+            int remainingCapacity = room.getMaxOccupancy()
+                    - allocation[0] - allocation[1];
 
-            int remainingCapacity = capacity - assignedAdults;
-            int assignedChildren = Math.min(remainingChildren, remainingCapacity);
-            remainingChildren -= assignedChildren;
+            int additionalAdults = Math.min(
+                    remainingAdults,
+                    remainingCapacity
+            );
+            allocation[0] += additionalAdults;
+            remainingAdults -= additionalAdults;
+            remainingCapacity -= additionalAdults;
 
+            int additionalChildren = Math.min(
+                    remainingChildren,
+                    remainingCapacity
+            );
+            allocation[1] += additionalChildren;
+            remainingChildren -= additionalChildren;
+        }
+
+        for (int index = 0;
+             index < assignedRooms.size();
+             index++) {
+            int[] allocation = allocations.get(index);
             reservation.addReservationRoom(
-                    new ReservationRoom(reservation, room, assignedAdults, assignedChildren)
+                    new ReservationRoom(
+                            reservation,
+                            assignedRooms.get(index),
+                            allocation[0],
+                            allocation[1]
+                    )
             );
         }
 

@@ -26,6 +26,13 @@
             <version>${javafx.version}</version>
         </dependency>
 
+        <!-- BCrypt Password Hashing -->
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version>
+        </dependency>
+
         <!-- JavaFX FXML -->
         <dependency>
             <groupId>org.openjfx</groupId>

@@ -2,6 +2,7 @@ package com.hotelreservation.repository;
 
 import com.hotelreservation.model.ReservationStatus;
 import com.hotelreservation.model.Room;
+import com.hotelreservation.model.RoomStatus;
 import com.hotelreservation.model.RoomType;
 
 import java.time.LocalDate;
@@ -21,49 +22,241 @@ public class RoomRepository extends AbstractRepository<Room> {
         return find(roomId);
     }
 
-    /**
-     * Rooms of the given type with no CONFIRMED or CHECKED_IN ReservationRoom
-     * assignment overlapping [requestedCheckIn, requestedCheckOut).
-     */
+    public List<Room> search(
+            String keyword,
+            RoomType roomType,
+            RoomStatus roomStatus
+    ) {
+        return executeRead(entityManager -> {
+            String value = keyword == null
+                    ? ""
+                    : keyword.trim().toLowerCase();
+
+            StringBuilder jpql = new StringBuilder(
+                    """
+                    SELECT room
+                    FROM Room room
+                    WHERE 1 = 1
+                    """
+            );
+
+            if (!value.isBlank()) {
+                jpql.append(
+                        """
+                         AND (
+                            LOWER(room.roomNumber) LIKE :keyword
+                            OR CAST(room.floor AS String) LIKE :keyword
+                         )
+                        """
+                );
+            }
+            if (roomType != null) {
+                jpql.append(" AND room.roomType = :roomType");
+            }
+            if (roomStatus != null) {
+                jpql.append(" AND room.status = :roomStatus");
+            }
+
+            jpql.append(" ORDER BY room.roomNumber");
+
+            var query = entityManager.createQuery(
+                    jpql.toString(),
+                    Room.class
+            );
+            if (!value.isBlank()) {
+                query.setParameter("keyword", "%" + value + "%");
+            }
+            if (roomType != null) {
+                query.setParameter("roomType", roomType);
+            }
+            if (roomStatus != null) {
+                query.setParameter("roomStatus", roomStatus);
+            }
+            return query.getResultList();
+        });
+    }
+
+    public List<Room> findAll() {
+        return search(null, null, null);
+    }
+
+    public long countByStatus(RoomStatus status) {
+        return executeRead(entityManager ->
+                entityManager.createQuery(
+                                """
+                                SELECT COUNT(room)
+                                FROM Room room
+                                WHERE room.status = :status
+                                """,
+                                Long.class
+                        )
+                        .setParameter("status", status)
+                        .getSingleResult()
+        );
+    }
+
     public List<Room> findAvailableRoomsByTypeAndDates(
             RoomType roomType,
             LocalDate requestedCheckIn,
             LocalDate requestedCheckOut
     ) {
-        return findAvailableRoomsByTypeAndDates(roomType, requestedCheckIn, requestedCheckOut, null);
+        return findAvailableRooms(
+                roomType,
+                requestedCheckIn,
+                requestedCheckOut,
+                null,
+                null
+        );
     }
 
-    /**
-     * Same overlap query as {@link #findAvailableRoomsByTypeAndDates(RoomType, LocalDate, LocalDate)},
-     * optionally capped at {@code maxResults} rooms.
-     */
     public List<Room> findAvailableRoomsByTypeAndDates(
             RoomType roomType,
             LocalDate requestedCheckIn,
             LocalDate requestedCheckOut,
             Integer maxResults
     ) {
+        return findAvailableRooms(
+                roomType,
+                requestedCheckIn,
+                requestedCheckOut,
+                null,
+                maxResults
+        );
+    }
+
+    /**
+     * Returns every non-maintenance room that has no overlapping confirmed
+     * or checked-in reservation. The reservation being edited can be excluded
+     * so its currently assigned rooms remain selectable.
+     */
+    public List<Room> findAvailableRoomsForDates(
+            LocalDate requestedCheckIn,
+            LocalDate requestedCheckOut,
+            Long excludedReservationId
+    ) {
+        return findAvailableRooms(
+                null,
+                requestedCheckIn,
+                requestedCheckOut,
+                excludedReservationId,
+                null
+        );
+    }
+
+    private List<Room> findAvailableRooms(
+            RoomType roomType,
+            LocalDate requestedCheckIn,
+            LocalDate requestedCheckOut,
+            Long excludedReservationId,
+            Integer maxResults
+    ) {
         return executeRead(entityManager -> {
+            StringBuilder jpql = new StringBuilder(
+                    """
+                    SELECT room
+                    FROM Room room
+                    WHERE room.status <> :maintenance
+                    """
+            );
+
+            if (roomType != null) {
+                jpql.append(
+                        " AND room.roomType = :roomType"
+                );
+            }
+
+            jpql.append(
+                    """
+                     AND NOT EXISTS (
+                        SELECT reservation
+                        FROM Reservation reservation
+                        WHERE reservation.room = room
+                          AND reservation.status
+                              IN (:confirmed, :checkedIn)
+                    """
+            );
+
+            if (excludedReservationId != null) {
+                jpql.append(
+                        """
+                         AND reservation.reservationId
+                             <> :excludedReservationId
+                        """
+                );
+            }
+
+            jpql.append(
+                    """
+                       AND reservation.checkInDate
+                           < :requestedCheckOut
+                       AND reservation.checkOutDate
+                           > :requestedCheckIn
+                     )
+                     AND NOT EXISTS (
+                        SELECT reservationRoom
+                        FROM ReservationRoom reservationRoom
+                        WHERE reservationRoom.room = room
+                          AND reservationRoom.reservation.status
+                              IN (:confirmed, :checkedIn)
+                    """
+            );
+
+            if (excludedReservationId != null) {
+                jpql.append(
+                        """
+                         AND reservationRoom.reservation.reservationId
+                             <> :excludedReservationId
+                        """
+                );
+            }
+
+            jpql.append(
+                    """
+                       AND reservationRoom.reservation.checkInDate
+                           < :requestedCheckOut
+                       AND reservationRoom.reservation.checkOutDate
+                           > :requestedCheckIn
+                     )
+                    ORDER BY room.roomNumber
+                    """
+            );
+
             var query = entityManager
                     .createQuery(
-                            """
-                            SELECT r FROM Room r
-                            WHERE r.roomType = :roomType
-                              AND NOT EXISTS (
-                                  SELECT rr FROM ReservationRoom rr
-                                  WHERE rr.room = r
-                                    AND rr.reservation.status IN (:confirmed, :checkedIn)
-                                    AND rr.reservation.checkInDate < :requestedCheckOut
-                                    AND rr.reservation.checkOutDate > :requestedCheckIn
-                              )
-                            """,
+                            jpql.toString(),
                             Room.class
                     )
-                    .setParameter("roomType", roomType)
-                    .setParameter("confirmed", ReservationStatus.CONFIRMED)
-                    .setParameter("checkedIn", ReservationStatus.CHECKED_IN)
-                    .setParameter("requestedCheckIn", requestedCheckIn)
-                    .setParameter("requestedCheckOut", requestedCheckOut);
+                    .setParameter(
+                            "maintenance",
+                            RoomStatus.MAINTENANCE
+                    )
+                    .setParameter(
+                            "confirmed",
+                            ReservationStatus.CONFIRMED
+                    )
+                    .setParameter(
+                            "checkedIn",
+                            ReservationStatus.CHECKED_IN
+                    )
+                    .setParameter(
+                            "requestedCheckIn",
+                            requestedCheckIn
+                    )
+                    .setParameter(
+                            "requestedCheckOut",
+                            requestedCheckOut
+                    );
+
+            if (roomType != null) {
+                query.setParameter("roomType", roomType);
+            }
+
+            if (excludedReservationId != null) {
+                query.setParameter(
+                        "excludedReservationId",
+                        excludedReservationId
+                );
+            }
 
             if (maxResults != null && maxResults > 0) {
                 query.setMaxResults(maxResults);

@@ -4,6 +4,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
@@ -12,176 +14,128 @@
 
 <BorderPane prefHeight="700.0" prefWidth="1100.0"
             stylesheets="@../../css/app.css"
-            fx:controller="com.hotelreservation.controller.admin.AdminNavigationController"
+            fx:controller="com.hotelreservation.controller.admin.BillingPaymentController"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1">
-
     <top>
         <VBox spacing="5.0" styleClass="header">
             <children>
-                <Label text="Billing and Payment Management" styleClass="header-title" />
-                <Label text="View billing records, payment history, refunds, and receipt details" styleClass="header-subtitle" />
+                <Label text="Billing &amp; Payments" styleClass="header-title"/>
+                <Label text="Deposits, partial payments, loyalty redemption, refunds, check-in and checkout"
+                       styleClass="header-subtitle"/>
             </children>
         </VBox>
     </top>
-
-    <left>
-        <VBox spacing="12.0" prefWidth="220.0" style="-fx-background-color: #111827; -fx-padding: 20;">
-            <children>
-                <Label text="Admin Menu"
-                       style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" />
-
-                <Button text="Dashboard" prefWidth="180.0"
-                        onAction="#openDashboard"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Reservations" prefWidth="180.0"
-                        onAction="#openReservations"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Rooms" prefWidth="180.0"
-                        onAction="#openRooms"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Guests" prefWidth="180.0"
-                        onAction="#openGuests"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Billing and Payments" prefWidth="180.0"
-                        onAction="#openBillingPayments"
-                        style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold;" />
-
-                <Button text="Discounts" prefWidth="180.0"
-                        onAction="#openDiscounts"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Loyalty" prefWidth="180.0"
-                        onAction="#openLoyalty"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Waitlist" prefWidth="180.0"
-                        onAction="#openWaitlist"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Feedback" prefWidth="180.0"
-                        onAction="#openFeedback"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Reports" prefWidth="180.0"
-                        onAction="#openReports"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Notifications" prefWidth="180.0"
-                        onAction="#openNotifications"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Logout" prefWidth="180.0"
-                        onAction="#logout"
-                        style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-font-weight: bold;" />
-            </children>
-        </VBox>
-    </left>
-
+    <left><fx:include source="AdminSidebar.fxml"/></left>
     <center>
-        <ScrollPane fitToWidth="true"
-                    hbarPolicy="NEVER"
-                    styleClass="scroll-pane">
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
             <content>
-                <VBox spacing="22.0" style="-fx-padding: 30;">
+                <VBox spacing="16.0" style="-fx-padding: 24;">
                     <children>
-
-                        <VBox spacing="6.0">
+                        <HBox spacing="10.0" styleClass="card">
                             <children>
-                                <Label text="Manage Billing and Payments" styleClass="screen-title" />
-                                <Label text="This screen connects to Billing, Payment, Reservation, and Discount entities."
-                                       wrapText="true"
-                                       style="-fx-font-size: 14px; -fx-text-fill: #6b7280;" />
-                            </children>
-                        </VBox>
-
-                        <HBox spacing="15.0" styleClass="card">
-                            <children>
-                                <TextField promptText="Search by billing ID, reservation ID, or guest name" prefWidth="420.0" />
-                                <ComboBox promptText="Payment method" prefWidth="180.0" />
-                                <ComboBox promptText="Payment status" prefWidth="180.0" />
-                                <Button text="Search" prefWidth="120.0" styleClass="primary-button" />
-                                <Button text="Clear" prefWidth="120.0" styleClass="secondary-button" />
+                                <TextField fx:id="searchField"
+                                           promptText="Reservation, guest, email, or phone"
+                                           prefWidth="420.0"
+                                           onAction="#searchBills"/>
+                                <Button text="Search"
+                                        styleClass="primary-button"
+                                        onAction="#searchBills"/>
+                                <Button text="Clear"
+                                        styleClass="secondary-button"
+                                        onAction="#clearSearch"/>
+                                <Label fx:id="resultLabel" text="0 bill(s)"/>
                             </children>
                         </HBox>
 
-                        <VBox spacing="12.0" styleClass="card">
+                        <VBox spacing="8.0" styleClass="card">
                             <children>
-                                <Label text="Billing Records" styleClass="section-title" />
-
-                                <GridPane hgap="18.0" vgap="12.0">
-                                    <children>
-                                        <Label text="Billing ID" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="0" />
-                                        <Label text="Reservation ID" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="1" />
-                                        <Label text="Guest" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="2" />
-                                        <Label text="Subtotal" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="3" />
-                                        <Label text="Tax" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="4" />
-                                        <Label text="Total" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="5" />
-                                        <Label text="Status" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="6" />
-
-                                        <Label text="BILL-501" GridPane.rowIndex="1" GridPane.columnIndex="0" />
-                                        <Label text="RES-1001" GridPane.rowIndex="1" GridPane.columnIndex="1" />
-                                        <Label text="John Smith" GridPane.rowIndex="1" GridPane.columnIndex="2" />
-                                        <Label text="CAD 900" GridPane.rowIndex="1" GridPane.columnIndex="3" />
-                                        <Label text="CAD 117" GridPane.rowIndex="1" GridPane.columnIndex="4" />
-                                        <Label text="CAD 1017" GridPane.rowIndex="1" GridPane.columnIndex="5" />
-                                        <Label text="Paid" style="-fx-text-fill: green;" GridPane.rowIndex="1" GridPane.columnIndex="6" />
-
-                                        <Label text="BILL-502" GridPane.rowIndex="2" GridPane.columnIndex="0" />
-                                        <Label text="RES-1002" GridPane.rowIndex="2" GridPane.columnIndex="1" />
-                                        <Label text="Maria Lee" GridPane.rowIndex="2" GridPane.columnIndex="2" />
-                                        <Label text="CAD 610" GridPane.rowIndex="2" GridPane.columnIndex="3" />
-                                        <Label text="CAD 79" GridPane.rowIndex="2" GridPane.columnIndex="4" />
-                                        <Label text="CAD 689" GridPane.rowIndex="2" GridPane.columnIndex="5" />
-                                        <Label text="Pending" style="-fx-text-fill: orange;" GridPane.rowIndex="2" GridPane.columnIndex="6" />
-
-                                        <Label text="BILL-503" GridPane.rowIndex="3" GridPane.columnIndex="0" />
-                                        <Label text="RES-1003" GridPane.rowIndex="3" GridPane.columnIndex="1" />
-                                        <Label text="Ava Brown" GridPane.rowIndex="3" GridPane.columnIndex="2" />
-                                        <Label text="CAD 1000" GridPane.rowIndex="3" GridPane.columnIndex="3" />
-                                        <Label text="CAD 130" GridPane.rowIndex="3" GridPane.columnIndex="4" />
-                                        <Label text="CAD 1130" GridPane.rowIndex="3" GridPane.columnIndex="5" />
-                                        <Label text="Refund Review" style="-fx-text-fill: #2563eb;" GridPane.rowIndex="3" GridPane.columnIndex="6" />
-                                    </children>
-                                </GridPane>
+                                <TableView fx:id="billingTable"
+                                           prefHeight="250.0">
+                                    <columns>
+                                        <TableColumn fx:id="reservationColumn" text="Reservation" prefWidth="110.0"/>
+                                        <TableColumn fx:id="guestColumn" text="Guest" prefWidth="180.0"/>
+                                        <TableColumn fx:id="reservationStatusColumn" text="Status" prefWidth="120.0"/>
+                                        <TableColumn fx:id="totalColumn" text="Bill Total" prefWidth="110.0"/>
+                                        <TableColumn fx:id="discountColumn" text="Discount" prefWidth="100.0"/>
+                                        <TableColumn fx:id="paidColumn" text="Paid" prefWidth="100.0"/>
+                                        <TableColumn fx:id="outstandingColumn" text="Outstanding" prefWidth="120.0"/>
+                                    </columns>
+                                </TableView>
                             </children>
                         </VBox>
 
-                        <GridPane hgap="20.0" vgap="20.0">
+                        <VBox spacing="10.0" styleClass="card">
                             <children>
-
-                                <VBox spacing="10.0" styleClass="card" prefWidth="390.0" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                                <Label fx:id="selectedBillLabel"
+                                       text="Select a billing record."
+                                       styleClass="section-title"/>
+                                <GridPane hgap="12.0" vgap="10.0">
                                     <children>
-                                        <Label text="Selected Payment Details" styleClass="section-title" />
-                                        <Label text="Payment ID: PAY-3001" />
-                                        <Label text="Billing ID: BILL-501" />
-                                        <Label text="Payment Method: Card" />
-                                        <Label text="Payment Date: July 15, 2026" />
-                                        <Label text="Amount Paid: CAD 1017" />
+                                        <Label text="Amount" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                        <TextField fx:id="amountField"
+                                                   promptText="0.00"
+                                                   prefWidth="150.0"
+                                                   GridPane.rowIndex="1"
+                                                   GridPane.columnIndex="0"/>
+                                        <Label text="Method" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                                        <ComboBox fx:id="methodComboBox"
+                                                  prefWidth="170.0"
+                                                  GridPane.rowIndex="1"
+                                                  GridPane.columnIndex="1"/>
+                                        <Label text="Payment Type" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                                        <ComboBox fx:id="paymentTypeComboBox"
+                                                  prefWidth="190.0"
+                                                  GridPane.rowIndex="1"
+                                                  GridPane.columnIndex="2"/>
+                                        <Label text="Note" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+                                        <TextField fx:id="noteField"
+                                                   promptText="Optional transaction note"
+                                                   prefWidth="280.0"
+                                                   GridPane.rowIndex="1"
+                                                   GridPane.columnIndex="3"/>
                                     </children>
-                                </VBox>
-
-                                <VBox spacing="10.0" styleClass="card" prefWidth="390.0" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                                </GridPane>
+                                <HBox spacing="9.0">
                                     <children>
-                                        <Label text="Payment Actions" styleClass="section-title" />
-                                        <Label text="Use these actions later for processing payments, refunds, and receipts." />
-                                        <Button text="Process Payment" prefWidth="200.0" styleClass="primary-button" />
-                                        <Button text="Process Refund" prefWidth="200.0" styleClass="secondary-button" />
-                                        <Button text="View Receipt" prefWidth="200.0" styleClass="secondary-button" />
+                                        <Button text="Process Payment"
+                                                styleClass="primary-button"
+                                                onAction="#processPayment"/>
+                                        <Button text="Refund"
+                                                styleClass="secondary-button"
+                                                onAction="#processRefund"/>
+                                        <Button text="Check In"
+                                                styleClass="secondary-button"
+                                                onAction="#checkIn"/>
+                                        <Button text="Check Out"
+                                                styleClass="secondary-button"
+                                                onAction="#checkOut"/>
+                                        <Button text="Export Final Bill PDF"
+                                                styleClass="secondary-button"
+                                                onAction="#exportFinalBill"/>
                                     </children>
-                                </VBox>
-
+                                </HBox>
                             </children>
-                        </GridPane>
+                        </VBox>
 
+                        <VBox spacing="8.0" styleClass="card">
+                            <children>
+                                <Label text="Payment History" styleClass="section-title"/>
+                                <TableView fx:id="paymentTable"
+                                           prefHeight="230.0">
+                                    <columns>
+                                        <TableColumn fx:id="paymentDateColumn" text="Date" prefWidth="180.0"/>
+                                        <TableColumn fx:id="paymentMethodColumn" text="Method" prefWidth="120.0"/>
+                                        <TableColumn fx:id="paymentTypeColumn" text="Type" prefWidth="170.0"/>
+                                        <TableColumn fx:id="paymentAmountColumn" text="Amount" prefWidth="110.0"/>
+                                        <TableColumn fx:id="paymentNoteColumn" text="Note" prefWidth="300.0"/>
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </VBox>
                     </children>
                 </VBox>
             </content>
         </ScrollPane>
     </center>
-
 </BorderPane>

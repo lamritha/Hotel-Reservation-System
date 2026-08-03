@@ -65,7 +65,7 @@
                                            text="Create a loyalty account"
                                            visible="false"
                                            managed="false"
-                                           onAction="#createLoyaltyAccountPlaceholder" />
+                                           onAction="#requestLoyaltyEnrollment" />
                             </children>
                         </VBox>
 

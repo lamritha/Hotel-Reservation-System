@@ -2,6 +2,7 @@ package com.hotelreservation.controller.kiosk;
 
 import com.hotelreservation.service.OccupancyService;
 import com.hotelreservation.util.BookingSession;
+import com.hotelreservation.util.RulesDialog;
 import com.hotelreservation.util.SceneNavigator;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -27,7 +29,16 @@ public class OccupancyController {
     @FXML
     private Label totalGuestsLabel;
 
-    private final OccupancyService occupancyService = new OccupancyService();
+    private final OccupancyService occupancyService;
+
+    public OccupancyController(
+            OccupancyService occupancyService
+    ) {
+        this.occupancyService = Objects.requireNonNull(
+                occupancyService,
+                "occupancyService"
+        );
+    }
 
     @FXML
     private void initialize() {
@@ -87,11 +98,7 @@ public class OccupancyController {
 
     @FXML
     private void showRulesAndRegulations() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Rules & Regulations");
-        alert.setHeaderText("Hotel Rules & Regulations");
-        alert.setContentText("Placeholder: rules and regulations content will be added later.");
-        alert.showAndWait();
+        RulesDialog.show();
     }
 
     private void showError(String message) {

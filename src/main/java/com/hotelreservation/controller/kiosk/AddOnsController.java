@@ -2,6 +2,7 @@ package com.hotelreservation.controller.kiosk;
 
 import com.hotelreservation.service.PricingService;
 import com.hotelreservation.util.BookingSession;
+import com.hotelreservation.util.RulesDialog;
 import com.hotelreservation.util.SceneNavigator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -41,7 +42,11 @@ public class AddOnsController {
     @FXML
     private Label subtotalLabel;
 
-    private final PricingService pricingService = new PricingService();
+    private final PricingService pricingService;
+
+    public AddOnsController(PricingService pricingService) {
+        this.pricingService = pricingService;
+    }
 
     @FXML
     private void initialize() {
@@ -95,10 +100,6 @@ public class AddOnsController {
 
     @FXML
     private void showRulesAndRegulations() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Rules & Regulations");
-        alert.setHeaderText("Hotel Rules & Regulations");
-        alert.setContentText("Placeholder: rules and regulations content will be added later.");
-        alert.showAndWait();
+        RulesDialog.show();
     }
 }

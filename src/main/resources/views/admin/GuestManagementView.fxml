@@ -1,189 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane prefHeight="700.0" prefWidth="1100.0"
             stylesheets="@../../css/app.css"
-            fx:controller="com.hotelreservation.controller.admin.AdminNavigationController"
+            fx:controller="com.hotelreservation.controller.admin.GuestManagementController"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1">
-
     <top>
         <VBox spacing="5.0" styleClass="header">
             <children>
-                <Label text="Guest Management" styleClass="header-title" />
-                <Label text="Search, view, and manage guest profiles and reservation history" styleClass="header-subtitle" />
+                <Label text="Guest Management" styleClass="header-title"/>
+                <Label text="Search persisted guest profiles and enroll loyalty members"
+                       styleClass="header-subtitle"/>
             </children>
         </VBox>
     </top>
-
-    <left>
-        <VBox spacing="12.0" prefWidth="220.0" style="-fx-background-color: #111827; -fx-padding: 20;">
-            <children>
-                <Label text="Admin Menu"
-                       style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" />
-
-                <Button text="Dashboard" prefWidth="180.0"
-                        onAction="#openDashboard"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Reservations" prefWidth="180.0"
-                        onAction="#openReservations"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Rooms" prefWidth="180.0"
-                        onAction="#openRooms"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Guests" prefWidth="180.0"
-                        onAction="#openGuests"
-                        style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold;" />
-
-                <Button text="Billing and Payments" prefWidth="180.0"
-                        onAction="#openBillingPayments"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Discounts" prefWidth="180.0"
-                        onAction="#openDiscounts"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Loyalty" prefWidth="180.0"
-                        onAction="#openLoyalty"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Waitlist" prefWidth="180.0"
-                        onAction="#openWaitlist"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Feedback" prefWidth="180.0"
-                        onAction="#openFeedback"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Reports" prefWidth="180.0"
-                        onAction="#openReports"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Notifications" prefWidth="180.0"
-                        onAction="#openNotifications"
-                        style="-fx-background-color: transparent; -fx-text-fill: #e5e7eb;" />
-
-                <Button text="Logout" prefWidth="180.0"
-                        onAction="#logout"
-                        style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-font-weight: bold;" />
-            </children>
-        </VBox>
-    </left>
-
+    <left><fx:include source="AdminSidebar.fxml"/></left>
     <center>
-        <ScrollPane fitToWidth="true"
-                    hbarPolicy="NEVER"
-                    styleClass="scroll-pane">
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
             <content>
-                <VBox spacing="22.0" style="-fx-padding: 30;">
+                <VBox spacing="18.0" style="-fx-padding: 26;">
                     <children>
-
-                        <VBox spacing="6.0">
+                        <HBox spacing="10.0" styleClass="card">
                             <children>
-                                <Label text="Manage Guests" styleClass="screen-title" />
-                                <Label text="This screen connects to Guest, Reservation, and LoyaltyAccount entities."
-                                       wrapText="true"
-                                       style="-fx-font-size: 14px; -fx-text-fill: #6b7280;" />
-                            </children>
-                        </VBox>
-
-                        <HBox spacing="15.0" styleClass="card">
-                            <children>
-                                <TextField promptText="Search by guest name, email, or phone" prefWidth="400.0" />
-                                <ComboBox promptText="Loyalty status" prefWidth="180.0" />
-                                <Button text="Search" prefWidth="120.0" styleClass="primary-button" />
-                                <Button text="Clear" prefWidth="120.0" styleClass="secondary-button" />
+                                <TextField fx:id="searchField"
+                                           promptText="Name, email, or phone"
+                                           prefWidth="420.0"
+                                           onAction="#searchGuests"/>
+                                <Button text="Search"
+                                        styleClass="primary-button"
+                                        onAction="#searchGuests"/>
+                                <Button text="Clear"
+                                        styleClass="secondary-button"
+                                        onAction="#clearSearch"/>
+                                <Label fx:id="resultLabel" text="0 guest(s)"/>
                             </children>
                         </HBox>
-
-                        <VBox spacing="12.0" styleClass="card">
+                        <VBox spacing="10.0" styleClass="card">
                             <children>
-                                <Label text="Guest List" styleClass="section-title" />
-
-                                <GridPane hgap="18.0" vgap="12.0">
+                                <TableView fx:id="guestTable"
+                                           prefHeight="410.0">
+                                    <columns>
+                                        <TableColumn fx:id="nameColumn"
+                                                     text="Guest"
+                                                     prefWidth="180.0"/>
+                                        <TableColumn fx:id="emailColumn"
+                                                     text="Email"
+                                                     prefWidth="240.0"/>
+                                        <TableColumn fx:id="phoneColumn"
+                                                     text="Phone"
+                                                     prefWidth="150.0"/>
+                                        <TableColumn fx:id="addressColumn"
+                                                     text="Address"
+                                                     prefWidth="310.0"/>
+                                    </columns>
+                                </TableView>
+                                <HBox spacing="14.0" alignment="CENTER_RIGHT">
                                     <children>
-                                        <Label text="Guest ID" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="0" />
-                                        <Label text="Name" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="1" />
-                                        <Label text="Email" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="2" />
-                                        <Label text="Phone" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="3" />
-                                        <Label text="Loyalty No." style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="4" />
-                                        <Label text="Points" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="5" />
-
-                                        <Label text="G-1001" GridPane.rowIndex="1" GridPane.columnIndex="0" />
-                                        <Label text="John Smith" GridPane.rowIndex="1" GridPane.columnIndex="1" />
-                                        <Label text="john.smith@email.com" GridPane.rowIndex="1" GridPane.columnIndex="2" />
-                                        <Label text="416-555-0198" GridPane.rowIndex="1" GridPane.columnIndex="3" />
-                                        <Label text="LOY-9001" GridPane.rowIndex="1" GridPane.columnIndex="4" />
-                                        <Label text="420" GridPane.rowIndex="1" GridPane.columnIndex="5" />
-
-                                        <Label text="G-1002" GridPane.rowIndex="2" GridPane.columnIndex="0" />
-                                        <Label text="Maria Lee" GridPane.rowIndex="2" GridPane.columnIndex="1" />
-                                        <Label text="maria.lee@email.com" GridPane.rowIndex="2" GridPane.columnIndex="2" />
-                                        <Label text="647-555-0134" GridPane.rowIndex="2" GridPane.columnIndex="3" />
-                                        <Label text="LOY-9002" GridPane.rowIndex="2" GridPane.columnIndex="4" />
-                                        <Label text="180" GridPane.rowIndex="2" GridPane.columnIndex="5" />
-
-                                        <Label text="G-1003" GridPane.rowIndex="3" GridPane.columnIndex="0" />
-                                        <Label text="Ava Brown" GridPane.rowIndex="3" GridPane.columnIndex="1" />
-                                        <Label text="ava.brown@email.com" GridPane.rowIndex="3" GridPane.columnIndex="2" />
-                                        <Label text="905-555-0147" GridPane.rowIndex="3" GridPane.columnIndex="3" />
-                                        <Label text="Not Enrolled" GridPane.rowIndex="3" GridPane.columnIndex="4" />
-                                        <Label text="0" GridPane.rowIndex="3" GridPane.columnIndex="5" />
+                                        <Button fx:id="previousPageButton"
+                                                text="Previous"
+                                                prefWidth="100.0"
+                                                styleClass="secondary-button"
+                                                onAction="#previousPage"/>
+                                        <Label fx:id="pageLabel"
+                                               text="Page 1 of 1"
+                                               style="-fx-font-weight: bold;"/>
+                                        <Button fx:id="nextPageButton"
+                                                text="Next"
+                                                prefWidth="100.0"
+                                                styleClass="secondary-button"
+                                                onAction="#nextPage"/>
                                     </children>
-                                </GridPane>
+                                </HBox>
+                                <HBox spacing="12.0" alignment="CENTER_LEFT">
+                                    <children>
+                                        <Label fx:id="selectedGuestLabel"
+                                               text="No guest selected"/>
+                                        <Button fx:id="enrollButton"
+                                                text="Enroll in Loyalty"
+                                                styleClass="primary-button"
+                                                onAction="#enrollSelectedGuest"/>
+                                    </children>
+                                </HBox>
                             </children>
                         </VBox>
-
-                        <GridPane hgap="20.0" vgap="20.0">
-                            <children>
-
-                                <VBox spacing="10.0" styleClass="card" prefWidth="390.0" GridPane.rowIndex="0" GridPane.columnIndex="0">
-                                    <children>
-                                        <Label text="Selected Guest Details" styleClass="section-title" />
-                                        <Label text="Guest ID: G-1001" />
-                                        <Label text="Name: John Smith" />
-                                        <Label text="Address: 25 King Street, Toronto" />
-                                        <Label text="Created At: July 1, 2026" />
-                                    </children>
-                                </VBox>
-
-                                <VBox spacing="10.0" styleClass="card" prefWidth="390.0" GridPane.rowIndex="0" GridPane.columnIndex="1">
-                                    <children>
-                                        <Label text="Reservation History" styleClass="section-title" />
-                                        <Label text="RES-1001 | Deluxe Room | Confirmed" />
-                                        <Label text="RES-0912 | Single Room | Checked Out" />
-                                        <Label text="RES-0845 | Double Room | Cancelled" />
-                                    </children>
-                                </VBox>
-
-                            </children>
-                        </GridPane>
-
-                        <HBox spacing="15.0" styleClass="card">
-                            <children>
-                                <Button text="View Guest" prefWidth="140.0" styleClass="secondary-button" />
-                                <Button text="Edit Guest" prefWidth="140.0" styleClass="primary-button" />
-                                <Button text="View Reservations" prefWidth="180.0" styleClass="secondary-button" />
-                                <Button text="Open Loyalty Account" prefWidth="210.0" styleClass="primary-button" />
-                            </children>
-                        </HBox>
-
                     </children>
                 </VBox>
             </content>
         </ScrollPane>
     </center>
-
 </BorderPane>

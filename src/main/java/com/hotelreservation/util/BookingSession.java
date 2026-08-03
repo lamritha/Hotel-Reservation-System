@@ -15,8 +15,10 @@ public class BookingSession {
     private static int numAdults = 2;
     private static int numChildren = 0;
 
-    private static LocalDate checkInDate = LocalDate.of(2026, 7, 17);
-    private static LocalDate checkOutDate = LocalDate.of(2026, 7, 20);
+    private static LocalDate checkInDate =
+            LocalDate.now().plusDays(1);
+    private static LocalDate checkOutDate =
+            LocalDate.now().plusDays(2);
 
     private static boolean groupBooking = false;
 
@@ -36,6 +38,7 @@ public class BookingSession {
     private static boolean airportPickupSelected;
 
     private static boolean loyaltyEnrolled;
+    private static boolean loyaltyEnrollmentRequested;
     private static String loyaltyNumber = "";
     private static int loyaltyPointsBalance;
 
@@ -63,8 +66,8 @@ public class BookingSession {
         numAdults = 2;
         numChildren = 0;
 
-        checkInDate = LocalDate.of(2026, 7, 17);
-        checkOutDate = LocalDate.of(2026, 7, 20);
+        checkInDate = LocalDate.now().plusDays(1);
+        checkOutDate = LocalDate.now().plusDays(2);
 
         groupBooking = false;
 
@@ -84,6 +87,7 @@ public class BookingSession {
         airportPickupSelected = false;
 
         loyaltyEnrolled = false;
+        loyaltyEnrollmentRequested = false;
         loyaltyNumber = "";
         loyaltyPointsBalance = 0;
 
@@ -309,6 +313,17 @@ public class BookingSession {
 
     public static void setLoyaltyEnrolled(boolean loyaltyEnrolled) {
         BookingSession.loyaltyEnrolled = loyaltyEnrolled;
+    }
+
+    public static boolean isLoyaltyEnrollmentRequested() {
+        return loyaltyEnrollmentRequested;
+    }
+
+    public static void setLoyaltyEnrollmentRequested(
+            boolean loyaltyEnrollmentRequested
+    ) {
+        BookingSession.loyaltyEnrollmentRequested =
+                loyaltyEnrollmentRequested;
     }
 
     public static String getLoyaltyNumber() {

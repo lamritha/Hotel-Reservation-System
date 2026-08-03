@@ -67,3 +67,9 @@
     -fx-text-fill: #dc2626;
     -fx-font-size: 12px;
 }
+
+.required-note {
+    -fx-text-fill: #b91c1c;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
