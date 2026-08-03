@@ -9,6 +9,7 @@ import com.hotelreservation.repository.LoyaltyTransactionRepository;
 import com.hotelreservation.repository.ReservationRepository;
 import com.hotelreservation.util.BookingSession;
 import com.hotelreservation.util.JpaUtil;
+import com.hotelreservation.util.ReservationValidator;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -108,6 +109,19 @@ public class BookingService {
             boolean groupBooking,
             PaymentMethod paymentMethod
     ) {
+        ReservationValidator.validate(
+                guest.getFirstName(),
+                guest.getLastName(),
+                guest.getEmail(),
+                guest.getPhone(),
+                guest.getAddress(),
+                checkInDate,
+                checkOutDate,
+                numAdults,
+                numChildren,
+                BookingSession.getTotalRoomQuantity() > 0
+        );
+
         List<Room> assignedRooms = collectAssignedRooms(checkInDate, checkOutDate);
 
         if (assignedRooms.isEmpty()) {

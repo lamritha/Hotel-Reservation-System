@@ -13,7 +13,7 @@ import com.hotelreservation.repository.RoomRepository;
 import com.hotelreservation.security.AdminSession;
 import com.hotelreservation.util.AppLogger;
 import com.hotelreservation.util.JpaUtil;
-import com.hotelreservation.util.ValidationUtil;
+import com.hotelreservation.util.ReservationValidator;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -427,97 +427,25 @@ public class ReservationManagementService {
             );
         }
 
-        if (!ValidationUtil.isValidName(request.firstName())) {
-            throw new IllegalArgumentException(
-                    "Please enter a valid first name."
-            );
-        }
-
-        if (!ValidationUtil.isValidName(request.lastName())) {
-            throw new IllegalArgumentException(
-                    "Please enter a valid last name."
-            );
-        }
-
-        if (!ValidationUtil.isValidEmail(request.email())) {
-            throw new IllegalArgumentException(
-                    "Please enter a valid email address."
-            );
-        }
-
-        if (normalize(request.email()).length() > 100) {
-            throw new IllegalArgumentException(
-                    "Email address cannot exceed 100 characters."
-            );
-        }
-
-        if (!ValidationUtil.isValidPhone(request.phone())) {
-            throw new IllegalArgumentException(
-                    "Please enter a valid phone number."
-            );
-        }
-
-        if (!ValidationUtil.isValidAddress(request.address())) {
-            throw new IllegalArgumentException(
-                    "Please enter an address with at least five characters."
-            );
-        }
-
-        if (normalize(request.address()).length() > 255) {
-            throw new IllegalArgumentException(
-                    "Address cannot exceed 255 characters."
-            );
-        }
-
-        validateDateOrder(
+        ReservationValidator.validate(
+                request.firstName(),
+                request.lastName(),
+                request.email(),
+                request.phone(),
+                request.address(),
                 request.checkInDate(),
-                request.checkOutDate()
+                request.checkOutDate(),
+                request.numAdults(),
+                request.numChildren(),
+                !request.roomIds().isEmpty()
         );
-
-        if (request.checkInDate().isBefore(LocalDate.now())) {
-            throw new IllegalArgumentException(
-                    "Check-in date cannot be before today."
-            );
-        }
-
-        if (request.numAdults() < 1
-                || request.numAdults() > 20) {
-
-            throw new IllegalArgumentException(
-                    "Adults must be between 1 and 20."
-            );
-        }
-
-        if (request.numChildren() < 0
-                || request.numChildren() > 20) {
-
-            throw new IllegalArgumentException(
-                    "Children must be between 0 and 20."
-            );
-        }
-
-        if (request.roomIds().isEmpty()) {
-            throw new IllegalArgumentException(
-                    "Select at least one available room."
-            );
-        }
     }
 
     private void validateDateOrder(
             LocalDate checkInDate,
             LocalDate checkOutDate
     ) {
-        if (checkInDate == null || checkOutDate == null) {
-            throw new IllegalArgumentException(
-                    "Check-in and check-out dates are required."
-            );
-        }
-
-        if (!checkOutDate.isAfter(checkInDate)) {
-            throw new IllegalArgumentException(
-                    "Check-out date must be after check-in date."
-            );
-        }
+        ReservationValidator.validateDateOrder(checkInDate, checkOutDate);
     }
 
     private void validateModifiableStatus(

@@ -864,3 +864,9 @@ Aug 03, 2026 4:28:11 P.M. com.hotelreservation.util.AppLogger audit
 INFO: actor=admin | action=CHECKOUT | entityType=Reservation | entityId=25 | message=Final balance settled, checkout completed, rooms marked available, and final bill exported to C:\Users\ashil\Desktop\Amritha\College\Sem 5\APD545\Project\MS1\Hotel-Reservation-System\Hotel-Reservation-System\exports\final-bill-RES-25-20260803-162811.pdf.
 Aug 03, 2026 4:28:11 P.M. com.hotelreservation.util.AppLogger audit
 INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=26 | message=Phone reservation created for Open ExportBlock with 1 room(s).
+Aug 03, 2026 5:04:03 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 03, 2026 5:04:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=5 | message=Administrator logged in successfully with role ADMIN.
+Aug 03, 2026 5:04:05 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=27 | message=Phone reservation created for Verify AdminShared with 1 room(s).
