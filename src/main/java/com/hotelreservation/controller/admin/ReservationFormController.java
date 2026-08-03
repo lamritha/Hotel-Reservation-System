@@ -1,8 +1,11 @@
 package com.hotelreservation.controller.admin;
 
+import com.hotelreservation.model.PaymentMethod;
+import com.hotelreservation.model.PaymentType;
 import com.hotelreservation.model.Reservation;
 import com.hotelreservation.model.ReservationRoom;
 import com.hotelreservation.model.Room;
+import com.hotelreservation.service.BillingPaymentService;
 import com.hotelreservation.service.ReservationManagementService;
 import com.hotelreservation.service.ReservationRequest;
 import javafx.collections.FXCollections;
@@ -10,6 +13,7 @@ import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -31,6 +35,7 @@ public class ReservationFormController {
 
     private final ReservationManagementService
             reservationManagementService;
+    private final BillingPaymentService billingPaymentService;
 
     @FXML
     private Label formTitleLabel;
@@ -77,6 +82,12 @@ public class ReservationFormController {
     @FXML
     private Button saveButton;
 
+    @FXML
+    private TextField depositAmountField;
+
+    @FXML
+    private ComboBox<PaymentMethod> depositMethodComboBox;
+
     private Stage dialogStage;
     private Long editingReservationId;
     private Reservation savedReservation;
@@ -85,10 +96,12 @@ public class ReservationFormController {
 
     public ReservationFormController(
             ReservationManagementService
-                    reservationManagementService
+                    reservationManagementService,
+            BillingPaymentService billingPaymentService
     ) {
         this.reservationManagementService =
                 reservationManagementService;
+        this.billingPaymentService = billingPaymentService;
     }
 
     @FXML
@@ -110,6 +123,13 @@ public class ReservationFormController {
                         0
                 )
         );
+
+        depositMethodComboBox.setItems(
+                FXCollections.observableArrayList(
+                        PaymentMethod.values()
+                )
+        );
+        depositMethodComboBox.setValue(PaymentMethod.CARD);
 
         availableRoomsList
                 .getSelectionModel()
@@ -332,11 +352,33 @@ public class ReservationFormController {
                     );
 
             if (editingReservationId == null) {
+                double depositAmount = readOptionalDepositAmount();
+
                 savedReservation =
                         reservationManagementService
                                 .createPhoneReservation(
                                         request
                                 );
+
+                if (depositAmount > 0) {
+                    try {
+                        billingPaymentService.processPayment(
+                                savedReservation.getReservationId(),
+                                depositAmount,
+                                depositMethodComboBox.getValue(),
+                                PaymentType.DEPOSIT,
+                                "Deposit collected at booking"
+                        );
+                    } catch (RuntimeException depositException) {
+                        showDepositWarning(
+                                savedReservation.getReservationId(),
+                                depositException.getMessage()
+                        );
+                        saved = true;
+                        closeDialog();
+                        return;
+                    }
+                }
             } else {
                 savedReservation =
                         reservationManagementService
@@ -351,6 +393,27 @@ public class ReservationFormController {
 
         } catch (RuntimeException exception) {
             showError(exception.getMessage());
+        }
+    }
+
+    private double readOptionalDepositAmount() {
+        String raw = depositAmountField.getText();
+        if (raw == null || raw.isBlank()) {
+            return 0;
+        }
+
+        try {
+            double amount = Double.parseDouble(raw.trim());
+            if (!Double.isFinite(amount) || amount < 0) {
+                throw new IllegalArgumentException(
+                        "Deposit amount must be zero or greater."
+                );
+            }
+            return amount;
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException(
+                    "Deposit amount must be a valid number."
+            );
         }
     }
 
@@ -568,6 +631,31 @@ public class ReservationFormController {
                 message == null || message.isBlank()
                         ? "An unexpected error occurred."
                         : message
+        );
+        alert.showAndWait();
+    }
+
+    private void showDepositWarning(
+            Long reservationId,
+            String depositMessage
+    ) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Reservation");
+        alert.setHeaderText(
+                "Reservation created — deposit not processed"
+        );
+        String detail = depositMessage == null
+                || depositMessage.isBlank()
+                ? "An unexpected error occurred."
+                : depositMessage;
+        alert.setContentText(
+                "Reservation "
+                        + reservationId
+                        + " created successfully, but the "
+                        + "deposit could not be processed ("
+                        + detail
+                        + "). You can process a "
+                        + "payment separately from Billing & Payments."
         );
         alert.showAndWait();
     }

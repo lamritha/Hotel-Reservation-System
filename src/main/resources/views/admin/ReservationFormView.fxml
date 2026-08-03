@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -193,6 +194,41 @@
                                 <Label text="Select one room for a standard reservation. Use Ctrl+Click to select multiple rooms for a group booking."
                                        wrapText="true"
                                        style="-fx-text-fill: #6b7280; -fx-font-size: 12px;"/>
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="14.0"
+                              styleClass="card">
+                            <children>
+                                <Label text="Optional Deposit"
+                                       styleClass="section-title"/>
+                                <Label text="Leave amount empty or 0.00 to create the reservation without collecting a deposit."
+                                       wrapText="true"
+                                       style="-fx-text-fill: #6b7280; -fx-font-size: 12px;"/>
+
+                                <GridPane hgap="12.0"
+                                          vgap="12.0">
+                                    <children>
+                                        <Label text="Deposit Amount"
+                                               GridPane.columnIndex="0"
+                                               GridPane.rowIndex="0"/>
+
+                                        <TextField fx:id="depositAmountField"
+                                                   promptText="0.00"
+                                                   prefWidth="200.0"
+                                                   GridPane.columnIndex="1"
+                                                   GridPane.rowIndex="0"/>
+
+                                        <Label text="Deposit Method"
+                                               GridPane.columnIndex="2"
+                                               GridPane.rowIndex="0"/>
+
+                                        <ComboBox fx:id="depositMethodComboBox"
+                                                  prefWidth="200.0"
+                                                  GridPane.columnIndex="3"
+                                                  GridPane.rowIndex="0"/>
+                                    </children>
+                                </GridPane>
                             </children>
                         </VBox>
 

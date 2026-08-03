@@ -304,7 +304,8 @@ public final class AppConfig {
         if (controllerClass
                 == ReservationFormController.class) {
             return new ReservationFormController(
-                    RESERVATION_MANAGEMENT_SERVICE
+                    RESERVATION_MANAGEMENT_SERVICE,
+                    BILLING_PAYMENT_SERVICE
             );
         }
         if (controllerClass
