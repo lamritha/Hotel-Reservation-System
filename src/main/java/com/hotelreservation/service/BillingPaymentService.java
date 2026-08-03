@@ -24,8 +24,10 @@ import com.hotelreservation.strategy.DiscountBillingStrategy;
 import com.hotelreservation.strategy.LoyaltyBillingStrategy;
 import com.hotelreservation.strategy.StandardBillingStrategy;
 import com.hotelreservation.util.AppLogger;
+import com.hotelreservation.util.ExportUtil;
 import com.hotelreservation.util.JpaUtil;
 
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -429,6 +431,23 @@ public class BillingPaymentService {
             );
         }
 
+        Path finalBillPath;
+        try {
+            finalBillPath = exportFinalBillPdf(reservationId);
+        } catch (RuntimeException exception) {
+            AppLogger.exception(
+                    LOGGER,
+                    "Checkout completed but final bill export failed.",
+                    exception
+            );
+            throw new IllegalStateException(
+                    "Checkout completed, but the final bill PDF "
+                            + "could not be generated: "
+                            + exception.getMessage(),
+                    exception
+            );
+        }
+
         AppLogger.audit(
                 LOGGER,
                 Level.INFO,
@@ -437,10 +456,73 @@ public class BillingPaymentService {
                 "Reservation",
                 String.valueOf(reservationId),
                 "Final balance settled, checkout completed, "
-                        + "and rooms marked available."
+                        + "rooms marked available, and final bill "
+                        + "exported to "
+                        + finalBillPath.toAbsolutePath()
+                        + "."
         );
 
         return checkoutResult.reservation();
+    }
+
+    /**
+     * Writes the final-bill PDF for a checked-out reservation.
+     * Shared by manual export and automatic post-checkout export.
+     */
+    public Path exportFinalBillPdf(Long reservationId) {
+        adminSession.requireCurrentUser();
+        BillingSummary summary = getSummary(reservationId);
+        Reservation reservation =
+                summary.billing().getReservation();
+
+        if (reservation.getStatus()
+                != ReservationStatus.CHECKED_OUT) {
+            throw new IllegalStateException(
+                    "Final bill can only be exported after checkout."
+            );
+        }
+
+        Billing billing = summary.billing();
+        List<List<String>> rows = new ArrayList<>();
+        rows.add(List.of(
+                "Reservation",
+                "RES-" + reservationId
+        ));
+        rows.add(List.of(
+                "Guest",
+                reservation.getGuest().getFullName()
+        ));
+        rows.add(List.of(
+                "Subtotal",
+                money(billing.getSubtotal())
+        ));
+        rows.add(List.of(
+                "Tax",
+                money(billing.getTaxAmount())
+        ));
+        rows.add(List.of(
+                "Discount",
+                money(billing.getDiscountAmount())
+        ));
+        rows.add(List.of(
+                "Paid",
+                money(summary.paid())
+        ));
+        rows.add(List.of(
+                "Outstanding",
+                money(summary.outstanding())
+        ));
+
+        return ExportUtil.writePdf(
+                "final-bill-RES-" + reservationId,
+                "Hotel Final Bill",
+                List.of("Item", "Amount / Value"),
+                rows
+        );
+    }
+
+    private String money(double value) {
+        return String.format("CAD %.2f", value);
     }
 
     public double calculateOutstanding(Billing billing) {

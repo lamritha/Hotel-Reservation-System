@@ -850,3 +850,17 @@ Aug 03, 2026 3:17:18 P.M. com.hotelreservation.util.AppLogger audit
 INFO: actor=admin | action=ROOM_STATUS_CHANGED | entityType=Room | entityId=16 | message=Room 201 changed from MAINTENANCE to AVAILABLE.
 Aug 03, 2026 3:17:18 P.M. com.hotelreservation.util.AppLogger audit
 INFO: actor=SYSTEM | action=WAITLIST_AVAILABILITY_NOTIFICATION | entityType=WaitlistEntry | entityId=2 | message=Room 201 (DOUBLE) is available for waitlist WAIT-2 belonging to Wait Overlap.
+Aug 03, 2026 4:28:10 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 03, 2026 4:28:10 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=5 | message=Administrator logged in successfully with role ADMIN.
+Aug 03, 2026 4:28:11 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=25 | message=Phone reservation created for Checkout PdfTest with 1 room(s).
+Aug 03, 2026 4:28:11 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=25 | message=CAD 271.20 processed using CARD as FINAL_PAYMENT.
+Aug 03, 2026 4:28:11 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECK_IN | entityType=Reservation | entityId=25 | message=Guest checked in and assigned rooms were marked occupied.
+Aug 03, 2026 4:28:11 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECKOUT | entityType=Reservation | entityId=25 | message=Final balance settled, checkout completed, rooms marked available, and final bill exported to C:\Users\ashil\Desktop\Amritha\College\Sem 5\APD545\Project\MS1\Hotel-Reservation-System\Hotel-Reservation-System\exports\final-bill-RES-25-20260803-162811.pdf.
+Aug 03, 2026 4:28:11 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=26 | message=Phone reservation created for Open ExportBlock with 1 room(s).

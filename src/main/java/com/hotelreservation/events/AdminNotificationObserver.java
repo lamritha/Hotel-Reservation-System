@@ -80,6 +80,9 @@ public class AdminNotificationObserver
                     + " belonging to "
                     + entry.getGuest().getFullName() + ".";
 
+            // Broadcast to all admins (recipient "ALL"): deliberate simplification —
+            // there is no per-admin subscribe/unsubscribe UI yet. Known Final scope
+            // limitation, not an oversight; every logged-in admin sees these.
             notificationRepository.save(
                     new AdminNotification(
                             NotificationType.WAITLIST_MATCH,
@@ -102,6 +105,7 @@ public class AdminNotificationObserver
         }
 
         if (matches.isEmpty()) {
+            // Same "ALL" broadcast as waitlist matches (no subscription model yet).
             notificationRepository.save(
                     new AdminNotification(
                             NotificationType.ROOM_AVAILABLE,

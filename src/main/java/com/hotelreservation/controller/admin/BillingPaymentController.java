@@ -7,7 +7,6 @@ import com.hotelreservation.security.AdminSession;
 import com.hotelreservation.security.AuthenticationService;
 import com.hotelreservation.service.BillingPaymentService;
 import com.hotelreservation.util.AlertUtil;
-import com.hotelreservation.util.ExportUtil;
 import javafx.beans.property.ReadOnlyDoubleWrapper;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -21,8 +20,6 @@ import javafx.scene.control.TextField;
 
 import java.nio.file.Path;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BillingPaymentController
         extends BaseAdminController {
@@ -311,7 +308,8 @@ public class BillingPaymentController
                     checkingIn ? "Check In" : "Check Out",
                     checkingIn
                             ? "Guest checked in successfully."
-                            : "Checkout completed. Invite the guest "
+                            : "Checkout completed. Final bill PDF "
+                            + "was generated. Invite the guest "
                             + "to submit feedback at the kiosk."
             );
             refreshReservation(reservationId);
@@ -330,45 +328,8 @@ public class BillingPaymentController
         try {
             BillingPaymentService.BillingSummary summary =
                     requireSelected();
-            var billing = summary.billing();
-            List<List<String>> rows = new ArrayList<>();
-            rows.add(List.of(
-                    "Reservation",
-                    "RES-" + reservationId(summary)
-            ));
-            rows.add(List.of(
-                    "Guest",
-                    billing.getReservation()
-                            .getGuest()
-                            .getFullName()
-            ));
-            rows.add(List.of(
-                    "Subtotal",
-                    money(billing.getSubtotal())
-            ));
-            rows.add(List.of(
-                    "Tax",
-                    money(billing.getTaxAmount())
-            ));
-            rows.add(List.of(
-                    "Discount",
-                    money(billing.getDiscountAmount())
-            ));
-            rows.add(List.of(
-                    "Paid",
-                    money(summary.paid())
-            ));
-            rows.add(List.of(
-                    "Outstanding",
-                    money(summary.outstanding())
-            ));
-
-            Path path = ExportUtil.writePdf(
-                    "final-bill-RES-"
-                            + reservationId(summary),
-                    "Hotel Final Bill",
-                    List.of("Item", "Amount / Value"),
-                    rows
+            Path path = service.exportFinalBillPdf(
+                    reservationId(summary)
             );
             AlertUtil.info(
                     "Final Bill Exported",
