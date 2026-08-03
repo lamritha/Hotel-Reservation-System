@@ -99,34 +99,6 @@ public class WaitlistRepository
         });
     }
 
-    public List<WaitlistEntry> findWaitingByRoomType(
-            RoomType roomType
-    ) {
-        return executeRead(entityManager ->
-                entityManager.createQuery(
-                                """
-                                SELECT entry
-                                FROM WaitlistEntry entry
-                                JOIN FETCH entry.guest
-                                WHERE entry.desiredRoomType = :roomType
-                                  AND entry.status IN (:waiting, :notified)
-                                ORDER BY entry.createdAt
-                                """,
-                                WaitlistEntry.class
-                        )
-                        .setParameter("roomType", roomType)
-                        .setParameter(
-                                "waiting",
-                                WaitlistStatus.WAITING
-                        )
-                        .setParameter(
-                                "notified",
-                                WaitlistStatus.NOTIFIED
-                        )
-                        .getResultList()
-        );
-    }
-
     public List<WaitlistEntry> findWaitingByRoomTypeAndDates(
             RoomType roomType,
             LocalDate availableFrom,
