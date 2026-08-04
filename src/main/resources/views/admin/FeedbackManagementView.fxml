@@ -76,7 +76,8 @@
                         <VBox spacing="8.0" styleClass="card">
                             <children>
                                 <TableView fx:id="feedbackTable"
-                                           prefHeight="500.0">
+                                           prefHeight="500.0"
+                                           columnResizePolicy="CONSTRAINED_RESIZE_POLICY">
                                     <columns>
                                         <TableColumn fx:id="reservationColumn" text="Reservation" prefWidth="110.0"/>
                                         <TableColumn fx:id="guestColumn" text="Guest" prefWidth="160.0"/>

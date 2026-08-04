@@ -144,7 +144,8 @@
                                 <Label text="Recent Reservations"
                                        styleClass="section-title"/>
                                 <TableView fx:id="recentTable"
-                                           prefHeight="230.0">
+                                           prefHeight="230.0"
+                                           columnResizePolicy="CONSTRAINED_RESIZE_POLICY">
                                     <columns>
                                         <TableColumn fx:id="recentIdColumn"
                                                      text="Reservation"

@@ -54,7 +54,8 @@
                         <VBox spacing="10.0" styleClass="card">
                             <children>
                                 <TableView fx:id="notificationTable"
-                                           prefHeight="500.0">
+                                           prefHeight="500.0"
+                                           columnResizePolicy="CONSTRAINED_RESIZE_POLICY">
                                     <columns>
                                         <TableColumn fx:id="idColumn" text="ID" prefWidth="90.0"/>
                                         <TableColumn fx:id="typeColumn" text="Type" prefWidth="150.0"/>

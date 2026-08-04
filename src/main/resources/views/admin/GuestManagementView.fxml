@@ -48,7 +48,8 @@
                         <VBox spacing="10.0" styleClass="card">
                             <children>
                                 <TableView fx:id="guestTable"
-                                           prefHeight="410.0">
+                                           prefHeight="410.0"
+                                           columnResizePolicy="CONSTRAINED_RESIZE_POLICY">
                                     <columns>
                                         <TableColumn fx:id="nameColumn"
                                                      text="Guest"

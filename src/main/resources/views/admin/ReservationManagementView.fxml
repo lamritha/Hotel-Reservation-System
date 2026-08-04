@@ -111,7 +111,8 @@
                                        styleClass="section-title"/>
 
                                 <TableView fx:id="reservationTable"
-                                           prefHeight="350.0">
+                                           prefHeight="350.0"
+                                           columnResizePolicy="CONSTRAINED_RESIZE_POLICY">
                                     <columns>
                                         <TableColumn fx:id="reservationIdColumn"
                                                      text="ID"

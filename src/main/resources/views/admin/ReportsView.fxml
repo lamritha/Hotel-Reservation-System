@@ -71,7 +71,8 @@
                         <VBox spacing="8.0" styleClass="card">
                             <children>
                                 <TableView fx:id="revenueTable"
-                                           prefHeight="500.0">
+                                           prefHeight="500.0"
+                                           columnResizePolicy="CONSTRAINED_RESIZE_POLICY">
                                     <columns>
                                         <TableColumn fx:id="revenuePeriodColumn" text="Period" prefWidth="190.0"/>
                                         <TableColumn fx:id="reservationCountColumn" text="Reservations" prefWidth="115.0"/>
@@ -85,7 +86,8 @@
                                 <TableView fx:id="occupancyTable"
                                            prefHeight="500.0"
                                            visible="false"
-                                           managed="false">
+                                           managed="false"
+                                           columnResizePolicy="CONSTRAINED_RESIZE_POLICY">
                                     <columns>
                                         <TableColumn fx:id="occupancyDateColumn" text="Period" prefWidth="240.0"/>
                                         <TableColumn fx:id="availableColumn" text="Rooms Available" prefWidth="180.0"/>
@@ -97,7 +99,8 @@
                                 <TableView fx:id="activityTable"
                                            prefHeight="500.0"
                                            visible="false"
-                                           managed="false">
+                                           managed="false"
+                                           columnResizePolicy="CONSTRAINED_RESIZE_POLICY">
                                     <columns>
                                         <TableColumn fx:id="activityTimeColumn" text="Timestamp" prefWidth="170.0"/>
                                         <TableColumn fx:id="activityActorColumn" text="Actor" prefWidth="100.0"/>
