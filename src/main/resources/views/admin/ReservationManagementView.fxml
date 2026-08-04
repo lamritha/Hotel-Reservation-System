@@ -111,8 +111,10 @@
                                        styleClass="section-title"/>
 
                                 <TableView fx:id="reservationTable"
-                                           prefHeight="350.0"
-                                           columnResizePolicy="CONSTRAINED_RESIZE_POLICY">
+                                           prefHeight="350.0">
+                                    <columnResizePolicy>
+                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                    </columnResizePolicy>
                                     <columns>
                                         <TableColumn fx:id="reservationIdColumn"
                                                      text="ID"
@@ -177,7 +179,7 @@
                             <children>
                                 <Button fx:id="viewDetailsButton"
                                         text="View Details"
-                                        prefWidth="130.0"
+                                        prefWidth="160.0"
                                         styleClass="primary-button"
                                         onAction="#viewDetails"/>
 

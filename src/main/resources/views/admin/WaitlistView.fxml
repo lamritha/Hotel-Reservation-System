@@ -57,8 +57,10 @@
                         <VBox spacing="8.0" styleClass="card">
                             <children>
                                 <TableView fx:id="waitlistTable"
-                                           prefHeight="255.0"
-                                           columnResizePolicy="CONSTRAINED_RESIZE_POLICY">
+                                           prefHeight="255.0">
+                                    <columnResizePolicy>
+                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                    </columnResizePolicy>
                                     <columns>
                                         <TableColumn fx:id="idColumn" text="ID" prefWidth="90.0"/>
                                         <TableColumn fx:id="guestColumn" text="Guest" prefWidth="170.0"/>

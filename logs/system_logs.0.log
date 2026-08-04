@@ -1192,3 +1192,207 @@ Aug 03, 2026 5:24:02 P.M. com.hotelreservation.util.AppLogger audit
 INFO: actor=admin | action=REVENUE_REPORT | entityType=Report | entityId=- | message=Generated 1 report row(s).
 Aug 03, 2026 5:24:02 P.M. com.hotelreservation.util.AppLogger audit
 INFO: actor=admin | action=OCCUPANCY_REPORT | entityType=Report | entityId=- | message=Generated 8 report row(s).
+Aug 03, 2026 9:39:34 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 03, 2026 9:46:36 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 03, 2026 9:46:37 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=ADMIN_ACCOUNT_CREATED | entityType=AdminUser | entityId=37 | message=Default ADMIN account created for username admin.
+Aug 03, 2026 9:46:37 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=ADMIN_ACCOUNT_CREATED | entityType=AdminUser | entityId=38 | message=Default MANAGER account created for username manager.
+Aug 03, 2026 9:48:42 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 03, 2026 11:48:02 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 03, 2026 11:53:20 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=37 | message=Administrator logged in successfully with role ADMIN.
+Aug 03, 2026 11:53:26 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=37 | message=Administrator logged in successfully with role ADMIN.
+Aug 03, 2026 11:53:34 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=37 | message=Administrator logged in successfully with role ADMIN.
+Aug 03, 2026 11:53:55 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 03, 2026 11:54:04 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=37 | message=Administrator logged in successfully with role ADMIN.
+Aug 03, 2026 11:57:31 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 03, 2026 11:58:02 P.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=37 | message=Administrator logged in successfully with role ADMIN.
+Aug 04, 2026 12:01:19 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 04, 2026 12:01:52 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=37 | message=Administrator logged in successfully with role ADMIN.
+Aug 04, 2026 12:06:21 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 04, 2026 12:07:06 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=37 | message=Administrator logged in successfully with role ADMIN.
+Aug 04, 2026 12:07:28 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=RESERVATION_SEARCH | entityType=Reservation | entityId=- | message=Search returned 1 reservation(s).
+Aug 04, 2026 12:08:02 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=FEEDBACK_SEARCH | entityType=Feedback | entityId=- | message=Feedback search returned 0 row(s).
+Aug 04, 2026 12:08:12 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=REVENUE_REPORT | entityType=Report | entityId=- | message=Generated 1 report row(s).
+Aug 04, 2026 12:08:38 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=REVENUE_REPORT | entityType=Report | entityId=- | message=Generated 1 report row(s).
+Aug 04, 2026 12:08:40 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=FEEDBACK_SEARCH | entityType=Feedback | entityId=- | message=Feedback search returned 0 row(s).
+Aug 04, 2026 12:09:18 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=RESERVATION_SEARCH | entityType=Reservation | entityId=- | message=Search returned 1 reservation(s).
+Aug 04, 2026 12:09:32 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=RESERVATION_SEARCH | entityType=Reservation | entityId=- | message=Search returned 1 reservation(s).
+Aug 04, 2026 12:11:33 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 04, 2026 12:12:04 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=37 | message=Administrator logged in successfully with role ADMIN.
+Aug 04, 2026 12:12:10 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=RESERVATION_SEARCH | entityType=Reservation | entityId=- | message=Search returned 1 reservation(s).
+Aug 04, 2026 12:12:11 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=RESERVATION_SEARCH | entityType=Reservation | entityId=- | message=Search returned 1 reservation(s).
+Aug 04, 2026 12:12:24 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECK_IN | entityType=Reservation | entityId=85 | message=Guest checked in and assigned rooms were marked occupied.
+Aug 04, 2026 12:12:26 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=RESERVATION_SEARCH | entityType=Reservation | entityId=- | message=Search returned 1 reservation(s).
+Aug 04, 2026 12:12:54 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=85 | message=CAD 666.70 processed using CASH as FINAL_PAYMENT.
+Aug 04, 2026 12:13:01 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECKOUT | entityType=Reservation | entityId=85 | message=Final balance settled, checkout completed, rooms marked available, and final bill exported to C:\Users\ashil\Desktop\Amritha\College\Sem 5\APD545\Project\MS1\Hotel-Reservation-System\Hotel-Reservation-System\exports\final-bill-RES-85-20260804-001301.pdf.
+Aug 04, 2026 12:13:12 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGOUT | entityType=AdminUser | entityId=37 | message=Administrator logged out.
+Aug 04, 2026 12:13:33 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=37 | message=Administrator logged in successfully with role ADMIN.
+Aug 04, 2026 12:14:06 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGOUT | entityType=AdminUser | entityId=37 | message=Administrator logged out.
+Aug 04, 2026 12:14:56 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=37 | message=Administrator logged in successfully with role ADMIN.
+Aug 04, 2026 12:14:58 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=FEEDBACK_SEARCH | entityType=Feedback | entityId=- | message=Feedback search returned 0 row(s).
+Aug 04, 2026 12:15:28 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGOUT | entityType=AdminUser | entityId=37 | message=Administrator logged out.
+Aug 04, 2026 12:15:49 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=GUEST | action=FEEDBACK_SUBMITTED | entityType=Reservation | entityId=85 | message=Rating 4 submitted with sentiment POSITIVE.
+Aug 04, 2026 12:16:22 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=37 | message=Administrator logged in successfully with role ADMIN.
+Aug 04, 2026 12:16:45 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=REVENUE_REPORT | entityType=Report | entityId=- | message=Generated 1 report row(s).
+Aug 04, 2026 12:16:49 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=FEEDBACK_SEARCH | entityType=Feedback | entityId=- | message=Feedback search returned 1 row(s).
+Aug 04, 2026 12:16:53 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=REVENUE_REPORT | entityType=Report | entityId=- | message=Generated 1 report row(s).
+Aug 04, 2026 12:16:55 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=REVENUE_REPORT | entityType=Report | entityId=- | message=Generated 1 report row(s).
+Aug 04, 2026 12:16:56 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=FEEDBACK_SEARCH | entityType=Feedback | entityId=- | message=Feedback search returned 1 row(s).
+Aug 04, 2026 12:17:58 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=REVENUE_REPORT | entityType=Report | entityId=- | message=Generated 1 report row(s).
+Aug 04, 2026 12:18:18 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 04, 2026 12:18:32 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=37 | message=Administrator logged in successfully with role ADMIN.
+Aug 04, 2026 12:18:43 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=REVENUE_REPORT | entityType=Report | entityId=- | message=Generated 1 report row(s).
+Aug 04, 2026 12:18:45 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=FEEDBACK_SEARCH | entityType=Feedback | entityId=- | message=Feedback search returned 1 row(s).
+Aug 04, 2026 12:24:04 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 04, 2026 12:24:05 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=37 | message=Administrator logged in successfully with role ADMIN.
+Aug 04, 2026 12:24:05 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=86 | message=Phone reservation created for Lock Form with 1 room(s).
+Aug 04, 2026 12:24:05 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=86 | message=CAD 271.20 processed using CARD as FINAL_PAYMENT.
+Aug 04, 2026 12:24:05 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECK_IN | entityType=Reservation | entityId=86 | message=Guest checked in and assigned rooms were marked occupied.
+Aug 04, 2026 12:24:05 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECKOUT | entityType=Reservation | entityId=86 | message=Final balance settled, checkout completed, rooms marked available, and final bill exported to C:\Users\ashil\Desktop\Amritha\College\Sem 5\APD545\Project\MS1\Hotel-Reservation-System\Hotel-Reservation-System\exports\final-bill-RES-86-20260804-002405.pdf.
+Aug 04, 2026 12:24:07 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=GUEST | action=FEEDBACK_SUBMITTED | entityType=Reservation | entityId=86 | message=Rating 5 submitted with sentiment POSITIVE.
+Aug 04, 2026 12:28:23 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 04, 2026 12:28:23 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=37 | message=Administrator logged in successfully with role ADMIN.
+Aug 04, 2026 12:28:24 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=87 | message=Phone reservation created for Export Verify with 1 room(s).
+Aug 04, 2026 12:28:24 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=87 | message=CAD 311.88 processed using CARD as FINAL_PAYMENT.
+Aug 04, 2026 12:28:24 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECK_IN | entityType=Reservation | entityId=87 | message=Guest checked in and assigned rooms were marked occupied.
+Aug 04, 2026 12:28:24 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECKOUT | entityType=Reservation | entityId=87 | message=Final balance settled, checkout completed, rooms marked available, and final bill exported to C:\Users\ashil\Desktop\Amritha\College\Sem 5\APD545\Project\MS1\Hotel-Reservation-System\Hotel-Reservation-System\exports\final-bill-RES-87-20260804-002824.pdf.
+Aug 04, 2026 12:28:24 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=FEEDBACK_SEARCH | entityType=Feedback | entityId=- | message=Feedback search returned 2 row(s).
+Aug 04, 2026 12:29:01 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 04, 2026 12:29:01 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=37 | message=Administrator logged in successfully with role ADMIN.
+Aug 04, 2026 12:29:02 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=88 | message=Phone reservation created for Export Verify with 1 room(s).
+Aug 04, 2026 12:29:02 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=88 | message=CAD 311.88 processed using CARD as FINAL_PAYMENT.
+Aug 04, 2026 12:29:02 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECK_IN | entityType=Reservation | entityId=88 | message=Guest checked in and assigned rooms were marked occupied.
+Aug 04, 2026 12:29:02 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECKOUT | entityType=Reservation | entityId=88 | message=Final balance settled, checkout completed, rooms marked available, and final bill exported to C:\Users\ashil\Desktop\Amritha\College\Sem 5\APD545\Project\MS1\Hotel-Reservation-System\Hotel-Reservation-System\exports\final-bill-RES-88-20260804-002902.pdf.
+Aug 04, 2026 12:29:02 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=FEEDBACK_SEARCH | entityType=Feedback | entityId=- | message=Feedback search returned 2 row(s).
+Aug 04, 2026 12:29:02 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=REVENUE_REPORT | entityType=Report | entityId=- | message=Generated 2 report row(s).
+Aug 04, 2026 12:29:02 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=OCCUPANCY_REPORT | entityType=Report | entityId=- | message=Generated 61 report row(s).
+Aug 04, 2026 12:29:07 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 04, 2026 12:29:08 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=37 | message=Administrator logged in successfully with role ADMIN.
+Aug 04, 2026 12:29:08 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=89 | message=Phone reservation created for Export Verify with 1 room(s).
+Aug 04, 2026 12:29:08 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=89 | message=CAD 311.88 processed using CARD as FINAL_PAYMENT.
+Aug 04, 2026 12:29:08 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECK_IN | entityType=Reservation | entityId=89 | message=Guest checked in and assigned rooms were marked occupied.
+Aug 04, 2026 12:29:08 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECKOUT | entityType=Reservation | entityId=89 | message=Final balance settled, checkout completed, rooms marked available, and final bill exported to C:\Users\ashil\Desktop\Amritha\College\Sem 5\APD545\Project\MS1\Hotel-Reservation-System\Hotel-Reservation-System\exports\final-bill-RES-89-20260804-002908.pdf.
+Aug 04, 2026 12:29:08 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=FEEDBACK_SEARCH | entityType=Feedback | entityId=- | message=Feedback search returned 2 row(s).
+Aug 04, 2026 12:29:08 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=REVENUE_REPORT | entityType=Report | entityId=- | message=Generated 2 report row(s).
+Aug 04, 2026 12:29:08 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=OCCUPANCY_REPORT | entityType=Report | entityId=- | message=Generated 61 report row(s).
+Aug 04, 2026 12:29:36 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 04, 2026 12:29:36 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=37 | message=Administrator logged in successfully with role ADMIN.
+Aug 04, 2026 12:29:37 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=90 | message=Phone reservation created for Export Verify with 1 room(s).
+Aug 04, 2026 12:29:37 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=90 | message=CAD 311.88 processed using CARD as FINAL_PAYMENT.
+Aug 04, 2026 12:29:37 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECK_IN | entityType=Reservation | entityId=90 | message=Guest checked in and assigned rooms were marked occupied.
+Aug 04, 2026 12:29:37 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECKOUT | entityType=Reservation | entityId=90 | message=Final balance settled, checkout completed, rooms marked available, and final bill exported to C:\Users\ashil\Desktop\Amritha\College\Sem 5\APD545\Project\MS1\Hotel-Reservation-System\Hotel-Reservation-System\exports\final-bill-RES-90-20260804-002937.pdf.
+Aug 04, 2026 12:29:37 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=FEEDBACK_SEARCH | entityType=Feedback | entityId=- | message=Feedback search returned 2 row(s).
+Aug 04, 2026 12:29:37 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=REVENUE_REPORT | entityType=Report | entityId=- | message=Generated 2 report row(s).
+Aug 04, 2026 12:29:37 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=OCCUPANCY_REPORT | entityType=Report | entityId=- | message=Generated 61 report row(s).
+Aug 04, 2026 12:30:45 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
+Aug 04, 2026 12:30:46 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=LOGIN_SUCCESS | entityType=AdminUser | entityId=37 | message=Administrator logged in successfully with role ADMIN.
+Aug 04, 2026 12:30:46 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PHONE_RESERVATION_CREATED | entityType=Reservation | entityId=91 | message=Phone reservation created for Export Verify with 1 room(s).
+Aug 04, 2026 12:30:46 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=PAYMENT_PROCESSED | entityType=Reservation | entityId=91 | message=CAD 311.88 processed using CARD as FINAL_PAYMENT.
+Aug 04, 2026 12:30:46 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECK_IN | entityType=Reservation | entityId=91 | message=Guest checked in and assigned rooms were marked occupied.
+Aug 04, 2026 12:30:47 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=CHECKOUT | entityType=Reservation | entityId=91 | message=Final balance settled, checkout completed, rooms marked available, and final bill exported to C:\Users\ashil\Desktop\Amritha\College\Sem 5\APD545\Project\MS1\Hotel-Reservation-System\Hotel-Reservation-System\exports\final-bill-RES-91-20260804-003046.pdf.
+Aug 04, 2026 12:30:47 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=FEEDBACK_SEARCH | entityType=Feedback | entityId=- | message=Feedback search returned 2 row(s).
+Aug 04, 2026 12:30:47 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=REVENUE_REPORT | entityType=Report | entityId=- | message=Generated 2 report row(s).
+Aug 04, 2026 12:30:47 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=OCCUPANCY_REPORT | entityType=Report | entityId=- | message=Generated 61 report row(s).
+Aug 04, 2026 12:30:47 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=ACTIVITY_LOG_REPORT | entityType=Report | entityId=- | message=Generated 315 report row(s).
+Aug 04, 2026 12:30:47 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=admin | action=FEEDBACK_SEARCH | entityType=Feedback | entityId=- | message=Feedback search returned 2 row(s).

@@ -48,8 +48,10 @@
                         <VBox spacing="8.0" styleClass="card">
                             <children>
                                 <TableView fx:id="accountTable"
-                                           prefHeight="280.0"
-                                           columnResizePolicy="CONSTRAINED_RESIZE_POLICY">
+                                           prefHeight="280.0">
+                                    <columnResizePolicy>
+                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                    </columnResizePolicy>
                                     <columns>
                                         <TableColumn fx:id="numberColumn" text="Loyalty Number" prefWidth="160.0"/>
                                         <TableColumn fx:id="guestColumn" text="Guest" prefWidth="180.0"/>
@@ -69,8 +71,10 @@
                                        text="Select a loyalty account."
                                        styleClass="section-title"/>
                                 <TableView fx:id="historyTable"
-                                           prefHeight="250.0"
-                                           columnResizePolicy="CONSTRAINED_RESIZE_POLICY">
+                                           prefHeight="250.0">
+                                    <columnResizePolicy>
+                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                    </columnResizePolicy>
                                     <columns>
                                         <TableColumn fx:id="dateColumn" text="Date" prefWidth="170.0"/>
                                         <TableColumn fx:id="typeColumn" text="Type" prefWidth="120.0"/>

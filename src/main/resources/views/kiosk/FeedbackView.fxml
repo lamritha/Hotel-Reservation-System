@@ -77,17 +77,20 @@
     <bottom>
         <HBox alignment="CENTER" spacing="18.0" style="-fx-padding: 20;">
             <children>
-                <Button text="Back"
+                <Button fx:id="backButton"
+                        text="Back"
                         prefWidth="180.0"
                         styleClass="secondary-button"
                         onAction="#backToFeedbackLookup" />
 
-                <Button text="Submit Feedback"
+                <Button fx:id="submitButton"
+                        text="Submit Feedback"
                         prefWidth="260.0"
                         styleClass="primary-button"
                         onAction="#submitFeedback" />
 
-                <Button text="Finish"
+                <Button fx:id="finishButton"
+                        text="Finish"
                         prefWidth="180.0"
                         styleClass="secondary-button"
                         onAction="#finishFeedback" />

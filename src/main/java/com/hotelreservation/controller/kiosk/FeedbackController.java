@@ -7,6 +7,7 @@ import com.hotelreservation.util.SceneNavigator;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -26,6 +27,15 @@ public class FeedbackController {
 
     @FXML
     private Label sentimentLabel;
+
+    @FXML
+    private Button backButton;
+
+    @FXML
+    private Button submitButton;
+
+    @FXML
+    private Button finishButton;
 
     public FeedbackController(
             FeedbackService feedbackService
@@ -80,9 +90,19 @@ public class FeedbackController {
             );
             alert.showAndWait();
 
+            lockFormAfterSubmit();
+
         } catch (RuntimeException exception) {
             showError(exception.getMessage());
         }
+    }
+
+    private void lockFormAfterSubmit() {
+        backButton.setDisable(true);
+        submitButton.setDisable(true);
+        ratingComboBox.setDisable(true);
+        commentArea.setDisable(true);
+        // Finish stays enabled as the only remaining action.
     }
 
     @FXML

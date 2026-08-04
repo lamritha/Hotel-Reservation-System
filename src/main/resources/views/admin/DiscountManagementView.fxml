@@ -51,8 +51,10 @@
                         <VBox spacing="8.0" styleClass="card">
                             <children>
                                 <TableView fx:id="billingTable"
-                                           prefHeight="260.0"
-                                           columnResizePolicy="CONSTRAINED_RESIZE_POLICY">
+                                           prefHeight="260.0">
+                                    <columnResizePolicy>
+                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                    </columnResizePolicy>
                                     <columns>
                                         <TableColumn fx:id="reservationColumn" text="Reservation" prefWidth="120.0"/>
                                         <TableColumn fx:id="guestColumn" text="Guest" prefWidth="190.0"/>
@@ -82,8 +84,10 @@
                                 <Label text="Discount Audit History"
                                        styleClass="section-title"/>
                                 <TableView fx:id="historyTable"
-                                           prefHeight="230.0"
-                                           columnResizePolicy="CONSTRAINED_RESIZE_POLICY">
+                                           prefHeight="230.0">
+                                    <columnResizePolicy>
+                                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                    </columnResizePolicy>
                                     <columns>
                                         <TableColumn fx:id="historyDateColumn" text="Date" prefWidth="170.0"/>
                                         <TableColumn fx:id="historyPercentColumn" text="Percent" prefWidth="90.0"/>

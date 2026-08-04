@@ -62,11 +62,14 @@ public class ActivityLogService {
         try (Stream<Path> stream =
                      Files.list(logDirectory)) {
             stream.filter(Files::isRegularFile)
-                    .filter(path ->
-                            path.getFileName()
-                                    .toString()
-                                    .startsWith("system_logs.")
-                    )
+                    .filter(path -> {
+                        String name = path.getFileName()
+                                .toString();
+                        // Skip java.util.logging lock files
+                        // (e.g. system_logs.0.log.lck).
+                        return name.startsWith("system_logs.")
+                                && name.endsWith(".log");
+                    })
                     .forEach(path ->
                             readFile(path, rows)
                     );
