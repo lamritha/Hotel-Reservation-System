@@ -1396,3 +1396,5 @@ Aug 04, 2026 12:30:47 A.M. com.hotelreservation.util.AppLogger audit
 INFO: actor=admin | action=ACTIVITY_LOG_REPORT | entityType=Report | entityId=- | message=Generated 315 report row(s).
 Aug 04, 2026 12:30:47 A.M. com.hotelreservation.util.AppLogger audit
 INFO: actor=admin | action=FEEDBACK_SEARCH | entityType=Feedback | entityId=- | message=Feedback search returned 2 row(s).
+Aug 10, 2026 9:13:23 A.M. com.hotelreservation.util.AppLogger audit
+INFO: actor=SYSTEM | action=REFERENCE_DATA_READY | entityType=Database | entityId=- | message=Default rooms and add-ons are ready.
