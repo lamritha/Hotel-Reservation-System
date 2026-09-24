@@ -4,3 +4,6 @@ target/
 database/*.mv.db
 database/*.trace.db
 _extract_fxml/
+exports/
+logs/
+*.lck
