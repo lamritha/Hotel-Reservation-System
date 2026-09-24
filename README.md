@@ -2,9 +2,7 @@
 
 A JavaFX desktop application for a hotel, with two sides: a **guest kiosk** for self-service booking and feedback, and an **admin back office** for reservations, billing, loyalty, waitlists, and reporting. Data is stored with JPA/Hibernate on a file-based H2 database.
 
-Built for APD545 (Seneca Polytechnic). [Add: solo project or team, and your role]
-
-<!-- Add 3-4 screenshots here: kiosk welcome, room selection, admin dashboard, reports -->
+Built for APD545 as a Group project (Seneca Polytechnic). 
 
 ## Features
 
